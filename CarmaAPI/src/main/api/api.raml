@@ -1,0 +1,21 @@
+#%RAML 0.8
+---
+title: Carma API
+version: 0.1
+baseUri: http://localhost:8820/carma/api
+mediaType: application/json
+
+/patients:
+  post:
+    body:
+      application/json:
+        example: !include examples/patient.json    
+  /{id}:
+    get:
+      responses:
+        200:
+          body: 
+            application/json:         
+              example: !include examples/patient.json    
+    put:
+      

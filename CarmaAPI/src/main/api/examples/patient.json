@@ -1,0 +1,107 @@
+{
+    "carmaRecord": {
+        "header": {
+            "version": "0.1",
+            "sourceSystem": "CARMA",
+            "environment": "DEV"
+        },
+        "patientInfo": {
+            "PatientRecordId": "3",
+            "PatientTrackingId": "",
+            "FacilityName": "Conroe Regional Medical Center",
+            "PatientFirstName": "Test",
+            "PatientLastName": "Two",
+            "SocialSecurityNumber": "",
+            "DateOfBirth": "1996-06-08",
+            "PatientGender": "1",
+            "PatientCell": "(000)  000-0000",
+            "PatientSecondaryPhone": "",
+            "PatientEmail": "",
+            "PatientAddress1": "",
+            "PatientAddress2": "",
+            "City": "",
+            "State": "",
+            "Zip": "",
+            "PatientHeightFeet": "",
+            "PatientHeightInches": "",
+            "PatientWeight": "",
+            "AMRFacilityId": "",
+            "HospiceFacilityId": "",
+            "AMRRecordNo": "",
+            "HospiceRecordNo": "",
+            "CreatedUser": "MICC User"
+        },
+        "referralInfo": {
+            "ReferralId": [
+                "3",
+                "3"
+            ],
+            "ReferralNumber": "B9E3CA1A-5701-4C0F-9264-581B1E0D7E84",
+            "TrackingNumber": "CAM-DC-682015-00003",
+            "CurrentStatus": "DischargeReferral",
+            "ReferralSource": "Supplier Clinicians",
+            "RiskType": "High",
+            "SenderFacilityName": "Conroe Regional Medical Center",
+            "SenderFullName": "MICC User",
+            "ReceiverFacilityId": "1",
+            "ReceiverFullName": "",
+            "ReferralExpirationTime": "",
+            "ReferralAssessment": "",
+            "ReferralReminderDate": "",
+            "FollowUpRequired": "0",
+            "ScheduledInLogis": "0",
+            "ServiceProvider": "Conroe Regional Medical Center",
+            "VisitedPatientatHospital": "1",
+            "SpecialInstructions": "",
+            "ChartBuiltInCERNER": "",
+            "MeetsCriteria": "1",
+            "SignedConsentForm": "1",
+            "ProviderAssigned": "",
+            "WelcomeCall": "",
+            "Orders": "",
+            "OrdersEntered": "",
+            "FollowUpCall": "",
+            "DischargeFormServiceCall": "",
+            "UnplanedFollowUpVisitId": "",
+            "Paramedic": "",
+            "ReAdmitToHospital": "",
+            "ChronicCareManager": "",
+            "IsPatientatHospital": "",
+            "OtherCancelrefReason": "",
+            "ReferralSourcePts": "AETNA",
+            "DocToDocType": "",
+            "diagnosisInfo": {
+                "Diagnosis": "sdfsdfsdf",
+                "OtherDiagnostics": ""
+            },
+            "hospitalInfo": {
+                "MedicalRecordNumber": "",
+                "RoomNo": "",
+                "RoomLocation": ""
+            },
+            "dischargeInfo": {
+                "DischargeInfo": "",
+                "DischargedToTypeId": "1",
+                "RehabFacilityName": "",
+                "FacilityName": "",
+                "FacilityAddress": "",
+                "FacilityCity": "",
+                "FacilityZip": "",
+                "FacilityPhone": "",
+                "PatientLocationId": "",
+                "ExpectedDischargeDate": "2015-06-08T14:45:00",
+                "ActualDischargeDate": "2015-06-16T14:15:00"
+            },
+            "insuranceInfo": {
+                "InsurenceCompany": "American Income Life",
+                "OtherPrimaryInsurance": "",
+                "OtherSecondaryInsurance": ""
+            },
+            "appointmentInfo": {
+                "OtherPatientToBeSeenWithIn": "",
+                "OtherAppointmentPreference": "",
+                "ExpirationTime": ""
+            }
+        }
+    }
+}
