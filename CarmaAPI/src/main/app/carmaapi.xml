@@ -1,45 +1,168 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:context="http://www.springframework.org/schema/context" xmlns:apikit="http://www.mulesoft.org/schema/mule/apikit" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" version="EE-3.6.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+<mule xmlns:splunklogger="http://www.mulesoft.org/schema/mule/splunklogger" 
+xmlns:db="http://www.mulesoft.org/schema/mule/db" 
+xmlns:json="http://www.mulesoft.org/schema/mule/json" 
+xmlns="http://www.mulesoft.org/schema/mule/core" 
+xmlns:apikit="http://www.mulesoft.org/schema/mule/apikit" 
+xmlns:context="http://www.springframework.org/schema/context" 
+xmlns:core="http://www.mulesoft.org/schema/mule/core" 
+xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" 
+xmlns:http="http://www.mulesoft.org/schema/mule/http" 
+xmlns:spring="http://www.springframework.org/schema/beans" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+version="EE-3.6.2" 
+xsi:schemaLocation="http://www.mulesoft.org/schema/mule/splunklogger http://www.mulesoft.org/schema/mule/splunklogger/current/mule-splunklogger.xsd 
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 http://www.mulesoft.org/schema/mule/apikit http://www.mulesoft.org/schema/mule/apikit/current/mule-apikit.xsd
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
-    <context:property-placeholder location="api.properties"/>
-    <apikit:config name="apiConfig" raml="api.raml" consoleEnabled="true" consolePath="console" doc:name="Router"/>
-    <http:listener-config name="HTTP_Listener_Configuration" host="0.0.0.0" port="${http.port}" doc:name="HTTP Listener Configuration"/>
+
+    <context:property-placeholder location="api.${env}.properties" />
+
+	<splunklogger:config name="SplunkLogger">
+		<splunklogger:global-fields>
+            <splunklogger:global-field key="sourceSystemName">#[message.payload['carmaRecord']['header']['sourceSystem']]</splunklogger:global-field>
+            <splunklogger:global-field key="sourceSystemRecordId">#[message.payload['carmaRecord']['header']['sourceSystemRecordId']]</splunklogger:global-field>
+            <splunklogger:global-field key="env">${env}</splunklogger:global-field>
+        </splunklogger:global-fields>
+	</splunklogger:config>
+	
+    <apikit:config name="apiConfig" raml="api.raml" consoleEnabled="true" consolePath="console" doc:name="Router" />
+
+    <http:listener-config name="HTTP_Listener_Configuration" host="0.0.0.0" port="${http.port}" doc:name="HTTP Listener Configuration" />
     
-    <flow name="main" doc:name="main">
-    	<http:listener config-ref="HTTP_Listener_Configuration" doc:name="HTTP" path="/api/*"/>
-        <apikit:router config-ref="apiConfig" doc:name="APIkit Router"/>
-        <exception-strategy ref="apiKitGlobalExceptionMapping" doc:name="Reference Exception Strategy"/>
+    <db:generic-config name="MSSQL" url="jdbc:sqlserver://${carma.mssql.host}:${carma.mssql.port};databaseName=${carma.mssql.db};user=${carma.mssql.user};password=${carma.mssql.password}" 
+                       driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver">
+     	<db:pooling-profile minPoolSize="10" preparedStatementCacheSize="100"/>
+    </db:generic-config>
+    
+    <spring:bean id="objectStore" class="org.mule.util.store.PartitionedPersistentObjectStore" />
+    
+    <flow name="main" >
+        <http:listener config-ref="HTTP_Listener_Configuration" doc:name="HTTP" path="/api/*" />
+        <apikit:router config-ref="apiConfig" doc:name="APIkit Router" />
+        <exception-strategy ref="apiKitGlobalExceptionMapping" doc:name="Reference Exception Strategy" />
     </flow>
     
-    <apikit:mapping-exception-strategy name="apiKitGlobalExceptionMapping">  
-        <apikit:mapping statusCode="404"> 
-            <apikit:exception value="org.mule.module.apikit.exception.NotFoundException"/>  
-            <set-property propertyName="Content-Type" value="application/json"></set-property>  
-            <set-payload value="{ &quot;message&quot;: &quot;Resource not found&quot; }"></set-payload> 
-        </apikit:mapping>  
-        <apikit:mapping statusCode="405"> 
-            <apikit:exception value="org.mule.module.apikit.exception.MethodNotAllowedException"/>  
-            <set-property propertyName="Content-Type" value="application/json"></set-property>  
-            <set-payload value="{ &quot;message&quot;: &quot;Method not allowed&quot; }"></set-payload> 
-        </apikit:mapping>  
-        <apikit:mapping statusCode="415"> 
-            <apikit:exception value="org.mule.module.apikit.exception.UnsupportedMediaTypeException"/>  
-            <set-property propertyName="Content-Type" value="application/json"></set-property>  
-            <set-payload value="{ &quot;message&quot;: &quot;Unsupported media type&quot; }"></set-payload> 
-        </apikit:mapping>  
-        <apikit:mapping statusCode="406"> 
-            <apikit:exception value="org.mule.module.apikit.exception.NotAcceptableException"/>  
-            <set-property propertyName="Content-Type" value="application/json"></set-property>  
-            <set-payload value="{ &quot;message&quot;: &quot;Not acceptable&quot; }"></set-payload> 
-        </apikit:mapping>  
-        <apikit:mapping statusCode="400"> 
-            <apikit:exception value="org.mule.module.apikit.exception.BadRequestException"/>  
-            <set-property propertyName="Content-Type" value="application/json"></set-property>  
-            <set-payload value="{ &quot;message&quot;: &quot;Bad request&quot; }"></set-payload> 
-        </apikit:mapping> 
+    <flow name="put:/patients/{id}:apiConfig">
+        <set-payload value="#[NullPayload.getInstance()]" doc:name="Set Payload"/>
+    </flow>
+    
+    <flow name="get:/patients/{id}:apiConfig">
+		<set-property value="501" propertyName="http.status" doc:name="Property" />
+		<set-payload value="{'message':'Not implemented'}"/>
+    </flow>
+    
+    <flow name="post:/patients:apiConfig">
+
+		<json:json-to-object-transformer returnClass="java.util.Map"/>
+		    	
+		<splunklogger:logger config-ref="SplunkLogger" severity="INFO">
+			<splunklogger:fields>
+				<splunklogger:field key="transactionStatus" value-ref="#['Received']"/>
+			</splunklogger:fields>
+		</splunklogger:logger>
+		
+		<until-successful maxRetries="${carma.mssql.retry.count}" secondsBetweenRetries="${carma.mssql.retry.interval}" objectStore-ref="objectStore" deadLetterQueue-ref="DLQHandler">
+    	 
+	    	<transactional action="BEGIN_OR_JOIN"> 
+		    	<db:insert config-ref="MSSQL" transactionalAction="JOIN_IF_POSSIBLE" autoGeneratedKeys="true" target="#[flowVars['recordId']]">
+					<db:parameterized-query>    		
+						<![CDATA[
+							INSERT INTO [dbo].[PatientRecords]
+						           ([PatientFirstName]
+						           ,[PatientLastName]
+						           ,[DateOfBirth]
+						           ,[PatientGender]
+								   ,[SenderUserId]
+								   ,[SenderFacilityId]
+								   ,[PrimarySearchContent]
+								   ,[SecondarySearchContent])
+						     VALUES
+						           ( #[message.payload['carmaRecord']['patientInfo']['PatientFirstName']]
+									,#[message.payload['carmaRecord']['patientInfo']['PatientLastName']]
+									,#[message.payload['carmaRecord']['patientInfo']['DateOfBirth'] != empty ? message.payload['carmaRecord']['patientInfo']['DateOfBirth'] : '']
+									,#[message.payload['carmaRecord']['patientInfo']['PatientGender'] != empty ? message.payload['carmaRecord']['patientInfo']['PatientGender'] : '']
+									,0
+									,0
+									,'Update-Later'
+									,'Update-Later')						
+						]]>						    	
+		    		</db:parameterized-query>
+		    	</db:insert>
+		    	
+		    	<logger level="INFO" message="ID is #[flowVars['recordId'][0]['GENERATED_KEYS']]"/>
+		    	
+		    	<db:insert config-ref="MSSQL" transactionalAction="JOIN_IF_POSSIBLE">
+					<db:parameterized-query>    		
+						<![CDATA[
+						INSERT INTO [dbo].[PatientOtherInfo] 
+	 				           ([PatientRecordId] 
+	 				           ,[InPatientAdmitDiagnosis]
+	 						   ,[FacilityName]
+           					   ,[ActualDischargeDate]) 
+					     VALUES
+	 				           ( #[flowVars['recordId'][0]['GENERATED_KEYS']]
+	 							,#[message.payload['carmaRecord']['patientInfo']['InPatientAdmitDiagnosis'] != empty ? message.payload['carmaRecord']['patientInfo']['InPatientAdmitDiagnosis'] : ''] 
+	 							,#[message.payload['carmaRecord']['referralInfo']['SenderFacilityName']] 
+	 							,#[message.payload['carmaRecord']['referralInfo']['dischargeInfo']['ActualDischargeDate']]) 
+	 					]]>						    	 
+		    		</db:parameterized-query>
+		    	</db:insert>   
+
+<!-- <logger level="INFO" message="#[message.inboundProperties['xyz']['ERROR']]"/> -->
+
+				<splunklogger:logger config-ref="SplunkLogger" severity="INFO">
+					<splunklogger:fields>
+						<splunklogger:field key="targetSystemRecordId" value-ref="#[flowVars['recordId'][0]['GENERATED_KEYS']]"/>
+						<splunklogger:field key="targetSystemName" value-ref="#['Carma']"/>
+						<splunklogger:field key="transactionStatus" value-ref="#['Accepted']"/>
+					</splunklogger:fields>
+				</splunklogger:logger>
+
+	    	</transactional>
+		</until-successful>
+		
+		<set-payload value="OK"/>
+		
+    </flow>
+    
+    <flow name="DLQHandler">
+    <logger level="INFO"/>
+    	<splunklogger:logger config-ref="SplunkLogger" severity="ERROR" message="#[exception]">
+			<splunklogger:fields>
+				<splunklogger:field key="transactionStatus" value-ref="#['Error']"/>
+			</splunklogger:fields>
+		</splunklogger:logger>
+    </flow>
+    
+    
+    <apikit:mapping-exception-strategy name="apiKitGlobalExceptionMapping">
+        <apikit:mapping statusCode="404">
+            <apikit:exception value="org.mule.module.apikit.exception.NotFoundException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
+            <set-payload value="{ &quot;message&quot;: &quot;Resource not found&quot; }" doc:name="Set Payload"/>
+        </apikit:mapping>
+        <apikit:mapping statusCode="405">
+            <apikit:exception value="org.mule.module.apikit.exception.MethodNotAllowedException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
+            <set-payload value="{ &quot;message&quot;: &quot;Method not allowed&quot; }" doc:name="Set Payload"/>
+        </apikit:mapping>
+        <apikit:mapping statusCode="415">
+            <apikit:exception value="org.mule.module.apikit.exception.UnsupportedMediaTypeException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
+            <set-payload value="{ &quot;message&quot;: &quot;Unsupported media type&quot; }" doc:name="Set Payload"/>
+        </apikit:mapping>
+        <apikit:mapping statusCode="406">
+            <apikit:exception value="org.mule.module.apikit.exception.NotAcceptableException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
+            <set-payload value="{ &quot;message&quot;: &quot;Not acceptable&quot; }" doc:name="Set Payload"/>
+        </apikit:mapping>
+        <apikit:mapping statusCode="400">
+            <apikit:exception value="org.mule.module.apikit.exception.BadRequestException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
+            <set-payload value="{ &quot;message&quot;: &quot;Bad request&quot; }" doc:name="Set Payload"/>
+        </apikit:mapping>
     </apikit:mapping-exception-strategy>
 </mule>
