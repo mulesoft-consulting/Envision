@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mule xmlns:splunklogger="http://www.mulesoft.org/schema/mule/splunklogger" 
+<mule xmlns:encryption="http://www.mulesoft.org/schema/mule/encryption" xmlns:splunklogger="http://www.mulesoft.org/schema/mule/splunklogger" 
 xmlns:db="http://www.mulesoft.org/schema/mule/db" 
 xmlns:json="http://www.mulesoft.org/schema/mule/json" 
 xmlns="http://www.mulesoft.org/schema/mule/core" 
@@ -11,16 +11,19 @@ xmlns:http="http://www.mulesoft.org/schema/mule/http"
 xmlns:spring="http://www.springframework.org/schema/beans" 
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 version="EE-3.6.2" 
-xsi:schemaLocation="http://www.mulesoft.org/schema/mule/splunklogger http://www.mulesoft.org/schema/mule/splunklogger/current/mule-splunklogger.xsd 
-http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+xsi:schemaLocation="http://www.mulesoft.org/schema/mule/splunklogger http://www.mulesoft.org/schema/mule/splunklogger/current/mule-splunklogger.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 http://www.mulesoft.org/schema/mule/apikit http://www.mulesoft.org/schema/mule/apikit/current/mule-apikit.xsd
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
-http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/encryption http://www.mulesoft.org/schema/mule/encryption/current/mule-encryption.xsd">
 
     <context:property-placeholder location="api.${env}.properties" />
 
-	<splunklogger:config name="SplunkLogger">
+	<splunklogger:config name="SplunkLogger" doc:name="SplunkLogger">
 		<splunklogger:global-fields>
             <splunklogger:global-field key="sourceSystemName">#[message.payload['carmaRecord']['header']['sourceSystem']]</splunklogger:global-field>
             <splunklogger:global-field key="sourceSystemRecordId">#[message.payload['carmaRecord']['header']['sourceSystemRecordId']]</splunklogger:global-field>
@@ -33,12 +36,18 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
     <http:listener-config name="HTTP_Listener_Configuration" host="0.0.0.0" port="${http.port}" doc:name="HTTP Listener Configuration" />
     
     <db:generic-config name="MSSQL" url="jdbc:sqlserver://${carma.mssql.host}:${carma.mssql.port};databaseName=${carma.mssql.db};user=${carma.mssql.user};password=${carma.mssql.password}" 
-                       driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver">
+                       driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver" doc:name="Generic Database Configuration">
      	<db:pooling-profile minPoolSize="10" preparedStatementCacheSize="100"/>
     </db:generic-config>
     
-    <spring:bean id="objectStore" class="org.mule.util.store.PartitionedPersistentObjectStore" />
-    <spring:bean id="cpObjectStore" class="org.mule.util.store.PartitionedPersistentObjectStore" />
+    <spring:beans>
+        <spring:bean id="objectStore" class="org.mule.util.store.PartitionedPersistentObjectStore"/>
+        <spring:bean id="cpObjectStore" class="org.mule.util.store.PartitionedPersistentObjectStore"/>
+    </spring:beans>
+    
+    <encryption:config name="Encryption" doc:name="Encryption">
+        <encryption:jce-encrypter-config key="${patient.encryption.key}"/>
+    </encryption:config>
     
     <flow name="main" >
         <http:listener config-ref="HTTP_Listener_Configuration" doc:name="HTTP" path="/api/*" />
@@ -47,21 +56,21 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
     </flow>
     
     <flow name="post:/patients/{id}/dispatch:apiConfig">
-    	<json:json-to-object-transformer returnClass="java.util.Map"/>
+    	<json:json-to-object-transformer returnClass="java.util.Map" doc:name="JSON to Object"/>
 		    	
-		<splunklogger:logger config-ref="SplunkLogger" severity="INFO">
+		<splunklogger:logger config-ref="SplunkLogger" doc:name="Logger">
 			<splunklogger:fields>
 				<splunklogger:field key="transactionStatus" value-ref="#['Received']"/>
 			</splunklogger:fields>
 		</splunklogger:logger>
     
-    	<until-successful maxRetries="${carma.corepoint.retry.count}" secondsBetweenRetries="${carma.corepoint.retry.interval}" objectStore-ref="cpObjectStore" deadLetterQueue-ref="DLQHandler">
-    		<json:json-to-xml-transformer />
+    	<until-successful maxRetries="${carma.corepoint.retry.count}" secondsBetweenRetries="${carma.corepoint.retry.interval}" objectStore-ref="cpObjectStore" deadLetterQueue-ref="DLQHandler" doc:name="Until Successful">
+    		<json:json-to-xml-transformer doc:name="JSON to XML"/>
     	
     	</until-successful>
     	
 		<set-property value="501" propertyName="http.status" doc:name="Property" />
-		<set-payload value="{'message':'Not implemented'}"/>
+		<set-payload value="{'message':'Not implemented'}" doc:name="Set Payload"/>
 	</flow>
 	
     <flow name="put:/patients/{id}:apiConfig">
@@ -70,85 +79,92 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
     
     <flow name="get:/patients/{id}:apiConfig">
 		<set-property value="501" propertyName="http.status" doc:name="Property" />
-		<set-payload value="{'message':'Not implemented'}"/>
+		<set-payload value="{'message':'Not implemented'}" doc:name="Set Payload"/>
     </flow>
     
     <flow name="post:/patients:apiConfig">
 
-		<json:json-to-object-transformer returnClass="java.util.Map"/>
+		<json:json-to-object-transformer returnClass="java.util.Map" doc:name="JSON to Object"/>
 		    	
-		<splunklogger:logger config-ref="SplunkLogger" severity="INFO">
+		<splunklogger:logger config-ref="SplunkLogger" doc:name="Logger">
 			<splunklogger:fields>
 				<splunklogger:field key="transactionStatus" value-ref="#['Received']"/>
 			</splunklogger:fields>
 		</splunklogger:logger>
 		
+		<json:object-to-json-transformer />
+		<encryption:encrypt config-ref="Encryption" />
+		
 		<until-successful maxRetries="${carma.mssql.retry.count}" secondsBetweenRetries="${carma.mssql.retry.interval}" objectStore-ref="objectStore" deadLetterQueue-ref="DLQHandler">
     	 
-	    	<transactional action="BEGIN_OR_JOIN"> 
-		    	<db:insert config-ref="MSSQL" transactionalAction="JOIN_IF_POSSIBLE" autoGeneratedKeys="true" target="#[flowVars['recordId']]">
-					<db:parameterized-query>    		
-						<![CDATA[
-							INSERT INTO [dbo].[PatientRecords]
-						           ([PatientFirstName]
-						           ,[PatientLastName]
-						           ,[DateOfBirth]
-						           ,[PatientGender]
-								   ,[SenderUserId]
-								   ,[SenderFacilityId]
-								   ,[PrimarySearchContent]
-								   ,[SecondarySearchContent])
+	    	<transactional action="BEGIN_OR_JOIN" doc:name="Transactional">
+	    		<processor-chain>
+					<encryption:decrypt config-ref="Encryption" />
+		    		<json:json-to-object-transformer returnClass="java.util.Map" doc:name="JSON to Object"/>
+	
+					<logger level="INFO" message="MAP IS #[message.payload]"/>
+					
+			    	<db:insert config-ref="MSSQL"  autoGeneratedKeys="true" target="#[flowVars['recordId']]" transactionalAction="ALWAYS_JOIN" doc:name="Database">
+						<db:parameterized-query>    		
+							<![CDATA[
+								INSERT INTO [dbo].[PatientRecords]
+							           ([PatientFirstName]
+							           ,[PatientLastName]
+							           ,[DateOfBirth]
+							           ,[PatientGender]
+									   ,[SenderUserId]
+									   ,[SenderFacilityId]
+									   ,[PrimarySearchContent]
+									   ,[SecondarySearchContent])
+							     VALUES
+							           ( #[message.payload['carmaRecord']['patientInfo']['PatientFirstName']]
+										,#[message.payload['carmaRecord']['patientInfo']['PatientLastName']]
+										,#[message.payload['carmaRecord']['patientInfo']['DateOfBirth'] != empty ? message.payload['carmaRecord']['patientInfo']['DateOfBirth'] : '']
+										,#[message.payload['carmaRecord']['patientInfo']['PatientGender'] != empty ? message.payload['carmaRecord']['patientInfo']['PatientGender'] : '']
+										,0
+										,0
+										,'Update-Later'
+										,'Update-Later')						
+							]]>						    	
+			    		</db:parameterized-query>
+			    	</db:insert>
+			    	
+			    	<logger level="INFO" message="ID is #[flowVars['recordId'][0]['GENERATED_KEYS']]" doc:name="Logger"/>
+			    	
+			    	<db:insert config-ref="MSSQL" doc:name="Database" transactionalAction="ALWAYS_JOIN">
+						<db:parameterized-query>    		
+							<![CDATA[
+							INSERT INTO [dbo].[PatientOtherInfo] 
+		 				           ([PatientRecordId] 
+		 				           ,[InPatientAdmitDiagnosis]
+		 						   ,[FacilityName]
+	           					   ,[ActualDischargeDate]) 
 						     VALUES
-						           ( #[message.payload['carmaRecord']['patientInfo']['PatientFirstName']]
-									,#[message.payload['carmaRecord']['patientInfo']['PatientLastName']]
-									,#[message.payload['carmaRecord']['patientInfo']['DateOfBirth'] != empty ? message.payload['carmaRecord']['patientInfo']['DateOfBirth'] : '']
-									,#[message.payload['carmaRecord']['patientInfo']['PatientGender'] != empty ? message.payload['carmaRecord']['patientInfo']['PatientGender'] : '']
-									,0
-									,0
-									,'Update-Later'
-									,'Update-Later')						
-						]]>						    	
-		    		</db:parameterized-query>
-		    	</db:insert>
-		    	
-		    	<logger level="INFO" message="ID is #[flowVars['recordId'][0]['GENERATED_KEYS']]"/>
-		    	
-		    	<db:insert config-ref="MSSQL" transactionalAction="JOIN_IF_POSSIBLE">
-					<db:parameterized-query>    		
-						<![CDATA[
-						INSERT INTO [dbo].[PatientOtherInfo] 
-	 				           ([PatientRecordId] 
-	 				           ,[InPatientAdmitDiagnosis]
-	 						   ,[FacilityName]
-           					   ,[ActualDischargeDate]) 
-					     VALUES
-	 				           ( #[flowVars['recordId'][0]['GENERATED_KEYS']]
-	 							,#[message.payload['carmaRecord']['patientInfo']['InPatientAdmitDiagnosis'] != empty ? message.payload['carmaRecord']['patientInfo']['InPatientAdmitDiagnosis'] : ''] 
-	 							,#[message.payload['carmaRecord']['referralInfo']['SenderFacilityName']] 
-	 							,#[message.payload['carmaRecord']['referralInfo']['dischargeInfo']['ActualDischargeDate']]) 
-	 					]]>						    	 
-		    		</db:parameterized-query>
-		    	</db:insert>   
-
-<!-- <logger level="INFO" message="#[message.inboundProperties['xyz']['ERROR']]"/> -->
-
-				<splunklogger:logger config-ref="SplunkLogger" severity="INFO">
-					<splunklogger:fields>
-						<splunklogger:field key="targetSystemRecordId" value-ref="#[flowVars['recordId'][0]['GENERATED_KEYS']]"/>
-						<splunklogger:field key="targetSystemName" value-ref="#['Carma']"/>
-						<splunklogger:field key="transactionStatus" value-ref="#['Accepted']"/>
-					</splunklogger:fields>
-				</splunklogger:logger>
-
+		 				           ( #[flowVars['recordId'][0]['GENERATED_KEYS']]
+		 							,#[message.payload['carmaRecord']['patientInfo']['InPatientAdmitDiagnosis'] != empty ? message.payload['carmaRecord']['patientInfo']['InPatientAdmitDiagnosis'] : ''] 
+		 							,#[message.payload['carmaRecord']['referralInfo']['SenderFacilityName']] 
+		 							,#[message.payload['carmaRecord']['referralInfo']['dischargeInfo']['ActualDischargeDate']]) 
+		 					]]>						    	 
+			    		</db:parameterized-query>
+			    	</db:insert>   
+	
+					<splunklogger:logger config-ref="SplunkLogger" doc:name="Logger">
+						<splunklogger:fields>
+							<splunklogger:field key="targetSystemRecordId" value-ref="#[flowVars['recordId'][0]['GENERATED_KEYS']]"/>
+							<splunklogger:field key="targetSystemName" value-ref="#['Carma']"/>
+							<splunklogger:field key="transactionStatus" value-ref="#['Accepted']"/>
+						</splunklogger:fields>
+					</splunklogger:logger>
+				</processor-chain>
 	    	</transactional>
 		</until-successful>
 		
-		<set-payload value="OK"/>
+		<set-payload value="OK" doc:name="Set Payload"/>
 		
     </flow>
     
     <flow name="DLQHandler">
-    	<splunklogger:logger config-ref="SplunkLogger" severity="ERROR" message="#[exception]">
+    	<splunklogger:logger config-ref="SplunkLogger" severity="ERROR" message="#[message.payload]" doc:name="Logger">
 			<splunklogger:fields>
 				<splunklogger:field key="transactionStatus" value-ref="#['Error']"/>
 			</splunklogger:fields>
