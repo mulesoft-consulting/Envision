@@ -38,6 +38,7 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
     </db:generic-config>
     
     <spring:bean id="objectStore" class="org.mule.util.store.PartitionedPersistentObjectStore" />
+    <spring:bean id="cpObjectStore" class="org.mule.util.store.PartitionedPersistentObjectStore" />
     
     <flow name="main" >
         <http:listener config-ref="HTTP_Listener_Configuration" doc:name="HTTP" path="/api/*" />
@@ -45,6 +46,24 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
         <exception-strategy ref="apiKitGlobalExceptionMapping" doc:name="Reference Exception Strategy" />
     </flow>
     
+    <flow name="post:/patients/{id}/dispatch:apiConfig">
+    	<json:json-to-object-transformer returnClass="java.util.Map"/>
+		    	
+		<splunklogger:logger config-ref="SplunkLogger" severity="INFO">
+			<splunklogger:fields>
+				<splunklogger:field key="transactionStatus" value-ref="#['Received']"/>
+			</splunklogger:fields>
+		</splunklogger:logger>
+    
+    	<until-successful maxRetries="${carma.corepoint.retry.count}" secondsBetweenRetries="${carma.corepoint.retry.interval}" objectStore-ref="cpObjectStore" deadLetterQueue-ref="DLQHandler">
+    		<json:json-to-xml-transformer />
+    	
+    	</until-successful>
+    	
+		<set-property value="501" propertyName="http.status" doc:name="Property" />
+		<set-payload value="{'message':'Not implemented'}"/>
+	</flow>
+	
     <flow name="put:/patients/{id}:apiConfig">
         <set-payload value="#[NullPayload.getInstance()]" doc:name="Set Payload"/>
     </flow>
@@ -129,7 +148,6 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
     </flow>
     
     <flow name="DLQHandler">
-    <logger level="INFO"/>
     	<splunklogger:logger config-ref="SplunkLogger" severity="ERROR" message="#[exception]">
 			<splunklogger:fields>
 				<splunklogger:field key="transactionStatus" value-ref="#['Error']"/>

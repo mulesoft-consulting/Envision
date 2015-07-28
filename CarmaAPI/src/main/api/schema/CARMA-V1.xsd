@@ -1,0 +1,463 @@
+﻿<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <!-- Root element -->
+  <xs:element type="carmaRecordType" name="carmaRecord">
+  </xs:element>
+  <!-- Complex Types -->
+  <xs:complexType name="carmaRecordType">
+    <xs:sequence>
+      <xs:element type="headerType" name="header">
+      </xs:element>
+      <xs:element type="patientInfoType" name="patientInfo">
+      </xs:element>
+      <xs:element type="rerralInfoType" name="referralInfo">
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="headerType">
+    <xs:sequence>
+      <xs:element type="xs:float" name="version"/>
+      <xs:element type="xs:string" name="sourceSystem"/>
+      <xs:element type="xs:string" name="environment"/>
+      <xs:element type="xs:string" name="messageType"/>
+      <xs:element type="xs:string" name="timeZone"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="patientInfoType">
+    <xs:sequence>
+      <xs:element type="xs:long" name="PatientRecordId"/>
+      <xs:element type="xs:string" name="PatientFirstName"/>
+      <xs:element type="xs:string" name="PatientLastName"/>
+      <xs:element type="xs:string" name="SocialSecurityNumber"/>
+      <xs:element type="xs:date" name="DateOfBirth"/>
+      <xs:element type="genderType" name="PatientGender"/>
+      <xs:element type="xs:string" name="PatientCell"/>
+      <xs:element type="xs:string" name="PatientSecondaryPhone"/>
+      <xs:element type="emailType" name="PatientEmail"/>
+      <xs:element type="xs:string" name="PatientAddress1"/>
+      <xs:element type="xs:string" name="PatientAddress2"/>
+      <xs:element type="xs:string" name="City"/>
+      <xs:element type="xs:string" name="State"/>
+      <xs:element type="usZipcodeType" name="Zip"/>
+      <xs:element type="decimalTwoType" name="PatientHeightFeet"/>
+      <xs:element type="decimalTwoType" name="PatientHeightInches"/>
+      <xs:element type="decimalTwoType" name="PatientWeight"/>
+      <xs:element type="xs:string" name="PatientTrackingId"/>
+      <xs:element type="xs:short" name="SenderFacilityId"/>
+      <xs:element type="xs:string" name="HosptialName"/>
+      <xs:element type="xs:string" name="HospitalEMR"/>
+      <xs:element type="xs:string" name="HospitalFIN"/>
+      <xs:element type="xs:string" name="HomePhone"/>
+      <xs:element type="xs:string" name="PrimaryCare"/>
+      <xs:element type="xs:string" name="PrimaryCareRelationship"/>
+      <xs:element type="xs:string" name="PrimaryCarePhone"/>
+      <xs:element type="emailType" name="PrimaryCareEmail"/>
+      <xs:element type="xs:string" name="PCPName"/>
+      <xs:element type="xs:string" name="PCPAddress"/>
+      <xs:element type="xs:string" name="PCPPhone"/>
+      <xs:element type="emailType" name="PCPEmail"/>
+      <xs:element type="xs:string" name="InPatientAdmitDate"/>
+      <xs:element type="xs:string" name="InPatientCareType"/>
+      <xs:element type="xs:string" name="InPatientAdmitDiagnosis"/>
+      <xs:element type="xs:string" name="HospitalAssignedDRG"/>
+      <xs:element type="xs:int" name="AMRFacilityId"/>
+      <xs:element type="xs:string" name="AMRRecordNo"/>
+      <xs:element type="xs:string" name="AmrFacilityName"/>
+      <xs:element type="xs:string" name="HospiceRecordNo"/>
+      <xs:element type="xs:int" name="HospiceFacilityId"/>
+      <xs:element type="xs:string" name="HospiceFacilityName"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="rerralInfoType">
+    <xs:sequence>
+      <xs:element type="xs:int" name="ReferralId"/>
+      <xs:element type="xs:string" name="ReferralNumber"/>
+      <xs:element type="xs:string" name="TrackingNumber"/>
+      <xs:element type="referralType" name="ReferralType"/>
+      <xs:element type="statusType" name="CurrentStatus"/>
+      <xs:element type="xs:int" name="SenderFacilityId"/>
+      <xs:element type="xs:string" name="SenderFacilityName"/>
+      <xs:element type="xs:int" name="SenderUserId"/>
+      <xs:element type="xs:string" name="SenderName"/>
+      <xs:element type="xs:int" name="ReceiverFacilityId"/>
+      <xs:element type="xs:string" name="RecieverFacilityName"/>
+      <xs:element type="xs:string" name="ReceiverUserId"/>
+      <xs:element type="xs:string" name="RecieverName"/>
+      <xs:element type="xs:string" name="ExpirationOption"/>
+      <xs:element type="xs:string" name="ReferralExpirationTime"/>
+      <xs:element type="xs:string" name="PublishType"/>
+      <xs:element type="xs:string" name="CancelReason"/>
+      <xs:element type="xs:string" name="OtherCancelrefReason"/>
+      <xs:element type="xs:string" name="ReferralAssessment"/>
+      <xs:element type="xs:string" name="ReferralReminderDate"/>
+      <xs:element type="xs:dateTime" name="ExpectedDischargeDate"/>
+      <xs:element type="xs:string" name="ActualDischargeDate"/>
+      <xs:element type="xs:string" name="Diagnosis"/>
+      <xs:element type="xs:boolean" name="FollowUpRequired"/>
+      <xs:element type="xs:boolean" name="ScheduledInLogis"/>
+      <xs:element type="xs:string" name="ServiceProvider"/>
+      <xs:element type="xs:int" name="ReferralExtrasId"/>
+      <xs:element type="xs:boolean" name="VisitedPatientatHospital"/>
+      <xs:element type="xs:string" name="SpecialInstructions"/>
+      <xs:element type="xs:boolean" name="ChartBuiltInCERNER"/>
+      <xs:element type="xs:boolean" name="MeetsCriteria"/>
+      <xs:element type="xs:boolean" name="SignedConsentForm"/>
+      <xs:element type="xs:string" name="ReferralTypeName"/>
+      <xs:element type="xs:string" name="DischargeInfo"/>
+      <xs:element type="xs:string" name="ProviderAssigned"/>
+      <xs:element type="xs:string" name="WelcomeCall"/>
+      <xs:element type="xs:string" name="Orders"/>
+      <xs:element type="xs:string" name="OrdersEntered"/>
+      <xs:element type="xs:string" name="FollowUpCall"/>
+      <xs:element type="xs:string" name="DischargeFormServiceCall"/>
+      <xs:element type="xs:string" name="UnplannedVisitName"/>
+      <xs:element type="xs:string" name="ReferralSourceType"/>
+      <xs:element type="xs:string" name="ReferralSourcePts"/>
+      <xs:element type="xs:string" name="CancelReferralReason"/>
+      <xs:element type="xs:string" name="RehabFacilityName"/>
+      <xs:element type="xs:string" name="Paramedic"/>
+      <xs:element type="xs:string" name="ReAdmitToHospital"/>
+      <xs:element type="xs:string" name="ChronicCareManager"/>
+      <xs:element type="xs:string" name="IsPatientatHospital"/>
+      <xs:element type="xs:string" name="PatientLocation"/>
+      <xs:element type="xs:string" name="SuspectedDrg"/>
+      <xs:element type="xs:string" name="ReferralContract"/>
+      <xs:element type="xs:string" name="ServiceContractPeriod"/>
+      <xs:element type="xs:string" name="DeveroMRN"/>
+      <xs:element type="diagnosisType" name="diagnosisInfo">
+      </xs:element>
+      <xs:element type="hospitalType" name="hospitalInfo">
+      </xs:element>
+      <xs:element type="dischargeType" name="dischargeInfo">
+      </xs:element>
+      <xs:element type="insuranceType" name="insuranceInfo">
+      </xs:element>
+      <xs:element type="appointmentType" name="appointmentInfo">
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="diagnosisType">
+    <xs:sequence>
+      <xs:element name="ICDs" maxOccurs="unbounded" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element type="xs:string" name="DiagnosisID"/>
+            <xs:element type="xs:string" name="DiagnosisType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element type="xs:string" name="OtherDiagnostics"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="hospitalType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="MedicalRecordNumber"/>
+      <xs:element type="xs:string" name="RoomNo"/>
+      <xs:element type="xs:string" name="RoomLocation"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="dischargeType">
+    <xs:sequence>
+      <xs:element name="discharge" maxOccurs="unbounded" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element type="xs:int" name="DischargeInfoId"/>
+            <xs:element type="xs:long" name="ReferralTrackerId"/>
+            <xs:element type="dischargeToType" name="DischartgeToType"/>
+            <xs:element type="xs:string" name="DischargeWithType"/>
+            <xs:element type="xs:string" name="AgencyName"/>
+            <xs:element type="xs:string" name="AgencyAddress"/>
+            <xs:element type="xs:string" name="AgencyPhone"/>
+            <xs:element type="xs:string" name="AgencyFAX"/>
+            <xs:element type="xs:string" name="FacilityTypeId"/>
+            <xs:element type="xs:string" name="FacilityType"/>
+            <xs:element type="xs:string" name="FacilityName"/>
+            <xs:element type="xs:string" name="FacilityAddress"/>
+            <xs:element type="xs:string" name="FacilityCity"/>
+            <xs:element type="usZipcodeType" name="FacilityZip"/>
+            <xs:element type="xs:string" name="FacilityPhone"/>
+            <xs:element type="xs:string" name="FacilityFax"/>
+            <xs:element type="xs:string" name="FacilityState"/>
+            <xs:element type="xs:string" name="PostAcuteProvider"/>
+            <xs:element type="xs:string" name="RemindDays"/>
+            <xs:element type="xs:string" name="DischargeDate"/>
+            <xs:element type="xs:string" name="TransferDate"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="insuranceType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="PrimaryInsuranceTypeId"/>
+      <xs:element type="xs:string" name="PrimaryCompanyName"/>
+      <xs:element type="xs:string" name="OtherPrimaryInsurance"/>
+      <xs:element type="xs:string" name="PrimaryCardHolderName"/>
+      <xs:element type="xs:string" name="PrimaryCardHolderSSN"/>
+      <xs:element type="xs:string" name="PrimaryPatientGroupId"/>
+      <xs:element type="xs:string" name="PrimaryPatientMemberId"/>
+      <xs:element type="xs:string" name="SecondaryInsuranceTypeId"/>
+      <xs:element type="xs:string" name="SecondaryCompanyName"/>
+      <xs:element type="xs:string" name="OtherSecondaryInsurance"/>
+      <xs:element type="xs:string" name="SecondaryCardHolderName"/>
+      <xs:element type="xs:string" name="SecondaryCardHolderSSN"/>
+      <xs:element type="xs:string" name="SecondaryPatientGroupId"/>
+      <xs:element type="xs:string" name="SecondaryPatientMemberId"/>
+      <xs:element type="xs:string" name="AdditionalInsuranceInfo"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="appointmentType">
+    <xs:sequence>
+      <xs:element name="appointment" maxOccurs="unbounded" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element type="xs:string" name="AppointmentId"/>
+            <xs:element type="xs:string" name="ScheduledTime"/>
+            <xs:element type="xs:string" name="ScheduleType"/>
+            <xs:element type="xs:string" name="AppointmentNote"/>
+            <xs:element type="xs:string" name="Status"/>
+            <xs:element type="xs:string" name="OtherAppointmentPreference"/>
+            <xs:element type="xs:string" name="OtherPatientToBeSeenWithIn"/>
+            <xs:element type="xs:string" name="CreatedAt"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <!-- Simple Types -->
+  <xs:simpleType name="genderType">
+    <xs:annotation>
+      <xs:documentation>Gender datatype</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Male"/>
+      <xs:enumeration value="Female"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="emailType">
+    <xs:restriction base="xs:token">
+      <xs:maxLength value="254"/>
+      <xs:pattern value="[_\-a-zA-Z0-9\.\+]+@[a-zA-Z0-9](\.?[\-a-zA-Z0-9]*[a-zA-Z0-9])*"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name='usZipcodeType'>
+    <xs:restriction base='xs:string'>
+      <xs:pattern value='[0-9]{5}(-[0-9]{4})?'/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="decimalTwoType">
+    <xs:restriction base="xs:decimal">
+      <xs:fractionDigits value="2" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ageType">
+    <xs:restriction base="xs:integer">
+      <xs:minInclusive value="0"/>
+      <xs:maxInclusive value="110"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="timeZoneType">
+    <xs:annotation>
+      <xs:documentation>Gender datatype</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="UTC"/>
+      <xs:enumeration value="CST"/>
+      <xs:enumeration value="EST"/>
+      <xs:enumeration value="MST"/>
+      <xs:enumeration value="PST"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="referralType">
+    <xs:annotation>
+      <xs:documentation>Carma Referral Types</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="OutPatient"/>
+      <xs:enumeration value="InPatient"/>
+      <xs:enumeration value="Discharge"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="statusType">
+    <xs:annotation>
+      <xs:documentation>Carma Statuses</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="PatientNoShow_FollowUp"/>
+      <xs:enumeration value="AssignProvider"/>
+      <xs:enumeration value="EditAppointment_FollowUp"/>
+      <xs:enumeration value="PatientNoShow"/>
+      <xs:enumeration value="EndService"/>
+      <xs:enumeration value="DischargeFromPostAcute"/>
+      <xs:enumeration value="Referral"/>
+      <xs:enumeration value="PatientDeceased"/>
+      <xs:enumeration value="FollowUpComplete"/>
+      <xs:enumeration value="VisitComplete"/>
+      <xs:enumeration value="ScheduleInLogis_FollowUp"/>
+      <xs:enumeration value="FollowUpCall"/>
+      <xs:enumeration value="FortyEightHourCall"/>
+      <xs:enumeration value="ScheduleVisit"/>
+      <xs:enumeration value="CallPatient"/>
+      <xs:enumeration value="UnderReview"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="dischargeToType">
+    <xs:annotation>
+      <xs:documentation>Carma Discharge to Type</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Home"/>
+      <xs:enumeration value="Post-Acute Facility"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="dischargeWithType">
+    <xs:annotation>
+      <xs:documentation>Carma Discharge With Type</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Non-EvHealth Home Health"/>
+      <xs:enumeration value="EvHealth Home Health"/>
+      <xs:enumeration value="Self Care"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="docToDocType">
+    <xs:annotation>
+      <xs:documentation>Carma Discharge With Type</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="No"/>
+      <xs:enumeration value="Yes Via Phone"/>
+      <xs:enumeration value="Yes Via Email"/>
+      <xs:enumeration value="Yes Via Text"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="cancelReasonType">
+    <xs:annotation>
+      <xs:documentation>Carma Cancel Reason Type</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Patient Does Not Meet Criteria"/>
+      <xs:enumeration value="Patient Declined Service"/>
+      <xs:enumeration value="Other"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="cancelReferralType">
+    <xs:annotation>
+      <xs:documentation>Carma Cancel Referral Type</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Duplicate Patient"/>
+      <xs:enumeration value="Incorrect Information"/>
+      <xs:enumeration value="Patient Declined Services"/>
+      <xs:enumeration value="Patient Does Not Meet Criteria"/>
+      <xs:enumeration value="Called by mistake"/>
+      <xs:enumeration value="Duplicate record"/>
+      <xs:enumeration value="OTHER"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="degreeType">
+    <xs:annotation>
+      <xs:documentation>Carma Degree Type</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NP"/>
+      <xs:enumeration value="PA"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="facilityType">
+    <xs:annotation>
+      <xs:documentation>Carma Facility Type</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Hospital Unit (Wound care center, Day Surgery)"/>
+      <xs:enumeration value="Clinic"/>
+      <xs:enumeration value="Diagnostic Center"/>
+      <xs:enumeration value="Hospital"/>
+      <xs:enumeration value="SNF/LTACs / Nursing Homes"/>
+      <xs:enumeration value="Rehab Center"/>
+      <xs:enumeration value="Practice Group"/>
+      <xs:enumeration value="Hospice"/>
+      <xs:enumeration value="Transport Facility"/>
+      <xs:enumeration value="SNF"/>
+      <xs:enumeration value="LTAC"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="patientLocationType">
+    <xs:annotation>
+      <xs:documentation>Carma patient Location Type</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Home"/>
+      <xs:enumeration value="Post-Acute Facility"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="preferenceTimeType">
+    <xs:annotation>
+      <xs:documentation>Carma appointment preference time Type</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Morning"/>
+      <xs:enumeration value="Afternoon"/>
+      <xs:enumeration value="No Preference"/>
+      <xs:enumeration value="Note"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="referralContractType">
+    <xs:annotation>
+      <xs:documentation>Carma Referral Contract Type</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Model 2"/>
+      <xs:enumeration value="Model 3"/>
+      <xs:enumeration value="Not Applicable"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="referralExpirationTimeType">
+    <xs:annotation>
+      <xs:documentation>Carma Referral Expiration time Type</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="3 Hours"/>
+      <xs:enumeration value="6 Hours"/>
+      <xs:enumeration value="24 Hours"/>
+      <xs:enumeration value="48 Hours"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="riskType">
+    <xs:annotation>
+      <xs:documentation>Carma Risk Type</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="High"/>
+      <xs:enumeration value="Medium"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="scheduleCallType">
+    <xs:annotation>
+      <xs:documentation>Schedule Call Type</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="48 Hour Call"/>
+      <xs:enumeration value="Follow-Up Call"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="scheduleTimeType">
+    <xs:annotation>
+      <xs:documentation>Schedule Time Type</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Morning"/>
+      <xs:enumeration value="Afternoon"/>
+      <xs:enumeration value="Anytime"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="contractPeriodType">
+    <xs:annotation>
+      <xs:documentation>Contract Period Type</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:int">
+      <xs:enumeration value="30"/>
+      <xs:enumeration value="60"/>
+      <xs:enumeration value="90"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
