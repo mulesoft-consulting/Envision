@@ -56,17 +56,14 @@ http://www.mulesoft.org/schema/mule/encryption http://www.mulesoft.org/schema/mu
     </flow>
     
     <flow name="post:/patients/{id}/dispatch:apiConfig">
-    	<json:json-to-object-transformer returnClass="java.util.Map" doc:name="JSON to Object"/>
-		    	
-		<splunklogger:logger config-ref="SplunkLogger" doc:name="Logger">
-			<splunklogger:fields>
-				<splunklogger:field key="transactionStatus" value-ref="#['Received']"/>
-			</splunklogger:fields>
-		</splunklogger:logger>
+
+		<flow-ref name="_logAndEncrypt"/>
     
     	<until-successful maxRetries="${carma.corepoint.retry.count}" secondsBetweenRetries="${carma.corepoint.retry.interval}" objectStore-ref="cpObjectStore" deadLetterQueue-ref="DLQHandler" doc:name="Until Successful">
-    		<json:json-to-xml-transformer doc:name="JSON to XML"/>
-    	
+    		<processor-chain>
+	    		<encryption:decrypt config-ref="Encryption" />
+    			<json:json-to-xml-transformer doc:name="JSON to XML"/>
+    		</processor-chain>
     	</until-successful>
     	
 		<set-property value="501" propertyName="http.status" doc:name="Property" />
@@ -84,16 +81,7 @@ http://www.mulesoft.org/schema/mule/encryption http://www.mulesoft.org/schema/mu
     
     <flow name="post:/patients:apiConfig">
 
-		<json:json-to-object-transformer returnClass="java.util.Map" doc:name="JSON to Object"/>
-		    	
-		<splunklogger:logger config-ref="SplunkLogger" doc:name="Logger">
-			<splunklogger:fields>
-				<splunklogger:field key="transactionStatus" value-ref="#['Received']"/>
-			</splunklogger:fields>
-		</splunklogger:logger>
-		
-		<json:object-to-json-transformer />
-		<encryption:encrypt config-ref="Encryption" />
+		<flow-ref name="_logAndEncrypt"/>
 		
 		<until-successful maxRetries="${carma.mssql.retry.count}" secondsBetweenRetries="${carma.mssql.retry.interval}" objectStore-ref="objectStore" deadLetterQueue-ref="DLQHandler">
     	 
@@ -170,6 +158,19 @@ http://www.mulesoft.org/schema/mule/encryption http://www.mulesoft.org/schema/mu
 			</splunklogger:fields>
 		</splunklogger:logger>
     </flow>
+    
+    <sub-flow name="_logAndEncrypt">
+    	<json:json-to-object-transformer returnClass="java.util.Map" doc:name="JSON to Object"/>
+		    	
+		<splunklogger:logger config-ref="SplunkLogger" doc:name="Logger">
+			<splunklogger:fields>
+				<splunklogger:field key="transactionStatus" value-ref="#['Received']"/>
+			</splunklogger:fields>
+		</splunklogger:logger>
+		
+		<json:object-to-json-transformer />
+		<encryption:encrypt config-ref="Encryption" />
+    </sub-flow>
     
     
     <apikit:mapping-exception-strategy name="apiKitGlobalExceptionMapping">
