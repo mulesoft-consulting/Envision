@@ -25,7 +25,19 @@
                         },
                         "sourceSystemRecordId": {
                             "id": "http://jsonschema.net/carmaRecord/header/sourceSystemRecordId",
-                            "type": "integer"
+                            "type": [ "string", "null" ]
+                        },
+                        "patientStatus": {
+                            "id": "http://jsonschema.net/carmaRecord/header/patientStatus",
+                            "type": [ "string", "null" ]
+                        },
+                        "createdAt": {
+                            "id": "http://jsonschema.net/carmaRecord/header/createdAt",
+                            "type": [ "string", "null" ]
+                        },
+                        "machine": {
+                            "id": "http://jsonschema.net/carmaRecord/header/machine",
+                            "type": [ "string", "null" ]
                         },
                         "timeZone": {
                             "id": "http://jsonschema.net/carmaRecord/header/timeZone",
@@ -67,7 +79,7 @@
                         },
                         "DateOfBirth": {
                             "id": "http://jsonschema.net/carmaRecord/patientInfo/DateOfBirth",
-                            "type": [ "string", "null" ]
+                            "type": "string"
                         },
                         "HomePhone": {
                             "id": "http://jsonschema.net/carmaRecord/patientInfo/HomePhone",
@@ -99,10 +111,14 @@
                         },
                         "HosptialName": {
                             "id": "http://jsonschema.net/carmaRecord/patientInfo/HosptialName",
-                            "type": [ "string", "null" ]
+                            "type": "string"
                         },
                         "InPatientAdmitDate": {
                             "id": "http://jsonschema.net/carmaRecord/patientInfo/InPatientAdmitDate",
+                            "type": [ "string", "null" ]
+                        },
+                        "InPatientDischargeDate": {
+                            "id": "http://jsonschema.net/carmaRecord/patientInfo/InPatientDischargeDate",
                             "type": [ "string", "null" ]
                         },
                         "InPatientAdmitDiagnosis": {
@@ -131,11 +147,11 @@
                         },
                         "PatientFirstName": {
                             "id": "http://jsonschema.net/carmaRecord/patientInfo/PatientFirstName",
-                            "type": [ "string", "null" ]
+                            "type": [ "string" ]
                         },
                         "PatientGender": {
                             "id": "http://jsonschema.net/carmaRecord/patientInfo/PatientGender",
-                            "type": [ "string", "null" ]
+                            "type": [ "string" ]
                         },
                         "PatientHeightFeet": {
                             "id": "http://jsonschema.net/carmaRecord/patientInfo/PatientHeightFeet",
@@ -147,7 +163,7 @@
                         },
                         "PatientLastName": {
                             "id": "http://jsonschema.net/carmaRecord/patientInfo/PatientLastName",
-                            "type": [ "string", "null" ]
+                            "type": [ "string" ]
                         },
                         "PatientRecordId": {
                             "id": "http://jsonschema.net/carmaRecord/patientInfo/PatientRecordId",
@@ -213,7 +229,15 @@
                             "id": "http://jsonschema.net/carmaRecord/patientInfo/Zip",
                             "type": [ "string", "null" ]
                         }
-                    }
+                    },
+                    "required": [
+                        "PatientFirstName",
+                        "PatientLastName",
+                        "DateOfBirth",
+                        "HosptialName",
+                        "PatientGender",
+                        "InPatientDischargeDate"
+                    ]
                 },
                 "referralInfo": {
                     "id": "http://jsonschema.net/carmaRecord/referralInfo",
@@ -277,7 +301,7 @@
                         },
                         "FollowUpCall": {
                             "id": "http://jsonschema.net/carmaRecord/referralInfo/FollowUpCall",
-                            "type": [ "string", "null" ]
+                            "type": [ "boolean", "null" ]
                         },
                         "FollowUpRequired": {
                             "id": "http://jsonschema.net/carmaRecord/referralInfo/FollowUpRequired",
@@ -285,7 +309,7 @@
                         },
                         "IsPatientatHospital": {
                             "id": "http://jsonschema.net/carmaRecord/referralInfo/IsPatientatHospital",
-                            "type": [ "string", "null" ]
+                            "type": [ "boolean", "null" ]
                         },
                         "MedicalRecordNumber": {
                             "id": "http://jsonschema.net/carmaRecord/referralInfo/MedicalRecordNumber",
@@ -293,7 +317,7 @@
                         },
                         "MeetsCriteria": {
                             "id": "http://jsonschema.net/carmaRecord/referralInfo/MeetsCriteria",
-                            "type": [ "string", "null" ]
+                            "type": [ "boolean", "null" ]
                         },
                         "Orders": {
                             "id": "http://jsonschema.net/carmaRecord/referralInfo/Orders",
@@ -301,7 +325,7 @@
                         },
                         "OrdersEntered": {
                             "id": "http://jsonschema.net/carmaRecord/referralInfo/OrdersEntered",
-                            "type": [ "string", "null" ]
+                            "type": [ "boolean", "null" ]
                         },
                         "OtherCancelrefReason": {
                             "id": "http://jsonschema.net/carmaRecord/referralInfo/OtherCancelrefReason",
@@ -321,11 +345,11 @@
                         },
                         "ProviderAssigned": {
                             "id": "http://jsonschema.net/carmaRecord/referralInfo/ProviderAssigned",
-                            "type": [ "string", "null" ]
+                            "type": [ "boolean", "null" ]
                         },
                         "PublishType": {
                             "id": "http://jsonschema.net/carmaRecord/referralInfo/PublishType",
-                            "type": "integer"
+                            "type": [ "integer", "null" ]
                         },
                         "ReAdmitToHospital": {
                             "id": "http://jsonschema.net/carmaRecord/referralInfo/ReAdmitToHospital",
@@ -373,7 +397,7 @@
                         },
                         "ReferralId": {
                             "id": "http://jsonschema.net/carmaRecord/referralInfo/ReferralId",
-                            "type": "integer"
+                            "type": [ "integer", "null" ]
                         },
                         "ReferralNumber": {
                             "id": "http://jsonschema.net/carmaRecord/referralInfo/ReferralNumber",
@@ -421,7 +445,7 @@
                         },
                         "ScheduledInLogis": {
                             "id": "http://jsonschema.net/carmaRecord/referralInfo/ScheduledInLogis",
-                            "type": [ "string", "null" ]
+                            "type": [ "boolean", "null" ]
                         },
                         "SenderFacilityId": {
                             "id": "http://jsonschema.net/carmaRecord/referralInfo/SenderFacilityId",
@@ -453,7 +477,7 @@
                         },
                         "SignedConsentForm": {
                             "id": "http://jsonschema.net/carmaRecord/referralInfo/SignedConsentForm",
-                            "type": [ "string", "null" ]
+                            "type": [ "boolean", "null" ]
                         },
                         "SpecialInstructions": {
                             "id": "http://jsonschema.net/carmaRecord/referralInfo/SpecialInstructions",
@@ -485,11 +509,11 @@
                         },
                         "WelcomeCall": {
                             "id": "http://jsonschema.net/carmaRecord/referralInfo/WelcomeCall",
-                            "type": [ "string", "null" ]
+                            "type": [ "boolean", "null" ]
                         },
                         "appointmentInfo": {
                             "id": "http://jsonschema.net/carmaRecord/referralInfo/appointmentInfo",
-                            "type": "array",
+                            "type": [ "array", "null" ],
                             "items": {
                                 "id": "http://jsonschema.net/carmaRecord/referralInfo/appointmentInfo/0",
                                 "type": "object",
@@ -523,11 +547,11 @@
                         },
                         "diagnosisInfo": {
                             "id": "http://jsonschema.net/carmaRecord/referralInfo/diagnosisInfo",
-                            "type": "object",
+                            "type": [ "object", "null" ],
                             "properties": {
                                 "ICDs": {
                                     "id": "http://jsonschema.net/carmaRecord/referralInfo/diagnosisInfo/ICDs",
-                                    "type": "array",
+                                    "type": [ "array", "null" ],
                                     "items": [
                                         {
                                             "id": "http://jsonschema.net/carmaRecord/referralInfo/diagnosisInfo/ICDs/0",
@@ -581,7 +605,7 @@
                         },
                         "dischargeInfo": {
                             "id": "http://jsonschema.net/carmaRecord/referralInfo/dischargeInfo",
-                            "type": "array",
+                            "type": [ "array", "null" ],
                             "items": {
                                 "id": "http://jsonschema.net/carmaRecord/referralInfo/dischargeInfo/0",
                                 "type": "object",
@@ -683,7 +707,7 @@
                         },
                         "hospitalInfo": {
                             "id": "http://jsonschema.net/carmaRecord/referralInfo/hospitalInfo",
-                            "type": "object",
+                            "type": [ "object", "null" ],
                             "properties": {
                                 "MedicalRecordNumber": {
                                     "id": "http://jsonschema.net/carmaRecord/referralInfo/hospitalInfo/MedicalRecordNumber",
@@ -701,7 +725,7 @@
                         },
                         "insuranceInfo": {
                             "id": "http://jsonschema.net/carmaRecord/referralInfo/insuranceInfo",
-                            "type": "object",
+                            "type": [ "object", "null" ],
                             "properties": {
                                 "AdditionalInsuranceInfo": {
                                     "id": "http://jsonschema.net/carmaRecord/referralInfo/insuranceInfo/AdditionalInsuranceInfo",
