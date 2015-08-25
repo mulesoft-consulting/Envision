@@ -128,7 +128,14 @@ http://www.mulesoft.org/schema/mule/encryption http://www.mulesoft.org/schema/mu
     </flow>
     
     <flow name="NonCarmaRecord">
-		<logger/>    
+		 <choice>
+			<when expression="#[message.payload['carmaRecord']['patientInfo']['SocialSecurityNumber'] != empty]">
+				<flow-ref name="_checkIfExistsBySSN"/> 
+			</when>   			
+			<otherwise>
+				<flow-ref name="_checkIfExistsByNameDOB"/>
+			</otherwise>
+   		</choice>    
     </flow>
     
     <flow name="DLQHandler">
@@ -158,16 +165,18 @@ http://www.mulesoft.org/schema/mule/encryption http://www.mulesoft.org/schema/mu
 		<db:insert config-ref="MSSQL" doc:name="Database" transactionalAction="JOIN_IF_POSSIBLE" target="#[flowVars['encounterRecordId']]">
 			<db:parameterized-query>    		
 				<![CDATA[
-				INSERT INTO [dbo].[PatientOtherInfo] 
-				           ([PatientRecordId] 
-				           ,[InPatientAdmitDiagnosis]
-						   ,[FacilityName]
-         				   ,[InPatientDischargeDate]) 
-			     VALUES
-				           ( #[message.payload['carmaRecord']['patientInfo']['PatientRecordId']]
-							,#[message.payload['carmaRecord']['patientInfo']['InPatientAdmitDiagnosis'] != empty ? message.payload['carmaRecord']['patientInfo']['InPatientAdmitDiagnosis'] : ''] 
-							,#[message.payload['carmaRecord']['referralInfo']['SenderFacilityName']] 
-							,#[message.payload['carmaRecord']['patientInfo']['InPatientDischargeDate']]) 
+				INSERT INTO [dbo].[PatientEncounters]
+		           ([PatientRecordId]
+		           ,[DiagnosisInfo]
+		           ,[FacilityName]
+		           ,[FacilityId]
+		           ,[InPatientDischargeDate])
+				VALUES
+		           ( #[message.payload['carmaRecord']['patientInfo']['PatientRecordId']]
+					,#[message.payload['carmaRecord']['patientInfo']['InPatientAdmitDiagnosis'] != empty ? message.payload['carmaRecord']['patientInfo']['InPatientAdmitDiagnosis'] : ''] 
+					,#[message.payload['carmaRecord']['referralInfo']['SenderFacilityName']]
+					,#[message.payload['carmaRecord']['referralInfo']['SenderFacilityId']]
+					,#[message.payload['carmaRecord']['patientInfo']['InPatientDischargeDate']]) 
 					]]>						    	 
     		</db:parameterized-query>		
 		</db:insert>
@@ -191,6 +200,7 @@ http://www.mulesoft.org/schema/mule/encryption http://www.mulesoft.org/schema/mu
 					INSERT INTO [dbo].[PatientRecords]
 				           ([PatientFirstName]
 				           ,[PatientLastName]
+				           ,[SocialSecurityNumber]
 				           ,[DateOfBirth]
 				           ,[PatientGender]
 				           ,[PatientStatus]
@@ -201,6 +211,7 @@ http://www.mulesoft.org/schema/mule/encryption http://www.mulesoft.org/schema/mu
 				     VALUES
 				           ( #[message.payload['carmaRecord']['patientInfo']['PatientFirstName']]
 							,#[message.payload['carmaRecord']['patientInfo']['PatientLastName']]
+							,#[message.payload['carmaRecord']['patientInfo']['SocialSecurityNumber']]
 							,#[message.payload['carmaRecord']['patientInfo']['DateOfBirth'] != empty ? message.payload['carmaRecord']['patientInfo']['DateOfBirth'] : '']
 							,#[message.payload['carmaRecord']['patientInfo']['PatientGender'] != empty ? message.payload['carmaRecord']['patientInfo']['PatientGender'] : '']
 							,'N'
@@ -235,14 +246,65 @@ http://www.mulesoft.org/schema/mule/encryption http://www.mulesoft.org/schema/mu
 			message.payload['carmaRecord']['patientInfo']['PatientRecordId'] = flowVars['recordId'][0]['GENERATED_KEYS'];
 		</expression-component>
 	</sub-flow>    
- <!--    
-    <sub-flow name="_checkIfExists">
+   
+    <sub-flow name="_checkIfExistsBySSN">
+ 		<db:select config-ref="MSSQL" doc:name="Database" target="#[flowVars['ExistingPatientInfo']]">
+			<db:parameterized-query>    		
+				<![CDATA[
+				SELECT * FROM [dbo].[PatientRecords] 
+				WHERE
+					 PatientFirstName = #[message.payload['carmaRecord']['patientInfo']['PatientFirstName']] AND
+					 PatientLastName = #[message.payload['carmaRecord']['patientInfo']['PatientLastName']] AND
+					 SocialSecurityNumber = #[message.payload['carmaRecord']['patientInfo']['SocialSecurityNumber']] AND
+					 DateOfBirth = #[message.payload['carmaRecord']['patientInfo']['DateOfBirth']]
+					]]>						    	 
+    		</db:parameterized-query>
+    	</db:select>   
+ 		<logger level="INFO" message="#[flowVars['ExistingPatientInfo']]"/>
    		<choice>
-			<when expression="#[]">
-			</when>   			
+   			<when expression="#[flowVars['ExistingPatientInfo'] != empty &amp;&amp; flowVars['ExistingPatientInfo'].size() &gt; 0]"><!-- Record exists -->
+   				<logger level="INFO" message="Patient record lookup by SSN successful, inserting encounter only"/>
+   				<expression-component>
+   					message.payload['carmaRecord']['patientInfo']['PatientRecordId'] = flowVars['ExistingPatientInfo'][0]['PatientRecordId'];
+   				</expression-component>
+   			</when>
+   			<otherwise>
+		   		<logger level="INFO" message="Patient record lookup by SSN did not return value, inserting new patient"/>
+		   		<flow-ref name="_insertNewPatient"/>		
+   			</otherwise>
    		</choice>
+
+   		<flow-ref name="_insertEncounter"/>
+   		   		
     </sub-flow> 
-    -->
+    
+    <sub-flow name="_checkIfExistsByNameDOB">
+ 		<db:select config-ref="MSSQL" doc:name="Database" target="#[flowVars['ExistingPatientInfo']]">
+			<db:parameterized-query>    		
+				<![CDATA[
+				SELECT * FROM [dbo].[PatientRecords] 
+				WHERE
+					 PatientFirstName = #[message.payload['carmaRecord']['patientInfo']['PatientFirstName']] AND
+					 PatientLastName = #[message.payload['carmaRecord']['patientInfo']['PatientLastName']] AND
+					 DateOfBirth = #[message.payload['carmaRecord']['patientInfo']['DateOfBirth']]
+					]]>						    	 
+    		</db:parameterized-query>
+    	</db:select>   
+ 		
+   		<choice>
+   			<when expression="#[flowVars['ExistingPatientInfo'] != empty &amp;&amp; flowVars['ExistingPatientInfo'].size() &gt; 0]"><!-- Record exists -->
+   				<logger level="INFO" message="Patient record lookup by name and DOB found information, inserting to Queue table..."/>
+   				<!-- TODO -->
+   			</when>
+   			<otherwise>
+		   		<logger level="INFO" message="Patient record lookup by name and DOB did not return value, inserting new patient"/>
+		   		<flow-ref name="_insertNewPatient"/>		
+		   		<flow-ref name="_insertEncounter"/>
+   			</otherwise>
+   		</choice>
+   		   		
+    </sub-flow> 
+
     <apikit:mapping-exception-strategy name="apiKitGlobalExceptionMapping">
         <apikit:mapping statusCode="404">
             <apikit:exception value="org.mule.module.apikit.exception.NotFoundException" />
