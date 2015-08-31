@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mule xmlns:tls="http://www.mulesoft.org/schema/mule/tls" xmlns:encryption="http://www.mulesoft.org/schema/mule/encryption" xmlns:splunklogger="http://www.mulesoft.org/schema/mule/splunklogger" 
-xmlns:db="http://www.mulesoft.org/schema/mule/db" 
-xmlns:json="http://www.mulesoft.org/schema/mule/json" 
-xmlns="http://www.mulesoft.org/schema/mule/core" 
-xmlns:apikit="http://www.mulesoft.org/schema/mule/apikit" 
-xmlns:context="http://www.springframework.org/schema/context" 
-xmlns:core="http://www.mulesoft.org/schema/mule/core" 
-xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" 
-xmlns:http="http://www.mulesoft.org/schema/mule/http" 
-xmlns:spring="http://www.springframework.org/schema/beans" 
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-version="EE-3.6.2" 
-xsi:schemaLocation="http://www.mulesoft.org/schema/mule/tls http://www.mulesoft.org/schema/mule/tls/current/mule-tls.xsd http://www.mulesoft.org/schema/mule/splunklogger http://www.mulesoft.org/schema/mule/splunklogger/current/mule-splunklogger.xsd
+<mule xmlns:data-mapper="http://www.mulesoft.org/schema/mule/ee/data-mapper"
+	xmlns:ws="http://www.mulesoft.org/schema/mule/ws" xmlns:tls="http://www.mulesoft.org/schema/mule/tls"
+	xmlns:encryption="http://www.mulesoft.org/schema/mule/encryption"
+	xmlns:splunklogger="http://www.mulesoft.org/schema/mule/splunklogger"
+	xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns:json="http://www.mulesoft.org/schema/mule/json"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/apikit"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:spring="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="EE-3.6.2"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/tls http://www.mulesoft.org/schema/mule/tls/current/mule-tls.xsd
+http://www.mulesoft.org/schema/mule/splunklogger http://www.mulesoft.org/schema/mule/splunklogger/current/mule-splunklogger.xsd
 http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
 http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
@@ -19,150 +18,208 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 http://www.mulesoft.org/schema/mule/apikit http://www.mulesoft.org/schema/mule/apikit/current/mule-apikit.xsd
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
-http://www.mulesoft.org/schema/mule/encryption http://www.mulesoft.org/schema/mule/encryption/current/mule-encryption.xsd">
+http://www.mulesoft.org/schema/mule/encryption http://www.mulesoft.org/schema/mule/encryption/current/mule-encryption.xsd
+http://www.mulesoft.org/schema/mule/ws http://www.mulesoft.org/schema/mule/ws/current/mule-ws.xsd
+http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schema/mule/ee/data-mapper/current/mule-data-mapper.xsd">
 
-    <context:property-placeholder location="api.${env}.properties" />
+	<context:property-placeholder location="api.${env}.properties" />
 
 	<splunklogger:config name="SplunkLogger" doc:name="SplunkLogger">
 		<splunklogger:global-fields>
-            <splunklogger:global-field key="sourceSystemName">#[message.payload['carmaRecord']['header']['sourceSystem']]</splunklogger:global-field>
-            <splunklogger:global-field key="sourceSystemRecordId">#[message.payload['carmaRecord']['header']['sourceSystemRecordId']]</splunklogger:global-field>
-            <splunklogger:global-field key="env">${env}</splunklogger:global-field>
-        </splunklogger:global-fields>
+			<splunklogger:global-field key="sourceSystemName">#[message.payload['carmaRecord']['header']['sourceSystem']]</splunklogger:global-field>
+			<splunklogger:global-field key="sourceSystemRecordId">#[message.payload['carmaRecord']['header']['sourceSystemRecordId']]</splunklogger:global-field>
+			<splunklogger:global-field key="env">${env}</splunklogger:global-field>
+		</splunklogger:global-fields>
 	</splunklogger:config>
-	
-    <apikit:config name="apiConfig" raml="api.raml" consoleEnabled="true" consolePath="console" doc:name="Router" />
 
-    <http:listener-config name="HTTP_Listener_Configuration" host="0.0.0.0" port="${http.port}" doc:name="HTTP Listener Configuration" protocol="HTTPS">
-    	<tls:context>
-    		<tls:key-store path="${app.home}/classes/keystore.jks" keyPassword="muleftw" password="muleftw" />
-    	</tls:context>
-    </http:listener-config>
-    
-    <!--  Enabling SSL: https://msdn.microsoft.com/en-us/library/bb879949(v=sql.110).aspx -->
-    <db:generic-config name="MSSQL" url="jdbc:sqlserver://${carma.mssql.host}:${carma.mssql.port};databaseName=${carma.mssql.db};user=${carma.mssql.user};password=${carma.mssql.password}" 
-                       driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver" doc:name="Generic Database Configuration">
-     	<db:pooling-profile minPoolSize="10" preparedStatementCacheSize="100"/>
-    </db:generic-config>
-    
-    <spring:beans>
-        <spring:bean id="objectStore" class="org.mule.util.store.PartitionedPersistentObjectStore"/>
-        <spring:bean id="cpObjectStore" class="org.mule.util.store.PartitionedPersistentObjectStore"/>
-    </spring:beans>
-    
-    <encryption:config name="Encryption" doc:name="Encryption">
-        <encryption:jce-encrypter-config key="${patient.encryption.key}"/>
-    </encryption:config>
-    
-    <flow name="main" >
-        <http:listener config-ref="HTTP_Listener_Configuration" doc:name="HTTP" path="/api/*" />
-        <apikit:router config-ref="apiConfig" doc:name="APIkit Router" />
-        <exception-strategy ref="apiKitGlobalExceptionMapping" doc:name="Reference Exception Strategy" />
-    </flow>
-    
-    <flow name="post:/patients/{id}/dispatch:apiConfig">
+	<apikit:config name="apiConfig" raml="api.raml"
+		consoleEnabled="true" consolePath="console" doc:name="Router" />
 
-		<flow-ref name="_logAndEncrypt"/>
-    
-    	<until-successful maxRetries="${carma.corepoint.retry.count}" secondsBetweenRetries="${carma.corepoint.retry.interval}" objectStore-ref="cpObjectStore" deadLetterQueue-ref="DLQHandler" doc:name="Until Successful">
-    		<processor-chain>
-	    		<encryption:decrypt config-ref="Encryption" />
-    			<json:json-to-xml-transformer doc:name="JSON to XML"/>
-    		</processor-chain>
-    	</until-successful>
-    	
-		<set-property value="501" propertyName="http.status" doc:name="Property" />
-		<set-payload value="{'message':'Not implemented'}" doc:name="Set Payload"/>
+	<http:listener-config name="HTTP_Listener_Configuration"
+		host="0.0.0.0" port="${http.port}" doc:name="HTTP Listener Configuration"
+		protocol="HTTPS">
+		<tls:context>
+			<tls:key-store path="${app.home}/classes/keystore.jks"
+				keyPassword="muleftw" password="muleftw" />
+		</tls:context>
+	</http:listener-config>
+
+	<!-- Enabling SSL: https://msdn.microsoft.com/en-us/library/bb879949(v=sql.110).aspx -->
+	<db:generic-config name="MSSQL"
+		url="jdbc:sqlserver://${carma.mssql.host}:${carma.mssql.port};databaseName=${carma.mssql.db};user=${carma.mssql.user};password=${carma.mssql.password}"
+		driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+		doc:name="Generic Database Configuration">
+		<db:pooling-profile minPoolSize="10"
+			preparedStatementCacheSize="100" />
+	</db:generic-config>
+
+	<spring:beans>
+		<spring:bean id="objectStore"
+			class="org.mule.util.store.PartitionedPersistentObjectStore" />
+		<spring:bean id="cpObjectStore"
+			class="org.mule.util.store.PartitionedPersistentObjectStore" />
+	</spring:beans>
+
+	<encryption:config name="Encryption" doc:name="Encryption">
+		<encryption:jce-encrypter-config key="${patient.encryption.key}" />
+	</encryption:config>
+	<ws:consumer-config name="Web_Service_Consumer"
+		wsdlLocation="corepoint.wsdl" service="InboundCarmaXML" port="Carma"
+		serviceAddress="http://localhost:8883" doc:name="Web Service Consumer" />
+	<data-mapper:config name="Json_To_Xml_SendPatientXMLData_"
+		transformationGraphPath="json_to_xml_sendpatientxmldata_.grf"
+		doc:name="Json_To_Xml_SendPatientXMLData_" />
+	<data-mapper:config name="Xml_SendPatientXMLDataResponse__To_JSON"
+		transformationGraphPath="xml_sendpatientxmldataresponse__to_json.grf"
+		doc:name="Xml_SendPatientXMLDataResponse__To_JSON" />
+
+	<flow name="main">
+		<http:listener config-ref="HTTP_Listener_Configuration"
+			doc:name="HTTP" path="/api/*" />
+		<apikit:router config-ref="apiConfig" doc:name="APIkit Router" />
+		<exception-strategy ref="apiKitGlobalExceptionMapping"
+			doc:name="Reference Exception Strategy" />
 	</flow>
-	
-    <flow name="put:/patients/{id}:apiConfig">
-        <set-payload value="#[NullPayload.getInstance()]" doc:name="Set Payload"/>
-    </flow>
-    
-    <flow name="get:/patients/{id}:apiConfig">
-		<set-property value="501" propertyName="http.status" doc:name="Property" />
-		<set-payload value="{'message':'Not implemented'}" doc:name="Set Payload"/>
-    </flow>
-    
-    <flow name="post:/patients:apiConfig">
 
-		<flow-ref name="_logAndEncrypt"/>
-		
-		<until-successful maxRetries="${carma.mssql.retry.count}" secondsBetweenRetries="${carma.mssql.retry.interval}" objectStore-ref="objectStore" deadLetterQueue-ref="DLQHandler">
-    	 
-	    	<transactional action="BEGIN_OR_JOIN" doc:name="Transactional">
-	    		<processor-chain>
-					<encryption:decrypt config-ref="Encryption" />
-		    		<json:json-to-object-transformer returnClass="java.util.Map" doc:name="JSON to Object"/>
-	
-					<choice>
-						<when expression="#[message.payload['carmaRecord']['header']['sourceSystem'] == '${carma.header.sourceSystem}']">
-							<logger level="INFO" message="Carma Record Received"/>
-							<flow-ref name="CarmaRecord"/>
+	<flow name="post:/patients/{id}/dispatch:apiConfig">
+
+
+		<flow-ref name="_logAndEncrypt" doc:name="_logAndEncrypt" />
+
+		<until-successful maxRetries="${carma.corepoint.retry.count}"
+			secondsBetweenRetries="${carma.corepoint.retry.interval}"
+			objectStore-ref="cpObjectStore" deadLetterQueue-ref="DLQHandler"
+			doc:name="Until Successful">
+			<processor-chain doc:name="Processor Chain">
+				<encryption:decrypt config-ref="Encryption"
+					doc:name="Encryption" />
+				<data-mapper:transform config-ref="Json_To_Xml_SendPatientXMLData_"
+					doc:name="Json To Xml&lt;SendPatientXMLData&gt;" />
+				<ws:consumer config-ref="Web_Service_Consumer"
+					operation="SendPatientXMLData" doc:name="Web Service Consumer" />
+
+			</processor-chain>
+		</until-successful>
+
+		<set-payload value="{'message':'Success'}"
+			doc:name="Set Payload" />
+
+	</flow>
+
+	<flow name="put:/patients/{id}:apiConfig">
+		<set-payload value="#[NullPayload.getInstance()]"
+			doc:name="Set Payload" />
+	</flow>
+
+	<flow name="get:/patients/{id}:apiConfig">
+		<set-property value="501" propertyName="http.status"
+			doc:name="Property" />
+		<set-payload value="{'message':'Not implemented'}"
+			doc:name="Set Payload" />
+	</flow>
+
+	<flow name="post:/patients:apiConfig">
+
+		<flow-ref name="_logAndEncrypt" doc:name="_logAndEncrypt" />
+
+		<until-successful maxRetries="${carma.mssql.retry.count}"
+			secondsBetweenRetries="${carma.mssql.retry.interval}"
+			objectStore-ref="objectStore" deadLetterQueue-ref="DLQHandler"
+			doc:name="Until Successful">
+
+			<transactional action="BEGIN_OR_JOIN" doc:name="Transactional">
+				<processor-chain doc:name="Processor Chain">
+					<encryption:decrypt config-ref="Encryption"
+						doc:name="Encryption" />
+					<json:json-to-object-transformer
+						returnClass="java.util.Map" doc:name="JSON to Object" />
+
+					<choice doc:name="Choice">
+						<when
+							expression="#[message.payload['carmaRecord']['header']['sourceSystem'] == '${carma.header.sourceSystem}']">
+							<logger level="INFO" message="Carma Record Received"
+								doc:name="Logger" />
+							<flow-ref name="CarmaRecord" doc:name="CarmaRecord" />
 						</when>
 						<otherwise>
-							<logger level="INFO" message="Non-Carma Record Received: #[message.payload['carmaRecord']['header']['sourceSystem']]"/>
-							<flow-ref name="NonCarmaRecord"/>
+							<logger level="INFO"
+								message="Non-Carma Record Received: #[message.payload['carmaRecord']['header']['sourceSystem']]"
+								doc:name="Logger" />
+							<flow-ref name="NonCarmaRecord" doc:name="NonCarmaRecord" />
 						</otherwise>
 					</choice>
-				</processor-chain>	
-	    	</transactional>
+				</processor-chain>
+			</transactional>
 		</until-successful>
-		
-		<set-payload value="OK" doc:name="Set Payload"/>
-		
-    </flow>
-    
-    <flow name="CarmaRecord">
-    	<choice>
-    		<when expression="#[message.payload['carmaRecord']['patientInfo']['PatientRecordId'] == 0]"> <!--  Record Does Not Exist -->
-    			<logger level="INFO" message="Carma : Inserting New Patient"/>
-    			 <flow-ref name="_insertNewPatient"/>
-    		</when>
-    		<otherwise>
-    			<logger level="INFO" message="#['Patient: ' + message.payload['carmaRecord']['patientInfo']['PatientRecordId'] + ' exists, inserting new encounter only...']"/>
-    		</otherwise>
-    	</choice>
 
-    	<flow-ref name="_insertEncounter"/>
-    </flow>
-    
-    <flow name="NonCarmaRecord">
-		 <choice>
-			<when expression="#[message.payload['carmaRecord']['patientInfo']['SocialSecurityNumber'] != empty]">
-				<flow-ref name="_checkIfExistsBySSN"/> 
-			</when>   			
+		<set-payload value="OK" doc:name="Set Payload" />
+
+	</flow>
+
+	<flow name="CarmaRecord">
+		<choice doc:name="Choice">
+			<when
+				expression="#[message.payload['carmaRecord']['patientInfo']['PatientRecordId'] == 0]"> <!-- Record Does Not Exist -->
+				<logger level="INFO" message="Carma : Inserting New Patient"
+					doc:name="Logger" />
+				<flow-ref name="_insertNewPatient" doc:name="_insertNewPatient" />
+			</when>
 			<otherwise>
-				<flow-ref name="_checkIfExistsByNameDOB"/>
+				<logger level="INFO"
+					message="#['Patient: ' + message.payload['carmaRecord']['patientInfo']['PatientRecordId'] + ' exists, inserting new encounter only...']"
+					doc:name="Logger" />
 			</otherwise>
-   		</choice>    
-    </flow>
-    
-    <flow name="DLQHandler">
-    	<splunklogger:logger config-ref="SplunkLogger" severity="ERROR" message="#[message.payload]" doc:name="Logger">
+		</choice>
+
+		<flow-ref name="_insertEncounter" doc:name="_insertEncounter" />
+	</flow>
+
+	<flow name="NonCarmaRecord">
+		<choice doc:name="Choice">
+			<when
+				expression="#[message.payload['carmaRecord']['patientInfo']['SocialSecurityNumber'] != empty]">
+				<flow-ref name="_checkIfExistsBySSN" doc:name="_checkIfExistsBySSN" />
+			</when>
+			<otherwise>
+				<flow-ref name="_checkIfExistsByNameDOB" doc:name="_checkIfExistsByNameDOB" />
+			</otherwise>
+		</choice>
+	</flow>
+
+	<flow name="DLQHandler">
+		<splunklogger:logger config-ref="SplunkLogger"
+			severity="ERROR" message="#[message.payload]" doc:name="Logger">
 			<splunklogger:fields>
-				<splunklogger:field key="transactionStatus" value-ref="#['Error']"/>
+				<splunklogger:field key="transactionStatus"
+					value-ref="#['Error']" />
 			</splunklogger:fields>
 		</splunklogger:logger>
-    </flow>
-    
-    <sub-flow name="_logAndEncrypt">
-    	<json:json-to-object-transformer returnClass="java.util.Map" doc:name="JSON to Object"/>
-		    	
-		<splunklogger:logger config-ref="SplunkLogger" doc:name="Logger">
+	</flow>
+
+	<sub-flow name="_logAndEncrypt">
+		<json:json-to-object-transformer
+			returnClass="java.util.Map" doc:name="JSON to Object" />
+
+		<splunklogger:logger config-ref="SplunkLogger"
+			doc:name="Logger">
 			<splunklogger:fields>
-				<splunklogger:field key="transactionStatus" value-ref="#['Received']"/>
+				<splunklogger:field key="transactionStatus"
+					value-ref="#['Received']" />
 			</splunklogger:fields>
 		</splunklogger:logger>
-		
-		<json:object-to-json-transformer />
-		<encryption:encrypt config-ref="Encryption" />
-    </sub-flow>
-    
-    <sub-flow name="_insertEncounter">
-		<logger level="INFO" message="(Encounter) MAP IS #[message.payload]"/>
-		
-		<db:insert config-ref="MSSQL" doc:name="Database" transactionalAction="JOIN_IF_POSSIBLE" target="#[flowVars['encounterRecordId']]">
+
+		<json:object-to-json-transformer
+			doc:name="Object to JSON" />
+		<encryption:encrypt config-ref="Encryption"
+			doc:name="Encryption" />
+	</sub-flow>
+
+	<sub-flow name="_insertEncounter">
+		<logger level="INFO" message="(Encounter) MAP IS #[message.payload]"
+			doc:name="Logger" />
+
+		<db:insert config-ref="MSSQL" doc:name="Database"
+			target="#[flowVars['encounterRecordId']]">
 			<db:parameterized-query>    		
 				<![CDATA[
 				INSERT INTO [dbo].[PatientEncounters]
@@ -178,23 +235,30 @@ http://www.mulesoft.org/schema/mule/encryption http://www.mulesoft.org/schema/mu
 					,#[message.payload['carmaRecord']['referralInfo']['SenderFacilityId']]
 					,#[message.payload['carmaRecord']['patientInfo']['InPatientDischargeDate']]) 
 					]]>						    	 
-    		</db:parameterized-query>		
+    		</db:parameterized-query>
 		</db:insert>
 
-		<splunklogger:logger config-ref="SplunkLogger" doc:name="Logger">
+		<splunklogger:logger config-ref="SplunkLogger"
+			doc:name="Logger">
 			<splunklogger:fields>
-				<splunklogger:field key="targetSystemRecordId" value-ref="#[message.payload['carmaRecord']['patientInfo']['PatientRecordId']]"/>
-				<splunklogger:field key="targetSystemName" value-ref="#['Carma']"/>
-				<splunklogger:field key="transactionStatus" value-ref="#['Accepted']"/>
+				<splunklogger:field key="targetSystemRecordId"
+					value-ref="#[message.payload['carmaRecord']['patientInfo']['PatientRecordId']]" />
+				<splunklogger:field key="targetSystemName"
+					value-ref="#['Carma']" />
+				<splunklogger:field key="transactionStatus"
+					value-ref="#['Accepted']" />
 			</splunklogger:fields>
 		</splunklogger:logger>
-		
-    </sub-flow>
-	
+
+	</sub-flow>
+
 	<sub-flow name="_insertNewPatient">
-		<logger level="INFO" message="MAP IS #[message.payload]"/>
-		
-    	<db:insert config-ref="MSSQL"  autoGeneratedKeys="true" target="#[flowVars['recordId']]" transactionalAction="ALWAYS_JOIN" doc:name="Database">
+		<logger level="INFO" message="MAP IS #[message.payload]"
+			doc:name="Logger" />
+
+		<db:insert config-ref="MSSQL" autoGeneratedKeys="true"
+			target="#[flowVars['recordId']]" transactionalAction="ALWAYS_JOIN"
+			doc:name="Database">
 			<db:parameterized-query>    		
 				<![CDATA[
 					INSERT INTO [dbo].[PatientRecords]
@@ -221,11 +285,14 @@ http://www.mulesoft.org/schema/mule/encryption http://www.mulesoft.org/schema/mu
 							,'Update-Later')						
 				]]>						    	
     		</db:parameterized-query>
-    	</db:insert>
-    	
-    	<logger level="INFO" message="ID is #[flowVars['recordId'][0]['GENERATED_KEYS']]" doc:name="Logger"/>
-    	
-    	<db:insert config-ref="MSSQL" doc:name="Database" transactionalAction="ALWAYS_JOIN" target="#[flowVars['otherInfoRecordId']]">
+		</db:insert>
+
+		<logger level="INFO"
+			message="ID is #[flowVars['recordId'][0]['GENERATED_KEYS']]"
+			doc:name="Logger" />
+
+		<db:insert config-ref="MSSQL" doc:name="Database"
+			transactionalAction="ALWAYS_JOIN" target="#[flowVars['otherInfoRecordId']]">
 			<db:parameterized-query>    		
 				<![CDATA[
 				INSERT INTO [dbo].[PatientOtherInfo] 
@@ -240,15 +307,17 @@ http://www.mulesoft.org/schema/mule/encryption http://www.mulesoft.org/schema/mu
 							,#[message.payload['carmaRecord']['patientInfo']['InPatientDischargeDate']]) 
 					]]>						    	 
     		</db:parameterized-query>
-    	</db:insert>   
+		</db:insert>
 
-		<expression-component>
-			message.payload['carmaRecord']['patientInfo']['PatientRecordId'] = flowVars['recordId'][0]['GENERATED_KEYS'];
+		<expression-component doc:name="Expression">
+			message.payload['carmaRecord']['patientInfo']['PatientRecordId'] =
+			flowVars['recordId'][0]['GENERATED_KEYS'];
 		</expression-component>
-	</sub-flow>    
-   
-    <sub-flow name="_checkIfExistsBySSN">
- 		<db:select config-ref="MSSQL" doc:name="Database" target="#[flowVars['ExistingPatientInfo']]">
+	</sub-flow>
+
+	<sub-flow name="_checkIfExistsBySSN">
+		<db:select config-ref="MSSQL" doc:name="Database"
+			target="#[flowVars['ExistingPatientInfo']]">
 			<db:parameterized-query>    		
 				<![CDATA[
 				SELECT * FROM [dbo].[PatientRecords] 
@@ -259,27 +328,35 @@ http://www.mulesoft.org/schema/mule/encryption http://www.mulesoft.org/schema/mu
 					 DateOfBirth = #[message.payload['carmaRecord']['patientInfo']['DateOfBirth']]
 					]]>						    	 
     		</db:parameterized-query>
-    	</db:select>   
- 		<logger level="INFO" message="#[flowVars['ExistingPatientInfo']]"/>
-   		<choice>
-   			<when expression="#[flowVars['ExistingPatientInfo'] != empty &amp;&amp; flowVars['ExistingPatientInfo'].size() &gt; 0]"><!-- Record exists -->
-   				<logger level="INFO" message="Patient record lookup by SSN successful, inserting encounter only"/>
-   				<expression-component>
-   					message.payload['carmaRecord']['patientInfo']['PatientRecordId'] = flowVars['ExistingPatientInfo'][0]['PatientRecordId'];
-   				</expression-component>
-   			</when>
-   			<otherwise>
-		   		<logger level="INFO" message="Patient record lookup by SSN did not return value, inserting new patient"/>
-		   		<flow-ref name="_insertNewPatient"/>		
-   			</otherwise>
-   		</choice>
+		</db:select>
+		<logger level="INFO" message="#[flowVars['ExistingPatientInfo']]"
+			doc:name="Logger" />
+		<choice doc:name="Choice">
+			<when
+				expression="#[flowVars['ExistingPatientInfo'] != empty &amp;&amp; flowVars['ExistingPatientInfo'].size() &gt; 0]"><!-- Record exists -->
+				<logger level="INFO"
+					message="Patient record lookup by SSN successful, inserting encounter only"
+					doc:name="Logger" />
+				<expression-component doc:name="Expression">
+					message.payload['carmaRecord']['patientInfo']['PatientRecordId'] =
+					flowVars['ExistingPatientInfo'][0]['PatientRecordId'];
+				</expression-component>
+			</when>
+			<otherwise>
+				<logger level="INFO"
+					message="Patient record lookup by SSN did not return value, inserting new patient"
+					doc:name="Logger" />
+				<flow-ref name="_insertNewPatient" doc:name="_insertNewPatient" />
+			</otherwise>
+		</choice>
 
-   		<flow-ref name="_insertEncounter"/>
-   		   		
-    </sub-flow> 
-    
-    <sub-flow name="_checkIfExistsByNameDOB">
- 		<db:select config-ref="MSSQL" doc:name="Database" target="#[flowVars['ExistingPatientInfo']]">
+		<flow-ref name="_insertEncounter" doc:name="_insertEncounter" />
+
+	</sub-flow>
+
+	<sub-flow name="_checkIfExistsByNameDOB">
+		<db:select config-ref="MSSQL" doc:name="Database"
+			target="#[flowVars['ExistingPatientInfo']]">
 			<db:parameterized-query>    		
 				<![CDATA[
 				SELECT * FROM [dbo].[PatientRecords] 
@@ -289,47 +366,71 @@ http://www.mulesoft.org/schema/mule/encryption http://www.mulesoft.org/schema/mu
 					 DateOfBirth = #[message.payload['carmaRecord']['patientInfo']['DateOfBirth']]
 					]]>						    	 
     		</db:parameterized-query>
-    	</db:select>   
- 		
-   		<choice>
-   			<when expression="#[flowVars['ExistingPatientInfo'] != empty &amp;&amp; flowVars['ExistingPatientInfo'].size() &gt; 0]"><!-- Record exists -->
-   				<logger level="INFO" message="Patient record lookup by name and DOB found information, inserting to Queue table..."/>
-   				<!-- TODO -->
-   			</when>
-   			<otherwise>
-		   		<logger level="INFO" message="Patient record lookup by name and DOB did not return value, inserting new patient"/>
-		   		<flow-ref name="_insertNewPatient"/>		
-		   		<flow-ref name="_insertEncounter"/>
-   			</otherwise>
-   		</choice>
-   		   		
-    </sub-flow> 
+		</db:select>
 
-    <apikit:mapping-exception-strategy name="apiKitGlobalExceptionMapping">
-        <apikit:mapping statusCode="404">
-            <apikit:exception value="org.mule.module.apikit.exception.NotFoundException" />
-            <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
-            <set-payload value="{ &quot;message&quot;: &quot;Resource not found&quot; }" doc:name="Set Payload"/>
-        </apikit:mapping>
-        <apikit:mapping statusCode="405">
-            <apikit:exception value="org.mule.module.apikit.exception.MethodNotAllowedException" />
-            <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
-            <set-payload value="{ &quot;message&quot;: &quot;Method not allowed&quot; }" doc:name="Set Payload"/>
-        </apikit:mapping>
-        <apikit:mapping statusCode="415">
-            <apikit:exception value="org.mule.module.apikit.exception.UnsupportedMediaTypeException" />
-            <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
-            <set-payload value="{ &quot;message&quot;: &quot;Unsupported media type&quot; }" doc:name="Set Payload"/>
-        </apikit:mapping>
-        <apikit:mapping statusCode="406">
-            <apikit:exception value="org.mule.module.apikit.exception.NotAcceptableException" />
-            <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
-            <set-payload value="{ &quot;message&quot;: &quot;Not acceptable&quot; }" doc:name="Set Payload"/>
-        </apikit:mapping>
-        <apikit:mapping statusCode="400">
-            <apikit:exception value="org.mule.module.apikit.exception.BadRequestException" />
-            <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
-            <set-payload value="{ &quot;message&quot;: &quot;Bad request&quot; }" doc:name="Set Payload"/>
-        </apikit:mapping>
-    </apikit:mapping-exception-strategy>
+		<choice doc:name="Choice">
+			<when
+				expression="#[flowVars['ExistingPatientInfo'] != empty &amp;&amp; flowVars['ExistingPatientInfo'].size() &gt; 0]"><!-- Record exists -->
+				<logger level="INFO"
+					message="Patient record lookup by name and DOB found information, inserting to Queue table..."
+					doc:name="Logger" />
+				<!-- TODO -->
+			</when>
+			<otherwise>
+				<logger level="INFO"
+					message="Patient record lookup by name and DOB did not return value, inserting new patient"
+					doc:name="Logger" />
+				<flow-ref name="_insertNewPatient" doc:name="_insertNewPatient" />
+				<flow-ref name="_insertEncounter" doc:name="_insertEncounter" />
+			</otherwise>
+		</choice>
+
+	</sub-flow>
+
+	<apikit:mapping-exception-strategy
+		name="apiKitGlobalExceptionMapping">
+		<apikit:mapping statusCode="404">
+			<apikit:exception
+				value="org.mule.module.apikit.exception.NotFoundException" />
+			<set-property propertyName="Content-Type" value="application/json"
+				doc:name="Property" />
+			<set-payload
+				value="{ &quot;message&quot;: &quot;Resource not found&quot; }"
+				doc:name="Set Payload" />
+		</apikit:mapping>
+		<apikit:mapping statusCode="405">
+			<apikit:exception
+				value="org.mule.module.apikit.exception.MethodNotAllowedException" />
+			<set-property propertyName="Content-Type" value="application/json"
+				doc:name="Property" />
+			<set-payload
+				value="{ &quot;message&quot;: &quot;Method not allowed&quot; }"
+				doc:name="Set Payload" />
+		</apikit:mapping>
+		<apikit:mapping statusCode="415">
+			<apikit:exception
+				value="org.mule.module.apikit.exception.UnsupportedMediaTypeException" />
+			<set-property propertyName="Content-Type" value="application/json"
+				doc:name="Property" />
+			<set-payload
+				value="{ &quot;message&quot;: &quot;Unsupported media type&quot; }"
+				doc:name="Set Payload" />
+		</apikit:mapping>
+		<apikit:mapping statusCode="406">
+			<apikit:exception
+				value="org.mule.module.apikit.exception.NotAcceptableException" />
+			<set-property propertyName="Content-Type" value="application/json"
+				doc:name="Property" />
+			<set-payload value="{ &quot;message&quot;: &quot;Not acceptable&quot; }"
+				doc:name="Set Payload" />
+		</apikit:mapping>
+		<apikit:mapping statusCode="400">
+			<apikit:exception
+				value="org.mule.module.apikit.exception.BadRequestException" />
+			<set-property propertyName="Content-Type" value="application/json"
+				doc:name="Property" />
+			<set-payload value="{ &quot;message&quot;: &quot;Bad request&quot; }"
+				doc:name="Set Payload" />
+		</apikit:mapping>
+	</apikit:mapping-exception-strategy>
 </mule>
