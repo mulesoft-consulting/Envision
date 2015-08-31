@@ -65,7 +65,7 @@ http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schem
 	</encryption:config>
 	<ws:consumer-config name="Web_Service_Consumer"
 		wsdlLocation="corepoint.wsdl" service="InboundCarmaXML" port="Carma"
-		serviceAddress="http://localhost:8883" doc:name="Web Service Consumer" />
+		serviceAddress="http://10.100.1.50:8085" doc:name="Web Service Consumer" />
 	<data-mapper:config name="Json_To_Xml_SendPatientXMLData_"
 		transformationGraphPath="json_to_xml_sendpatientxmldata_.grf"
 		doc:name="Json_To_Xml_SendPatientXMLData_" />
