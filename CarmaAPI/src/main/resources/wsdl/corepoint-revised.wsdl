@@ -8,13 +8,7 @@
 	<wsdl:types>
 		<s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
 			<s:import namespace="http://edims.corepoint.com/carma" />
-			<s:element name="SendPatientXMLData">
-				<s:complexType>
-					<s:sequence>
-						<s:element minOccurs="0" maxOccurs="1" ref="s1:carmaRecord" />
-					</s:sequence>
-				</s:complexType>
-			</s:element>
+			<s:element name="carmaRecord" type="s1:carmaRecordType" />
 			<s:element name="SendPatientXMLDataResponse">
 				<s:complexType>
 					<s:sequence>
@@ -432,7 +426,7 @@
 		</s:schema>
 	</wsdl:types>
 	<wsdl:message name="SendPatientXMLDataSoapIn">
-		<wsdl:part name="parameters" element="tns:SendPatientXMLData" />
+		<wsdl:part name="parameters" element="tns:carmaRecord" />
 	</wsdl:message>
 	<wsdl:message name="SendPatientXMLDataSoapOut">
 		<wsdl:part name="parameters" element="tns:SendPatientXMLDataResponse" />

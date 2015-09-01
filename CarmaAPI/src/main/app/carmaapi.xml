@@ -63,16 +63,13 @@ http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schem
 	<encryption:config name="Encryption" doc:name="Encryption">
 		<encryption:jce-encrypter-config key="${patient.encryption.key}" />
 	</encryption:config>
-	<ws:consumer-config name="Web_Service_Consumer"
-		wsdlLocation="corepoint.wsdl" service="InboundCarmaXML" port="Carma"
-		serviceAddress="http://10.100.1.50:8085" doc:name="Web Service Consumer" />
-	<data-mapper:config name="Json_To_Xml_SendPatientXMLData_"
-		transformationGraphPath="json_to_xml_sendpatientxmldata_.grf"
-		doc:name="Json_To_Xml_SendPatientXMLData_" />
-	<data-mapper:config name="Xml_SendPatientXMLDataResponse__To_JSON"
-		transformationGraphPath="xml_sendpatientxmldataresponse__to_json.grf"
-		doc:name="Xml_SendPatientXMLDataResponse__To_JSON" />
-
+	<ws:consumer-config name="Web_Service_Consumer1"
+		wsdlLocation="wsdl/corepoint-revised.wsdl" service="InboundCarmaXML"
+		port="Carma" serviceAddress="http://${carma.corepoint.server}:${carma.corepoint.port}" doc:name="Web Service Consumer" />
+	<data-mapper:config name="Json_To_Xml_carmaRecord__1"
+		transformationGraphPath="json_to_xml_carmarecord__1.grf" doc:name="Json_To_Xml_carmaRecord__1" />
+    <data-mapper:config name="Xml_SendPatientXMLDataResponse__To_Map" transformationGraphPath="xml_sendpatientxmldataresponse__to_map_1.grf" doc:name="Xml_SendPatientXMLDataResponse__To_Map"/>
+	
 	<flow name="main">
 		<http:listener config-ref="HTTP_Listener_Configuration"
 			doc:name="HTTP" path="/api/*" />
@@ -82,6 +79,8 @@ http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schem
 	</flow>
 
 	<flow name="post:/patients/{id}/dispatch:apiConfig">
+		<logger level="INFO" doc:name="Logger" />
+
 
 
 		<flow-ref name="_logAndEncrypt" doc:name="_logAndEncrypt" />
@@ -93,16 +92,28 @@ http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schem
 			<processor-chain doc:name="Processor Chain">
 				<encryption:decrypt config-ref="Encryption"
 					doc:name="Encryption" />
-				<data-mapper:transform config-ref="Json_To_Xml_SendPatientXMLData_"
-					doc:name="Json To Xml&lt;SendPatientXMLData&gt;" />
-				<ws:consumer config-ref="Web_Service_Consumer"
+
+				<data-mapper:transform config-ref="Json_To_Xml_carmaRecord__1"
+					doc:name="Json To Xml&lt;carmaRecord&gt;" />
+
+				<ws:consumer config-ref="Web_Service_Consumer1"
 					operation="SendPatientXMLData" doc:name="Web Service Consumer" />
+                <data-mapper:transform config-ref="Xml_SendPatientXMLDataResponse__To_Map" doc:name="Xml&lt;SendPatientXMLDataResponse&gt; To Map"/>
+
+
+				<splunklogger:logger config-ref="SplunkLogger"
+					doc:name="Logger">
+					<splunklogger:fields>
+						<splunklogger:field key="sendPatientXMLDataResult"
+							value-ref="#[payload.SendPatientXMLDataResult]" />
+					</splunklogger:fields>
+
+				</splunklogger:logger>
 
 			</processor-chain>
 		</until-successful>
 
-		<set-payload value="{'message':'Success'}"
-			doc:name="Set Payload" />
+		<set-payload value="{'message':'Success'}" doc:name="Set Payload" />
 
 	</flow>
 

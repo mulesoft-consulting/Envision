@@ -1,0 +1,50 @@
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+	<soap:Body>
+		<ns0:SendPatientXMLData xmlns:ns0="http://tempuri.org/">
+			<ns1:carmaRecord xmlns:ns1="http://edims.corepoint.com/carma">
+				<ns1:header>
+					<ns1:version>0.2</ns1:version>
+					<ns1:sourceSystem>Carma-EH</ns1:sourceSystem>
+					<ns1:environment>Dev</ns1:environment>
+					<ns1:messageType>Carma-Record</ns1:messageType>
+					<ns1:timeZone>utc</ns1:timeZone>
+					<ns1:patientStatus>New</ns1:patientStatus>
+					<ns1:createdAt>8/25/2015 5:12:52 AM</ns1:createdAt>
+					<ns1:machine>SMS-LAP-0004</ns1:machine>
+				</ns1:header>
+				<ns1:patientInfo>
+					<ns1:PatientRecordId>1182</ns1:PatientRecordId>
+					<ns1:PatientFirstName>First Name</ns1:PatientFirstName>
+					<ns1:PatientLastName>Last Name</ns1:PatientLastName>
+					<ns1:DateOfBirth>8/25/1982</ns1:DateOfBirth>
+					<ns1:PatientGender>M</ns1:PatientGender>
+					<ns1:SenderFacilityId>0</ns1:SenderFacilityId>
+					<ns1:HosptialName>Facility Name</ns1:HosptialName>
+					<ns1:InPatientDischargeDate>8/25/2015 10:42:52 AM
+					</ns1:InPatientDischargeDate>
+				</ns1:patientInfo>
+				<ns1:referralInfo>
+					<ns1:ReferralId>0</ns1:ReferralId>
+					<ns1:SenderFacilityId>0</ns1:SenderFacilityId>
+					<ns1:SenderUserId>0</ns1:SenderUserId>
+					<ns1:ReceiverFacilityId>0</ns1:ReceiverFacilityId>
+					<ns1:PublishType>0</ns1:PublishType>
+					<ns1:ActualDischargeDate>8/25/2015 10:42:52 AM
+					</ns1:ActualDischargeDate>
+					<ns1:FollowUpRequired>false</ns1:FollowUpRequired>
+					<ns1:ScheduledInLogis>false</ns1:ScheduledInLogis>
+					<ns1:ReferralExtrasId>0</ns1:ReferralExtrasId>
+					<ns1:VisitedPatientatHospital>false</ns1:VisitedPatientatHospital>
+					<ns1:ChartBuiltInCERNER>false</ns1:ChartBuiltInCERNER>
+					<ns1:MeetsCriteria>false</ns1:MeetsCriteria>
+					<ns1:SignedConsentForm>false</ns1:SignedConsentForm>
+					<ns1:ProviderAssigned>false</ns1:ProviderAssigned>
+					<ns1:WelcomeCall>false</ns1:WelcomeCall>
+					<ns1:OrdersEntered>false</ns1:OrdersEntered>
+					<ns1:FollowUpCall>false</ns1:FollowUpCall>
+					<ns1:IsPatientatHospital>false</ns1:IsPatientatHospital>
+				</ns1:referralInfo>
+			</ns1:carmaRecord>
+		</ns0:SendPatientXMLData>
+	</soap:Body>
+</soap:Envelope>
