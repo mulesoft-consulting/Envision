@@ -2,14 +2,15 @@
 ---
 title: Carma API
 version: 0.1
-baseUri: http://localhost:8820/carma/api
+#baseUri: http://10.5.248.25:8081/api
+baseUri: http://mocksvc.mulesoft.com/mocks/4eaaac10-c180-4e92-bab4-aa01b609c43d/api
 mediaType: application/json
 /patients:
   post:
     body:
       application/json:
-        example: !include examples/patient.json    
-        schema: !include schema/CarmaRecord_V2.jsonschema
+        example: !include examples/sample-dispatch.json    
+        schema: !include schema/CarmaRecord_json_V0.2.jsonschema
   /{id}:
     get:
       responses:
@@ -28,4 +29,4 @@ mediaType: application/json
         body:
           application/json:
             example: !include examples/sample-dispatch.json    
-            schema: !include schema/CarmaRecord_json_V0.2.json
+            schema: !include schema/CarmaRecord_json_V0.2.jsonschema

@@ -39,7 +39,7 @@ http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schem
 		host="0.0.0.0" port="${http.port}" doc:name="HTTP Listener Configuration"
 		protocol="HTTPS">
 		<tls:context>
-			<tls:key-store path="${app.home}/classes/keystore.jks"
+			<tls:key-store path="${app.home}/classes/envisionkeystore.jks"
 				keyPassword="muleftw" password="muleftw" />
 		</tls:context>
 	</http:listener-config>
