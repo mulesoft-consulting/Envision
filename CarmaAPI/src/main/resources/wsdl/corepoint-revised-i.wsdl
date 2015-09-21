@@ -1,0 +1,524 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:s="http://www.w3.org/2001/XMLSchema"
+	xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+	xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/"
+	xmlns:s1="http://edims.corepoint.com/carma" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+	targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+	<wsdl:types>
+		<s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+			<s:import namespace="http://edims.corepoint.com/carma" />
+			<s:element name="carmaRecord" type="s1:carmaRecordType" />
+			<s:element name="SendPatientXMLDataResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="SendPatientXMLDataResult" type="s:string" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+		</s:schema>
+		<s:schema elementFormDefault="qualified"
+			targetNamespace="http://edims.corepoint.com/carma">
+			<s:element name="carmaRecord" type="s1:carmaRecordType" />
+			<s:complexType name="carmaRecordType">
+				<s:sequence>
+					<s:element type="s1:headerType" name="header">
+					</s:element>
+					<s:element type="s1:patientInfoType" name="patientInfo">
+					</s:element>
+					<s:element type="s1:rerralInfoType" name="referralInfo">
+					</s:element>
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="headerType">
+				<s:sequence>
+					<s:element type="s:float" name="version" />
+					<s:element type="s:string" name="sourceSystem" />
+					<s:element type="s:string" name="environment" />
+					<s:element type="s:string" name="messageType" />
+					<s:element type="s:string" name="timeZone" />
+					<s:element type="s:string" name="patientStatus" />
+					<s:element type="s:string" name="sourceSystemRecordId" />
+					<s:element type="s:string" name="createdAt" />
+					<s:element type="s:string" name="machine" />
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="patientInfoType">
+				<s:sequence>
+					<s:element type="s:long" name="PatientRecordId" />
+					<s:element type="s:string" name="PatientFirstName" />
+					<s:element type="s:string" name="PatientLastName" />
+					<s:element type="s:string" name="SocialSecurityNumber" />
+					<s:element type="s:string" name="DateOfBirth" />
+					<s:element type="s1:genderType" name="PatientGender" />
+					<s:element type="s:string" name="PatientCell" />
+					<s:element type="s:string" name="PatientSecondaryPhone" />
+					<s:element type="s1:emailType" name="PatientEmail" />
+					<s:element type="s:string" name="PatientAddress1" />
+					<s:element type="s:string" name="PatientAddress2" />
+					<s:element type="s:string" name="City" />
+					<s:element type="s:string" name="State" />
+					<s:element type="s1:usZipcodeType" name="Zip" />
+					<s:element type="s1:decimalTwoType" name="PatientHeightFeet" />
+					<s:element type="s1:decimalTwoType" name="PatientHeightInches" />
+					<s:element type="s1:decimalTwoType" name="PatientWeight" />
+					<s:element type="s:string" name="PatientTrackingId" />
+					<s:element type="s:short" name="SenderFacilityId" />
+					<s:element type="s:string" name="HosptialName" />
+					<s:element type="s:string" name="HospitalEMR" />
+					<s:element type="s:string" name="HospitalFIN" />
+					<s:element type="s:string" name="HomePhone" />
+					<s:element type="s:string" name="PrimaryCare" />
+					<s:element type="s:string" name="PrimaryCareRelationship" />
+					<s:element type="s:string" name="PrimaryCarePhone" />
+					<s:element type="s1:emailType" name="PrimaryCareEmail" />
+					<s:element type="s:string" name="PCPName" />
+					<s:element type="s:string" name="PCPAddress" />
+					<s:element type="s:string" name="PCPPhone" />
+					<s:element type="s1:emailType" name="PCPEmail" />
+					<s:element type="s:string" name="InPatientAdmitDate" />
+					<s:element type="s:string" name="InPatientDischargeDate" />
+					<s:element type="s:string" name="InPatientCareType" />
+					<s:element type="s:string" name="InPatientAdmitDiagnosis" />
+					<s:element type="s:string" name="HospitalAssignedDRG" />
+					<s:element type="s:int" name="AMRFacilityId" />
+					<s:element type="s:string" name="AMRRecordNo" />
+					<s:element type="s:string" name="AmrFacilityName" />
+					<s:element type="s:string" name="HospiceRecordNo" />
+					<s:element type="s:int" name="HospiceFacilityId" />
+					<s:element type="s:string" name="HospiceFacilityName" />
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="rerralInfoType">
+				<s:sequence>
+					<s:element type="s:int" name="ReferralId" />
+					<s:element type="s:string" name="ReferralNumber" />
+					<s:element type="s:string" name="TrackingNumber" />
+					<s:element type="s1:referralType" name="ReferralType" />
+					<s:element type="s1:statusType" name="CurrentStatus" />
+					<s:element type="s:int" name="SenderFacilityId" />
+					<s:element type="s:string" name="SenderFacilityName" />
+					<s:element type="s:int" name="SenderUserId" />
+					<s:element type="s:string" name="SenderName" />
+					<s:element type="s:int" name="ReceiverFacilityId" />
+					<s:element type="s:string" name="RecieverFacilityName" />
+					<s:element type="s:string" name="ReceiverUserId" />
+					<s:element type="s:string" name="RecieverName" />
+					<s:element type="s:string" name="ExpirationOption" />
+					<s:element type="s:string" name="ReferralExpirationTime" />
+					<s:element type="s:string" name="PublishType" />
+					<s:element type="s:string" name="CancelReason" />
+					<s:element type="s:string" name="OtherCancelrefReason" />
+					<s:element type="s:string" name="ReferralAssessment" />
+					<s:element type="s:string" name="ReferralReminderDate" />
+					<s:element type="s:string" name="ExpectedDischargeDate" />
+					<s:element type="s:string" name="ActualDischargeDate" />
+					<s:element type="s:string" name="Diagnosis" />
+					<s:element type="s:boolean" name="FollowUpRequired" />
+					<s:element type="s:boolean" name="ScheduledInLogis" />
+					<s:element type="s:string" name="ServiceProvider" />
+					<s:element type="s:int" name="ReferralExtrasId" />
+					<s:element type="s:boolean" name="VisitedPatientatHospital" />
+					<s:element type="s:string" name="SpecialInstructions" />
+					<s:element type="s:boolean" name="ChartBuiltInCERNER" />
+					<s:element type="s:boolean" name="MeetsCriteria" />
+					<s:element type="s:boolean" name="SignedConsentForm" />
+					<s:element type="s:string" name="ReferralTypeName" />
+					<s:element type="s:string" name="ProviderAssigned" />
+					<s:element type="s:string" name="WelcomeCall" />
+					<s:element type="s:string" name="Orders" />
+					<s:element type="s:string" name="OrdersEntered" />
+					<s:element type="s:string" name="FollowUpCall" />
+					<s:element type="s:string" name="DischargeFormServiceCall" />
+					<s:element type="s:string" name="UnplannedVisitName" />
+					<s:element type="s:string" name="ReferralSourceType" />
+					<s:element type="s:string" name="ReferralSourcePts" />
+					<s:element type="s:string" name="CancelReferralReason" />
+					<s:element type="s:string" name="RehabFacilityName" />
+					<s:element type="s:string" name="Paramedic" />
+					<s:element type="s:string" name="ReAdmitToHospital" />
+					<s:element type="s:string" name="ChronicCareManager" />
+					<s:element type="s:string" name="IsPatientatHospital" />
+					<s:element type="s:string" name="PatientLocation" />
+					<s:element type="s:string" name="SuspectedDrg" />
+					<s:element type="s:string" name="ReferralContract" />
+					<s:element type="s:string" name="ServiceContractPeriod" />
+					<s:element type="s:string" name="DeveroMRN" />
+					<s:element type="s1:diagnosisType" name="diagnosisInfo">
+					</s:element>
+					<s:element type="s1:hospitalType" name="hospitalInfo">
+					</s:element>
+					<s:element type="s1:dischargeType" name="dischargeInfo"
+						maxOccurs="unbounded" minOccurs="0">
+					</s:element>
+					<s:element type="s1:insuranceType" name="insuranceInfo">
+					</s:element>
+					<s:element type="s1:appointmentType" name="appointmentInfo"
+						maxOccurs="unbounded" minOccurs="0">
+					</s:element>
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="diagnosisType">
+				<s:sequence>
+					<s:element name="ICDs" maxOccurs="unbounded" minOccurs="0">
+						<s:complexType>
+							<s:sequence>
+								<s:element type="s:string" name="DiagnosisID" />
+								<s:element type="s:string" name="DiagnosisType" />
+							</s:sequence>
+						</s:complexType>
+					</s:element>
+					<s:element type="s:string" name="OtherDiagnostics" />
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="hospitalType">
+				<s:sequence>
+					<s:element type="s:string" name="RoomNo" />
+					<s:element type="s:string" name="RoomLocation" />
+					<s:element type="s:string" name="MedicalRecordNumber" />
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="dischargeType">
+				<s:sequence>
+					<s:element type="s:int" name="DischargeInfoId" />
+					<s:element type="s:long" name="ReferralTrackerId" />
+					<s:element type="s1:dischargeToType" name="DischartgeToType" />
+					<s:element type="s:string" name="DischargeWithType" />
+					<s:element type="s:string" name="AgencyName" />
+					<s:element type="s:string" name="AgencyAddress" />
+					<s:element type="s:string" name="AgencyPhone" />
+					<s:element type="s:string" name="AgencyFAX" />
+					<s:element type="s:string" name="FacilityTypeId" />
+					<s:element type="s:string" name="FacilityType" />
+					<s:element type="s:string" name="FacilityName" />
+					<s:element type="s:string" name="FacilityAddress" />
+					<s:element type="s:string" name="FacilityCity" />
+					<s:element type="s1:usZipcodeType" name="FacilityZip" />
+					<s:element type="s:string" name="FacilityPhone" />
+					<s:element type="s:string" name="FacilityFax" />
+					<s:element type="s:string" name="FacilityState" />
+					<s:element type="s:string" name="PostAcuteProvider" />
+					<s:element type="s:string" name="RemindDays" />
+					<s:element type="s:string" name="DischargeDate" />
+					<s:element type="s:string" name="TransferDate" />
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="insuranceType">
+				<s:sequence>
+					<s:element type="s:string" name="PrimaryInsuranceTypeId" />
+					<s:element type="s:string" name="PrimaryCompanyName" />
+					<s:element type="s:string" name="OtherPrimaryInsurance" />
+					<s:element type="s:string" name="PrimaryCardHolderName" />
+					<s:element type="s:string" name="PrimaryCardHolderSSN" />
+					<s:element type="s:string" name="PrimaryPatientGroupId" />
+					<s:element type="s:string" name="PrimaryPatientMemberId" />
+					<s:element type="s:string" name="SecondaryInsuranceTypeId" />
+					<s:element type="s:string" name="SecondaryCompanyName" />
+					<s:element type="s:string" name="OtherSecondaryInsurance" />
+					<s:element type="s:string" name="SecondaryCardHolderName" />
+					<s:element type="s:string" name="SecondaryCardHolderSSN" />
+					<s:element type="s:string" name="SecondaryPatientGroupId" />
+					<s:element type="s:string" name="SecondaryPatientMemberId" />
+					<s:element type="s:string" name="AdditionalInsuranceInfo" />
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="appointmentType">
+				<s:sequence>
+					<s:element type="s:int" name="AppointmentId" />
+					<s:element type="s:string" name="ScheduledTime" />
+					<s:element type="s:string" name="ScheduleType" />
+					<s:element type="s:string" name="AppointmentNote" />
+					<s:element type="s:string" name="Status" />
+					<s:element type="s:string" name="OtherAppointmentPreference" />
+					<s:element type="s:string" name="OtherPatientToBeSeenWithIn" />
+					<s:element type="s:string" name="CreatedAt" />
+				</s:sequence>
+			</s:complexType>
+			<!-- Simple Types -->
+			<s:simpleType name="genderType">
+				<s:annotation>
+					<s:documentation>Gender datatype</s:documentation>
+				</s:annotation>
+				<s:restriction base="s:string">
+					<s:enumeration value="Male" />
+					<s:enumeration value="Female" />
+				</s:restriction>
+			</s:simpleType>
+			<s:simpleType name="emailType">
+				<s:restriction base="s:token">
+					<s:maxLength value="254" />
+					<s:pattern
+						value="[_\-a-zA-Z0-9\.\+]+@[a-zA-Z0-9](\.?[\-a-zA-Z0-9]*[a-zA-Z0-9])*" />
+				</s:restriction>
+			</s:simpleType>
+			<s:simpleType name='usZipcodeType'>
+				<s:restriction base='s:string'>
+					<s:pattern value='[0-9]{5}(-[0-9]{4})?' />
+				</s:restriction>
+			</s:simpleType>
+			<s:simpleType name="decimalTwoType">
+				<s:restriction base="s:decimal">
+					<s:fractionDigits value="2" />
+				</s:restriction>
+			</s:simpleType>
+			<s:simpleType name="ageType">
+				<s:restriction base="s:integer">
+					<s:minInclusive value="0" />
+					<s:maxInclusive value="110" />
+				</s:restriction>
+			</s:simpleType>
+			<s:simpleType name="timeZoneType">
+				<s:annotation>
+					<s:documentation>Gender datatype</s:documentation>
+				</s:annotation>
+				<s:restriction base="s:string">
+					<s:enumeration value="UTC" />
+					<s:enumeration value="CST" />
+					<s:enumeration value="EST" />
+					<s:enumeration value="MST" />
+					<s:enumeration value="PST" />
+				</s:restriction>
+			</s:simpleType>
+			<s:simpleType name="referralType">
+				<s:annotation>
+					<s:documentation>Carma Referral Types</s:documentation>
+				</s:annotation>
+				<s:restriction base="s:string">
+					<s:enumeration value="OutPatient" />
+					<s:enumeration value="InPatient" />
+					<s:enumeration value="Discharge" />
+				</s:restriction>
+			</s:simpleType>
+			<s:simpleType name="statusType">
+				<s:annotation>
+					<s:documentation>Carma Statuses</s:documentation>
+				</s:annotation>
+				<s:restriction base="s:string">
+					<s:enumeration value="PatientNoShow_FollowUp" />
+					<s:enumeration value="AssignProvider" />
+					<s:enumeration value="EditAppointment_FollowUp" />
+					<s:enumeration value="PatientNoShow" />
+					<s:enumeration value="EndService" />
+					<s:enumeration value="DischargeFromPostAcute" />
+					<s:enumeration value="Referral" />
+					<s:enumeration value="PatientDeceased" />
+					<s:enumeration value="FollowUpComplete" />
+					<s:enumeration value="VisitComplete" />
+					<s:enumeration value="ScheduleInLogis_FollowUp" />
+					<s:enumeration value="FollowUpCall" />
+					<s:enumeration value="FortyEightHourCall" />
+					<s:enumeration value="ScheduleVisit" />
+					<s:enumeration value="CallPatient" />
+					<s:enumeration value="UnderReview" />
+				</s:restriction>
+			</s:simpleType>
+			<s:simpleType name="dischargeToType">
+				<s:annotation>
+					<s:documentation>Carma Discharge to Type</s:documentation>
+				</s:annotation>
+				<s:restriction base="s:string">
+					<s:enumeration value="Home" />
+					<s:enumeration value="Post-Acute Facility" />
+				</s:restriction>
+			</s:simpleType>
+			<s:simpleType name="dischargeWithType">
+				<s:annotation>
+					<s:documentation>Carma Discharge With Type</s:documentation>
+				</s:annotation>
+				<s:restriction base="s:string">
+					<s:enumeration value="Non-EvHealth Home Health" />
+					<s:enumeration value="EvHealth Home Health" />
+					<s:enumeration value="Self Care" />
+				</s:restriction>
+			</s:simpleType>
+			<s:simpleType name="docToDocType">
+				<s:annotation>
+					<s:documentation>Carma Discharge With Type</s:documentation>
+				</s:annotation>
+				<s:restriction base="s:string">
+					<s:enumeration value="No" />
+					<s:enumeration value="Yes Via Phone" />
+					<s:enumeration value="Yes Via Email" />
+					<s:enumeration value="Yes Via Text" />
+				</s:restriction>
+			</s:simpleType>
+			<s:simpleType name="cancelReasonType">
+				<s:annotation>
+					<s:documentation>Carma Cancel Reason Type</s:documentation>
+				</s:annotation>
+				<s:restriction base="s:string">
+					<s:enumeration value="Patient Does Not Meet Criteria" />
+					<s:enumeration value="Patient Declined Service" />
+					<s:enumeration value="Other" />
+				</s:restriction>
+			</s:simpleType>
+			<s:simpleType name="cancelReferralType">
+				<s:annotation>
+					<s:documentation>Carma Cancel Referral Type</s:documentation>
+				</s:annotation>
+				<s:restriction base="s:string">
+					<s:enumeration value="Duplicate Patient" />
+					<s:enumeration value="Incorrect Information" />
+					<s:enumeration value="Patient Declined Services" />
+					<s:enumeration value="Patient Does Not Meet Criteria" />
+					<s:enumeration value="Called by mistake" />
+					<s:enumeration value="Duplicate record" />
+					<s:enumeration value="OTHER" />
+				</s:restriction>
+			</s:simpleType>
+			<s:simpleType name="degreeType">
+				<s:annotation>
+					<s:documentation>Carma Degree Type</s:documentation>
+				</s:annotation>
+				<s:restriction base="s:string">
+					<s:enumeration value="NP" />
+					<s:enumeration value="PA" />
+				</s:restriction>
+			</s:simpleType>
+			<s:simpleType name="facilityType">
+				<s:annotation>
+					<s:documentation>Carma Facility Type</s:documentation>
+				</s:annotation>
+				<s:restriction base="s:string">
+					<s:enumeration value="Hospital Unit (Wound care center, Day Surgery)" />
+					<s:enumeration value="Clinic" />
+					<s:enumeration value="Diagnostic Center" />
+					<s:enumeration value="Hospital" />
+					<s:enumeration value="SNF/LTACs / Nursing Homes" />
+					<s:enumeration value="Rehab Center" />
+					<s:enumeration value="Practice Group" />
+					<s:enumeration value="Hospice" />
+					<s:enumeration value="Transport Facility" />
+					<s:enumeration value="SNF" />
+					<s:enumeration value="LTAC" />
+				</s:restriction>
+			</s:simpleType>
+			<s:simpleType name="patientLocationType">
+				<s:annotation>
+					<s:documentation>Carma patient Location Type</s:documentation>
+				</s:annotation>
+				<s:restriction base="s:string">
+					<s:enumeration value="Home" />
+					<s:enumeration value="Post-Acute Facility" />
+				</s:restriction>
+			</s:simpleType>
+			<s:simpleType name="preferenceTimeType">
+				<s:annotation>
+					<s:documentation>Carma appointment preference time Type</s:documentation>
+				</s:annotation>
+				<s:restriction base="s:string">
+					<s:enumeration value="Morning" />
+					<s:enumeration value="Afternoon" />
+					<s:enumeration value="No Preference" />
+					<s:enumeration value="Note" />
+				</s:restriction>
+			</s:simpleType>
+			<s:simpleType name="referralContractType">
+				<s:annotation>
+					<s:documentation>Carma Referral Contract Type</s:documentation>
+				</s:annotation>
+				<s:restriction base="s:string">
+					<s:enumeration value="Model 2" />
+					<s:enumeration value="Model 3" />
+					<s:enumeration value="Not Applicable" />
+				</s:restriction>
+			</s:simpleType>
+			<s:simpleType name="referralExpirationTimeType">
+				<s:annotation>
+					<s:documentation>Carma Referral Expiration time Type</s:documentation>
+				</s:annotation>
+				<s:restriction base="s:string">
+					<s:enumeration value="3 Hours" />
+					<s:enumeration value="6 Hours" />
+					<s:enumeration value="24 Hours" />
+					<s:enumeration value="48 Hours" />
+				</s:restriction>
+			</s:simpleType>
+			<s:simpleType name="riskType">
+				<s:annotation>
+					<s:documentation>Carma Risk Type</s:documentation>
+				</s:annotation>
+				<s:restriction base="s:string">
+					<s:enumeration value="High" />
+					<s:enumeration value="Medium" />
+				</s:restriction>
+			</s:simpleType>
+			<s:simpleType name="scheduleCallType">
+				<s:annotation>
+					<s:documentation>Schedule Call Type</s:documentation>
+				</s:annotation>
+				<s:restriction base="s:string">
+					<s:enumeration value="48 Hour Call" />
+					<s:enumeration value="Follow-Up Call" />
+				</s:restriction>
+			</s:simpleType>
+			<s:simpleType name="scheduleTimeType">
+				<s:annotation>
+					<s:documentation>Schedule Time Type</s:documentation>
+				</s:annotation>
+				<s:restriction base="s:string">
+					<s:enumeration value="Morning" />
+					<s:enumeration value="Afternoon" />
+					<s:enumeration value="Anytime" />
+				</s:restriction>
+			</s:simpleType>
+			<s:simpleType name="contractPeriodType">
+				<s:annotation>
+					<s:documentation>Contract Period Type</s:documentation>
+				</s:annotation>
+				<s:restriction base="s:int">
+					<s:enumeration value="30" />
+					<s:enumeration value="60" />
+					<s:enumeration value="90" />
+				</s:restriction>
+			</s:simpleType>
+		</s:schema>
+	</wsdl:types>
+	<wsdl:message name="SendPatientXMLDataSoapIn">
+		<wsdl:part name="parameters" element="tns:carmaRecord" />
+	</wsdl:message>
+	<wsdl:message name="SendPatientXMLDataSoapOut">
+		<wsdl:part name="parameters" element="tns:SendPatientXMLDataResponse" />
+	</wsdl:message>
+	<wsdl:portType name="Carma">
+		<wsdl:operation name="SendPatientXMLData">
+			<wsdl:input message="tns:SendPatientXMLDataSoapIn" />
+			<wsdl:output message="tns:SendPatientXMLDataSoapOut" />
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="Carma" type="tns:Carma">
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="SendPatientXMLData">
+			<soap:operation soapAction="http://tempuri.org/SendPatientXMLData"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:binding name="Carma12" type="tns:Carma">
+		<soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="SendPatientXMLData">
+			<soap12:operation soapAction="http://tempuri.org/SendPatientXMLData"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="InboundCarmaXML">
+		<wsdl:port name="Carma" binding="tns:Carma">
+			<soap:address location="http://10.100.1.50:8085" />
+		</wsdl:port>
+		<wsdl:port name="Carma12" binding="tns:Carma12">
+			<soap12:address location="http://10.100.1.50:8085" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

@@ -64,11 +64,11 @@ http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schem
 		<encryption:jce-encrypter-config key="${patient.encryption.key}" />
 	</encryption:config>
 	<ws:consumer-config name="Web_Service_Consumer1"
-		wsdlLocation="wsdl/corepoint-revised.wsdl" service="InboundCarmaXML"
+		wsdlLocation="wsdl/corepoint-revised-i.wsdl" service="InboundCarmaXML"
 		port="Carma" serviceAddress="http://${carma.corepoint.server}:${carma.corepoint.port}" doc:name="Web Service Consumer" />
-	<data-mapper:config name="Json_To_Xml_carmaRecord__1"
-		transformationGraphPath="json_to_xml_carmarecord__1.grf" doc:name="Json_To_Xml_carmaRecord__1" />
     <data-mapper:config name="Xml_SendPatientXMLDataResponse__To_Map" transformationGraphPath="xml_sendpatientxmldataresponse__to_map_1.grf" doc:name="Xml_SendPatientXMLDataResponse__To_Map"/>
+
+    <data-mapper:config name="JSON_To_Xml_carmaRecord__1JSON_To_Xml_carmaRecord__2" transformationGraphPath="json_to_xml_carmarecord__3.grf" doc:name="JSON_To_Xml_carmaRecord__1JSON_To_Xml_carmaRecord__2"/>
 	
 	<flow name="main">
 		<http:listener config-ref="HTTP_Listener_Configuration"
@@ -79,28 +79,26 @@ http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schem
 	</flow>
 
 	<flow name="post:/patients/{id}/dispatch:apiConfig">
-		<logger level="INFO" doc:name="Logger" />
-
-
-
-		<flow-ref name="_logAndEncrypt" doc:name="_logAndEncrypt" />
-
+	
+		
+	 
+	
+ 		<flow-ref name="_logAndEncrypt" doc:name="_logAndEncrypt" /> 
+ 
 		<until-successful maxRetries="${carma.corepoint.retry.count}"
 			secondsBetweenRetries="${carma.corepoint.retry.interval}"
 			objectStore-ref="cpObjectStore" deadLetterQueue-ref="DLQHandler"
-			doc:name="Until Successful">
+			doc:name="Until Successful" >
 			<processor-chain doc:name="Processor Chain">
+  
 				<encryption:decrypt config-ref="Encryption"
 					doc:name="Encryption" />
-
-				<data-mapper:transform config-ref="Json_To_Xml_carmaRecord__1"
-					doc:name="Json To Xml&lt;carmaRecord&gt;" />
-
+	
+				<data-mapper:transform config-ref="JSON_To_Xml_carmaRecord__1JSON_To_Xml_carmaRecord__2" doc:name="JSON To Xml&lt;carmaRecord&gt;"/>	
+                
 				<ws:consumer config-ref="Web_Service_Consumer1"
 					operation="SendPatientXMLData" doc:name="Web Service Consumer" />
                 <data-mapper:transform config-ref="Xml_SendPatientXMLDataResponse__To_Map" doc:name="Xml&lt;SendPatientXMLDataResponse&gt; To Map"/>
-
-
 				<splunklogger:logger config-ref="SplunkLogger"
 					doc:name="Logger">
 					<splunklogger:fields>
@@ -109,12 +107,11 @@ http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schem
 					</splunklogger:fields>
 
 				</splunklogger:logger>
-
 			</processor-chain>
 		</until-successful>
 
 		<set-payload value="{'message':'Success'}" doc:name="Set Payload" />
-
+ 
 	</flow>
 
 	<flow name="put:/patients/{id}:apiConfig">

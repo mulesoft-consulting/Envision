@@ -1,6 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?><Graph __version="3.5.0" author="albin" created="Mon Aug 31 14:59:17 PDT 2015" description="Json To Xml&lt;carmaRecord&gt;" guiVersion="3.4.4.P" id="1441122659131" licenseCode="Unlicensed" licenseType="Unknown" modified="Mon Aug 31 14:59:17 PDT 2015" modifiedBy="albin" name="Json_To_Xml_carmaRecord__1" revision="1.0" showComponentDetails="false">
+<?xml version="1.0" encoding="UTF-8"?><Graph __version="3.5.0" author="albin" created="Sat Sep 12 11:34:31 PDT 2015" description="JSON To Xml&lt;carmaRecord&gt;" guiVersion="3.4.4.P" id="1442087901967" licenseCode="Unlicensed" licenseType="Unknown" modified="Sat Sep 12 11:34:31 PDT 2015" modifiedBy="albin" name="JSON_To_Xml_carmaRecord__1JSON_To_Xml_carmaRecord__2" preview-file="${Project_Home}/src/main/api/examples/sample-dispatch-0912.json" revision="1.0" showComponentDetails="false">
 <Global>
-<Metadata __index="146" __referenceCounter="1" __schemaType="{http://edims.corepoint.com/carma}appointmentType" __sourcePath="{http://edims.corepoint.com/carma=ns1,http://tempuri.org/=ns0}/ns0:carmaRecord/ns1:referralInfo/ns1:appointmentInfo" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="deb9dc86-7496-462b-b6af-9f2dc55ef379" _parent_id="__parent_id" _type="Output" id="c6334661-afcb-4887-b762-82b5b4fcb86c">
+<Metadata __index="143" __referenceCounter="1" __sourcePath="{}/object/carmaRecord/referralInfo/appointmentInfo" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="5c9d17b5-00d0-4530-9451-d0da70f5fe46" _parent_id="__parent_id" _type="Input" id="b147aa0b-f023-4791-a2b9-a2b2eed00eaf">
+<Record fieldDelimiter="," name="appointmentInfo" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="143" __sourcePath="{}/object/carmaRecord/referralInfo/appointmentInfo/AppointmentId" containerType="SINGLE" label="AppointmentId" name="AppointmentId" type="integer"/>
+<Field __index="144" __sourcePath="{}/object/carmaRecord/referralInfo/appointmentInfo/ScheduledTime" containerType="SINGLE" label="ScheduledTime" name="ScheduledTime" type="string"/>
+<Field __index="145" __sourcePath="{}/object/carmaRecord/referralInfo/appointmentInfo/ScheduleType" containerType="SINGLE" label="ScheduleType" name="ScheduleType" type="string"/>
+<Field __index="146" __sourcePath="{}/object/carmaRecord/referralInfo/appointmentInfo/AppointmentNote" containerType="SINGLE" label="AppointmentNote" name="AppointmentNote" type="string"/>
+<Field __index="147" __sourcePath="{}/object/carmaRecord/referralInfo/appointmentInfo/Status" containerType="SINGLE" label="Status" name="Status" type="string"/>
+<Field __index="148" __sourcePath="{}/object/carmaRecord/referralInfo/appointmentInfo/OtherPatientToBeSeenWithIn" containerType="SINGLE" label="OtherPatientToBeSeenWithIn" name="OtherPatientToBeSeenWithIn" type="string"/>
+<Field __index="149" __sourcePath="{}/object/carmaRecord/referralInfo/appointmentInfo/OtherAppointmentPreference" containerType="SINGLE" label="OtherAppointmentPreference" name="OtherAppointmentPreference" type="string"/>
+<Field __index="150" __sourcePath="{}/object/carmaRecord/referralInfo/appointmentInfo/CreatedAt" containerType="SINGLE" label="CreatedAt" name="CreatedAt" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="146" __referenceCounter="1" __schemaType="{http://edims.corepoint.com/carma}appointmentType" __sourcePath="{http://edims.corepoint.com/carma=ns1,http://tempuri.org/=ns0}/ns0:carmaRecord/ns1:referralInfo/ns1:appointmentInfo" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="b4143c08-e40f-4a74-be7f-700b9cb26e42" _parent_id="__parent_id" _type="Output" id="d1679064-fdee-4713-a4ae-0d483d1ae922">
 <Record fieldDelimiter="," name="appointmentInfo" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
 <Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
 <Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
@@ -14,20 +28,7 @@
 <Field __implementationClass="java.lang.String" __index="153" __sourcePath="{http://edims.corepoint.com/carma=ns1,http://tempuri.org/=ns0}/ns0:carmaRecord/ns1:referralInfo/ns1:appointmentInfo/ns1:CreatedAt" containerType="SINGLE" label="ns0:CreatedAt" name="ns0_CreatedAt" type="string"/>
 </Record>
 </Metadata>
-<Metadata __index="146" __referenceCounter="1" __sourcePath="{}/object/carmaRecord/referralInfo/appointmentInfo" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="0b95c370-9848-40d4-8a2d-7064851f87af" _parent_id="__parent_id" _type="Input" id="8d0f90b9-eb13-4b04-bcfb-68e2253d3bd1">
-<Record fieldDelimiter="," name="appointmentInfo" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
-<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
-<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
-<Field __index="146" __sourcePath="{}/object/carmaRecord/referralInfo/appointmentInfo/AppointmentId" containerType="SINGLE" label="AppointmentId" name="AppointmentId" type="string"/>
-<Field __index="147" __sourcePath="{}/object/carmaRecord/referralInfo/appointmentInfo/ScheduledTime" containerType="SINGLE" label="ScheduledTime" name="ScheduledTime" type="string"/>
-<Field __index="148" __sourcePath="{}/object/carmaRecord/referralInfo/appointmentInfo/ScheduleType" containerType="SINGLE" label="ScheduleType" name="ScheduleType" type="string"/>
-<Field __index="149" __sourcePath="{}/object/carmaRecord/referralInfo/appointmentInfo/AppointmentNote" containerType="SINGLE" label="AppointmentNote" name="AppointmentNote" type="string"/>
-<Field __index="150" __sourcePath="{}/object/carmaRecord/referralInfo/appointmentInfo/Status" containerType="SINGLE" label="Status" name="Status" type="string"/>
-<Field __index="151" __sourcePath="{}/object/carmaRecord/referralInfo/appointmentInfo/OtherAppointmentPreference" containerType="SINGLE" label="OtherAppointmentPreference" name="OtherAppointmentPreference" type="string"/>
-<Field __index="152" __sourcePath="{}/object/carmaRecord/referralInfo/appointmentInfo/OtherPatientToBeSeenWithIn" containerType="SINGLE" label="OtherPatientToBeSeenWithIn" name="OtherPatientToBeSeenWithIn" type="string"/>
-</Record>
-</Metadata>
-<Metadata __index="0" __referenceCounter="1" __schemaType="{http://edims.corepoint.com/carma}carmaRecordType" __sourcePath="{http://tempuri.org/=ns0}/ns0:carmaRecord" _dataStructure="OBJECT" _id="__id" _type="Output" id="deb9dc86-7496-462b-b6af-9f2dc55ef379">
+<Metadata __index="0" __referenceCounter="1" __schemaType="{http://edims.corepoint.com/carma}carmaRecordType" __sourcePath="{http://tempuri.org/=ns0}/ns0:carmaRecord" _dataStructure="OBJECT" _id="__id" _type="Output" id="b4143c08-e40f-4a74-be7f-700b9cb26e42">
 <Record fieldDelimiter="," name="carmaRecord" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
 <Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
 <Field __implementationClass="java.lang.Double" __index="0" __sourcePath="{http://edims.corepoint.com/carma=ns1,http://tempuri.org/=ns0}/ns0:carmaRecord/ns1:header/ns1:version" containerType="SINGLE" label="ns0:version" name="ns0_version" type="number"/>
@@ -155,7 +156,36 @@
 <Field __implementationClass="java.lang.String" __index="145" __sourcePath="{http://edims.corepoint.com/carma=ns1,http://tempuri.org/=ns0}/ns0:carmaRecord/ns1:referralInfo/ns1:insuranceInfo/ns1:AdditionalInsuranceInfo" containerType="SINGLE" label="ns0:AdditionalInsuranceInfo" name="ns0_AdditionalInsuranceInfo" type="string"/>
 </Record>
 </Metadata>
-<Metadata __index="110" __referenceCounter="1" __schemaType="{http://edims.corepoint.com/carma}dischargeType" __sourcePath="{http://edims.corepoint.com/carma=ns1,http://tempuri.org/=ns0}/ns0:carmaRecord/ns1:referralInfo/ns1:dischargeInfo" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="deb9dc86-7496-462b-b6af-9f2dc55ef379" _parent_id="__parent_id" _type="Output" id="722717ab-5c62-44e8-bf09-562164c8fc28">
+<Metadata __index="151" __referenceCounter="1" __sourcePath="{}/object/carmaRecord/referralInfo/dischargeInfo" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="5c9d17b5-00d0-4530-9451-d0da70f5fe46" _parent_id="__parent_id" _type="Input" id="c71b4bb4-913a-430e-90b4-9693d760fe11">
+<Record fieldDelimiter="," name="dischargeInfo" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="151" __sourcePath="{}/object/carmaRecord/referralInfo/dischargeInfo/DischargeInfoId" containerType="SINGLE" label="DischargeInfoId" name="DischargeInfoId" type="integer"/>
+<Field __index="152" __sourcePath="{}/object/carmaRecord/referralInfo/dischargeInfo/ReferralTrackerId" containerType="SINGLE" label="ReferralTrackerId" name="ReferralTrackerId" type="integer"/>
+<Field __index="153" __sourcePath="{}/object/carmaRecord/referralInfo/dischargeInfo/DischargedToTypeId" containerType="SINGLE" label="DischargedToTypeId" name="DischargedToTypeId" type="string"/>
+<Field __index="154" __sourcePath="{}/object/carmaRecord/referralInfo/dischargeInfo/DischartgeToType" containerType="SINGLE" label="DischartgeToType" name="DischartgeToType" type="string"/>
+<Field __index="155" __sourcePath="{}/object/carmaRecord/referralInfo/dischargeInfo/DischargeWithTypeId" containerType="SINGLE" label="DischargeWithTypeId" name="DischargeWithTypeId" type="string"/>
+<Field __index="156" __sourcePath="{}/object/carmaRecord/referralInfo/dischargeInfo/DischargeWithType" containerType="SINGLE" label="DischargeWithType" name="DischargeWithType" type="string"/>
+<Field __index="157" __sourcePath="{}/object/carmaRecord/referralInfo/dischargeInfo/AgencyName" containerType="SINGLE" label="AgencyName" name="AgencyName" type="string"/>
+<Field __index="158" __sourcePath="{}/object/carmaRecord/referralInfo/dischargeInfo/AgencyAddress" containerType="SINGLE" label="AgencyAddress" name="AgencyAddress" type="string"/>
+<Field __index="159" __sourcePath="{}/object/carmaRecord/referralInfo/dischargeInfo/AgencyPhone" containerType="SINGLE" label="AgencyPhone" name="AgencyPhone" type="string"/>
+<Field __index="160" __sourcePath="{}/object/carmaRecord/referralInfo/dischargeInfo/AgencyFAX" containerType="SINGLE" label="AgencyFAX" name="AgencyFAX" type="string"/>
+<Field __index="161" __sourcePath="{}/object/carmaRecord/referralInfo/dischargeInfo/FacilityTypeId" containerType="SINGLE" label="FacilityTypeId" name="FacilityTypeId" type="string"/>
+<Field __index="162" __sourcePath="{}/object/carmaRecord/referralInfo/dischargeInfo/FacilityType" containerType="SINGLE" label="FacilityType" name="FacilityType" type="string"/>
+<Field __index="163" __sourcePath="{}/object/carmaRecord/referralInfo/dischargeInfo/FacilityName" containerType="SINGLE" label="FacilityName" name="FacilityName" type="string"/>
+<Field __index="164" __sourcePath="{}/object/carmaRecord/referralInfo/dischargeInfo/FacilityAddress" containerType="SINGLE" label="FacilityAddress" name="FacilityAddress" type="string"/>
+<Field __index="165" __sourcePath="{}/object/carmaRecord/referralInfo/dischargeInfo/FacilityCity" containerType="SINGLE" label="FacilityCity" name="FacilityCity" type="string"/>
+<Field __index="166" __sourcePath="{}/object/carmaRecord/referralInfo/dischargeInfo/FacilityZip" containerType="SINGLE" label="FacilityZip" name="FacilityZip" type="string"/>
+<Field __index="167" __sourcePath="{}/object/carmaRecord/referralInfo/dischargeInfo/FacilityPhone" containerType="SINGLE" label="FacilityPhone" name="FacilityPhone" type="string"/>
+<Field __index="168" __sourcePath="{}/object/carmaRecord/referralInfo/dischargeInfo/FacilityFax" containerType="SINGLE" label="FacilityFax" name="FacilityFax" type="string"/>
+<Field __index="169" __sourcePath="{}/object/carmaRecord/referralInfo/dischargeInfo/FacilityState" containerType="SINGLE" label="FacilityState" name="FacilityState" type="string"/>
+<Field __index="170" __sourcePath="{}/object/carmaRecord/referralInfo/dischargeInfo/PostAcuteProvider" containerType="SINGLE" label="PostAcuteProvider" name="PostAcuteProvider" type="string"/>
+<Field __index="171" __sourcePath="{}/object/carmaRecord/referralInfo/dischargeInfo/RemindDays" containerType="SINGLE" label="RemindDays" name="RemindDays" type="string"/>
+<Field __index="172" __sourcePath="{}/object/carmaRecord/referralInfo/dischargeInfo/DischargeDate" containerType="SINGLE" label="DischargeDate" name="DischargeDate" type="string"/>
+<Field __index="173" __sourcePath="{}/object/carmaRecord/referralInfo/dischargeInfo/TransferDate" containerType="SINGLE" label="TransferDate" name="TransferDate" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="110" __referenceCounter="1" __schemaType="{http://edims.corepoint.com/carma}dischargeType" __sourcePath="{http://edims.corepoint.com/carma=ns1,http://tempuri.org/=ns0}/ns0:carmaRecord/ns1:referralInfo/ns1:dischargeInfo" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="b4143c08-e40f-4a74-be7f-700b9cb26e42" _parent_id="__parent_id" _type="Output" id="ae8a5098-2922-46af-b3ae-206357a7a43c">
 <Record fieldDelimiter="," name="dischargeInfo" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
 <Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
 <Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
@@ -182,34 +212,15 @@
 <Field __implementationClass="java.lang.String" __index="130" __sourcePath="{http://edims.corepoint.com/carma=ns1,http://tempuri.org/=ns0}/ns0:carmaRecord/ns1:referralInfo/ns1:dischargeInfo/ns1:TransferDate" containerType="SINGLE" label="ns0:TransferDate" name="ns0_TransferDate" type="string"/>
 </Record>
 </Metadata>
-<Metadata __index="110" __referenceCounter="1" __sourcePath="{}/object/carmaRecord/referralInfo/dischargeInfo" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="0b95c370-9848-40d4-8a2d-7064851f87af" _parent_id="__parent_id" _type="Input" id="438a4d19-b5c7-4b0a-bcf4-7a66071fe730">
-<Record fieldDelimiter="," name="dischargeInfo" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Metadata __index="122" __referenceCounter="1" __sourcePath="{}/object/carmaRecord/referralInfo/diagnosisInfo/ICDs" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="5c9d17b5-00d0-4530-9451-d0da70f5fe46" _parent_id="__parent_id" _type="Input" id="98a002d4-a9ca-46af-98bd-9afb077f879b">
+<Record fieldDelimiter="," name="ICDs" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
 <Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
 <Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
-<Field __index="110" __sourcePath="{}/object/carmaRecord/referralInfo/dischargeInfo/DischargeInfoId" containerType="SINGLE" label="DischargeInfoId" name="DischargeInfoId" type="integer"/>
-<Field __index="111" __sourcePath="{}/object/carmaRecord/referralInfo/dischargeInfo/ReferralTrackerId" containerType="SINGLE" label="ReferralTrackerId" name="ReferralTrackerId" type="integer"/>
-<Field __index="112" __sourcePath="{}/object/carmaRecord/referralInfo/dischargeInfo/DischartgeToType" containerType="SINGLE" label="DischartgeToType" name="DischartgeToType" type="string"/>
-<Field __index="113" __sourcePath="{}/object/carmaRecord/referralInfo/dischargeInfo/DischargeWithType" containerType="SINGLE" label="DischargeWithType" name="DischargeWithType" type="string"/>
-<Field __index="114" __sourcePath="{}/object/carmaRecord/referralInfo/dischargeInfo/AgencyName" containerType="SINGLE" label="AgencyName" name="AgencyName" type="string"/>
-<Field __index="115" __sourcePath="{}/object/carmaRecord/referralInfo/dischargeInfo/AgencyAddress" containerType="SINGLE" label="AgencyAddress" name="AgencyAddress" type="string"/>
-<Field __index="116" __sourcePath="{}/object/carmaRecord/referralInfo/dischargeInfo/AgencyPhone" containerType="SINGLE" label="AgencyPhone" name="AgencyPhone" type="string"/>
-<Field __index="117" __sourcePath="{}/object/carmaRecord/referralInfo/dischargeInfo/AgencyFAX" containerType="SINGLE" label="AgencyFAX" name="AgencyFAX" type="string"/>
-<Field __index="118" __sourcePath="{}/object/carmaRecord/referralInfo/dischargeInfo/FacilityTypeId" containerType="SINGLE" label="FacilityTypeId" name="FacilityTypeId" type="string"/>
-<Field __index="119" __sourcePath="{}/object/carmaRecord/referralInfo/dischargeInfo/FacilityType" containerType="SINGLE" label="FacilityType" name="FacilityType" type="string"/>
-<Field __index="120" __sourcePath="{}/object/carmaRecord/referralInfo/dischargeInfo/FacilityName" containerType="SINGLE" label="FacilityName" name="FacilityName" type="string"/>
-<Field __index="121" __sourcePath="{}/object/carmaRecord/referralInfo/dischargeInfo/FacilityAddress" containerType="SINGLE" label="FacilityAddress" name="FacilityAddress" type="string"/>
-<Field __index="122" __sourcePath="{}/object/carmaRecord/referralInfo/dischargeInfo/FacilityCity" containerType="SINGLE" label="FacilityCity" name="FacilityCity" type="string"/>
-<Field __index="123" __sourcePath="{}/object/carmaRecord/referralInfo/dischargeInfo/FacilityZip" containerType="SINGLE" label="FacilityZip" name="FacilityZip" type="string"/>
-<Field __index="124" __sourcePath="{}/object/carmaRecord/referralInfo/dischargeInfo/FacilityPhone" containerType="SINGLE" label="FacilityPhone" name="FacilityPhone" type="string"/>
-<Field __index="125" __sourcePath="{}/object/carmaRecord/referralInfo/dischargeInfo/FacilityFax" containerType="SINGLE" label="FacilityFax" name="FacilityFax" type="string"/>
-<Field __index="126" __sourcePath="{}/object/carmaRecord/referralInfo/dischargeInfo/FacilityState" containerType="SINGLE" label="FacilityState" name="FacilityState" type="string"/>
-<Field __index="127" __sourcePath="{}/object/carmaRecord/referralInfo/dischargeInfo/PostAcuteProvider" containerType="SINGLE" label="PostAcuteProvider" name="PostAcuteProvider" type="string"/>
-<Field __index="128" __sourcePath="{}/object/carmaRecord/referralInfo/dischargeInfo/RemindDays" containerType="SINGLE" label="RemindDays" name="RemindDays" type="string"/>
-<Field __index="129" __sourcePath="{}/object/carmaRecord/referralInfo/dischargeInfo/DischargeDate" containerType="SINGLE" label="DischargeDate" name="DischargeDate" type="string"/>
-<Field __index="130" __sourcePath="{}/object/carmaRecord/referralInfo/dischargeInfo/TransferDate" containerType="SINGLE" label="TransferDate" name="TransferDate" type="string"/>
+<Field __index="122" __sourcePath="{}/object/carmaRecord/referralInfo/diagnosisInfo/ICDs/DiagnosisID" containerType="SINGLE" label="DiagnosisID" name="DiagnosisID" type="string"/>
+<Field __index="123" __sourcePath="{}/object/carmaRecord/referralInfo/diagnosisInfo/ICDs/DiagnosisType" containerType="SINGLE" label="DiagnosisType" name="DiagnosisType" type="string"/>
 </Record>
 </Metadata>
-<Metadata __index="104" __referenceCounter="1" __sourcePath="{http://edims.corepoint.com/carma=ns1,http://tempuri.org/=ns0}/ns0:carmaRecord/ns1:referralInfo/ns1:diagnosisInfo/ns1:ICDs" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="deb9dc86-7496-462b-b6af-9f2dc55ef379" _parent_id="__parent_id" _type="Output" id="e6efc2da-9bac-41d6-adcc-fa70331a373a">
+<Metadata __index="104" __referenceCounter="1" __sourcePath="{http://edims.corepoint.com/carma=ns1,http://tempuri.org/=ns0}/ns0:carmaRecord/ns1:referralInfo/ns1:diagnosisInfo/ns1:ICDs" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="b4143c08-e40f-4a74-be7f-700b9cb26e42" _parent_id="__parent_id" _type="Output" id="5a3b6d7e-a290-45ad-9228-995678ac4379">
 <Record fieldDelimiter="," name="ICDs" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
 <Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
 <Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
@@ -217,15 +228,7 @@
 <Field __implementationClass="java.lang.String" __index="105" __sourcePath="{http://edims.corepoint.com/carma=ns1,http://tempuri.org/=ns0}/ns0:carmaRecord/ns1:referralInfo/ns1:diagnosisInfo/ns1:ICDs/ns1:DiagnosisType" containerType="SINGLE" label="ns0:DiagnosisType" name="ns0_DiagnosisType" type="string"/>
 </Record>
 </Metadata>
-<Metadata __index="104" __referenceCounter="1" __sourcePath="{}/object/carmaRecord/referralInfo/diagnosisInfo/ICDs" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="0b95c370-9848-40d4-8a2d-7064851f87af" _parent_id="__parent_id" _type="Input" id="bd96b420-99c7-4c49-b08a-1b7609229f45">
-<Record fieldDelimiter="," name="ICDs" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
-<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
-<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
-<Field __index="104" __sourcePath="{}/object/carmaRecord/referralInfo/diagnosisInfo/ICDs/DiagnosisID" containerType="SINGLE" label="DiagnosisID" name="DiagnosisID" type="string"/>
-<Field __index="105" __sourcePath="{}/object/carmaRecord/referralInfo/diagnosisInfo/ICDs/DiagnosisType" containerType="SINGLE" label="DiagnosisType" name="DiagnosisType" type="string"/>
-</Record>
-</Metadata>
-<Metadata __index="0" __referenceCounter="1" __sourcePath="{}/object" _dataStructure="OBJECT" _id="__id" _type="Input" id="0b95c370-9848-40d4-8a2d-7064851f87af">
+<Metadata __index="0" __referenceCounter="1" __sourcePath="{}/object" _dataStructure="OBJECT" _id="__id" _type="Input" id="5c9d17b5-00d0-4530-9451-d0da70f5fe46">
 <Record fieldDelimiter="," name="object" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
 <Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
 <Field __index="0" __sourcePath="{}/object/carmaRecord/header/version" containerType="SINGLE" label="version" name="version" type="number"/>
@@ -233,9 +236,9 @@
 <Field __index="2" __sourcePath="{}/object/carmaRecord/header/environment" containerType="SINGLE" label="environment" name="environment" type="string"/>
 <Field __index="3" __sourcePath="{}/object/carmaRecord/header/messageType" containerType="SINGLE" label="messageType" name="messageType" type="string"/>
 <Field __index="4" __sourcePath="{}/object/carmaRecord/header/timeZone" containerType="SINGLE" label="timeZone" name="timeZone" type="string"/>
-<Field __index="5" __sourcePath="{}/object/carmaRecord/header/patientStatus" containerType="SINGLE" label="patientStatus" name="patientStatus" type="string"/>
-<Field __index="6" __sourcePath="{}/object/carmaRecord/header/sourceSystemRecordId" containerType="SINGLE" label="sourceSystemRecordId" name="sourceSystemRecordId" type="string"/>
-<Field __index="7" __sourcePath="{}/object/carmaRecord/header/createdAt" containerType="SINGLE" label="createdAt" name="createdAt" type="string"/>
+<Field __index="5" __sourcePath="{}/object/carmaRecord/header/sourceSystemRecordId" containerType="SINGLE" label="sourceSystemRecordId" name="sourceSystemRecordId" type="string"/>
+<Field __index="6" __sourcePath="{}/object/carmaRecord/header/createdAt" containerType="SINGLE" label="createdAt" name="createdAt" type="string"/>
+<Field __index="7" __sourcePath="{}/object/carmaRecord/header/patientStatus" containerType="SINGLE" label="patientStatus" name="patientStatus" type="string"/>
 <Field __index="8" __sourcePath="{}/object/carmaRecord/header/machine" containerType="SINGLE" label="machine" name="machine" type="string"/>
 <Field __index="9" __sourcePath="{}/object/carmaRecord/patientInfo/PatientRecordId" containerType="SINGLE" label="PatientRecordId" name="PatientRecordId" type="integer"/>
 <Field __index="10" __sourcePath="{}/object/carmaRecord/patientInfo/PatientFirstName" containerType="SINGLE" label="PatientFirstName" name="PatientFirstName" type="string"/>
@@ -269,88 +272,106 @@
 <Field __index="38" __sourcePath="{}/object/carmaRecord/patientInfo/PCPPhone" containerType="SINGLE" label="PCPPhone" name="PCPPhone" type="string"/>
 <Field __index="39" __sourcePath="{}/object/carmaRecord/patientInfo/PCPEmail" containerType="SINGLE" label="PCPEmail" name="PCPEmail" type="string"/>
 <Field __index="40" __sourcePath="{}/object/carmaRecord/patientInfo/InPatientAdmitDate" containerType="SINGLE" label="InPatientAdmitDate" name="InPatientAdmitDate" type="string"/>
-<Field __index="41" __sourcePath="{}/object/carmaRecord/patientInfo/InPatientDischargeDate" containerType="SINGLE" label="InPatientDischargeDate" name="InPatientDischargeDate" type="string"/>
-<Field __index="42" __sourcePath="{}/object/carmaRecord/patientInfo/InPatientCareType" containerType="SINGLE" label="InPatientCareType" name="InPatientCareType" type="string"/>
-<Field __index="43" __sourcePath="{}/object/carmaRecord/patientInfo/InPatientAdmitDiagnosis" containerType="SINGLE" label="InPatientAdmitDiagnosis" name="InPatientAdmitDiagnosis" type="string"/>
-<Field __index="44" __sourcePath="{}/object/carmaRecord/patientInfo/HospitalAssignedDRG" containerType="SINGLE" label="HospitalAssignedDRG" name="HospitalAssignedDRG" type="string"/>
-<Field __index="45" __sourcePath="{}/object/carmaRecord/patientInfo/AMRFacilityId" containerType="SINGLE" label="AMRFacilityId" name="AMRFacilityId" type="string"/>
-<Field __index="46" __sourcePath="{}/object/carmaRecord/patientInfo/AMRRecordNo" containerType="SINGLE" label="AMRRecordNo" name="AMRRecordNo" type="string"/>
-<Field __index="47" __sourcePath="{}/object/carmaRecord/patientInfo/AmrFacilityName" containerType="SINGLE" label="AmrFacilityName" name="AmrFacilityName" type="string"/>
-<Field __index="48" __sourcePath="{}/object/carmaRecord/patientInfo/HospiceRecordNo" containerType="SINGLE" label="HospiceRecordNo" name="HospiceRecordNo" type="string"/>
-<Field __index="49" __sourcePath="{}/object/carmaRecord/patientInfo/HospiceFacilityId" containerType="SINGLE" label="HospiceFacilityId" name="HospiceFacilityId" type="string"/>
-<Field __index="50" __sourcePath="{}/object/carmaRecord/patientInfo/HospiceFacilityName" containerType="SINGLE" label="HospiceFacilityName" name="HospiceFacilityName" type="string"/>
-<Field __index="51" __sourcePath="{}/object/carmaRecord/referralInfo/ReferralId" containerType="SINGLE" label="ReferralId" name="ReferralId" type="integer"/>
-<Field __index="52" __sourcePath="{}/object/carmaRecord/referralInfo/ReferralNumber" containerType="SINGLE" label="ReferralNumber" name="ReferralNumber" type="string"/>
-<Field __index="53" __sourcePath="{}/object/carmaRecord/referralInfo/TrackingNumber" containerType="SINGLE" label="TrackingNumber" name="TrackingNumber" type="string"/>
-<Field __index="54" __sourcePath="{}/object/carmaRecord/referralInfo/ReferralType" containerType="SINGLE" label="ReferralType" name="ReferralType" type="string"/>
-<Field __index="55" __sourcePath="{}/object/carmaRecord/referralInfo/CurrentStatus" containerType="SINGLE" label="CurrentStatus" name="CurrentStatus" type="string"/>
-<Field __index="56" __sourcePath="{}/object/carmaRecord/referralInfo/SenderFacilityId" containerType="SINGLE" label="SenderFacilityId" name="SenderFacilityId_1" type="integer"/>
-<Field __index="57" __sourcePath="{}/object/carmaRecord/referralInfo/SenderFacilityName" containerType="SINGLE" label="SenderFacilityName" name="SenderFacilityName" type="string"/>
-<Field __index="58" __sourcePath="{}/object/carmaRecord/referralInfo/SenderUserId" containerType="SINGLE" label="SenderUserId" name="SenderUserId" type="integer"/>
-<Field __index="59" __sourcePath="{}/object/carmaRecord/referralInfo/SenderName" containerType="SINGLE" label="SenderName" name="SenderName" type="string"/>
-<Field __index="60" __sourcePath="{}/object/carmaRecord/referralInfo/ReceiverFacilityId" containerType="SINGLE" label="ReceiverFacilityId" name="ReceiverFacilityId" type="integer"/>
-<Field __index="61" __sourcePath="{}/object/carmaRecord/referralInfo/RecieverFacilityName" containerType="SINGLE" label="RecieverFacilityName" name="RecieverFacilityName" type="string"/>
-<Field __index="62" __sourcePath="{}/object/carmaRecord/referralInfo/ReceiverUserId" containerType="SINGLE" label="ReceiverUserId" name="ReceiverUserId" type="string"/>
-<Field __index="63" __sourcePath="{}/object/carmaRecord/referralInfo/RecieverName" containerType="SINGLE" label="RecieverName" name="RecieverName" type="string"/>
-<Field __index="64" __sourcePath="{}/object/carmaRecord/referralInfo/ExpirationOption" containerType="SINGLE" label="ExpirationOption" name="ExpirationOption" type="string"/>
-<Field __index="65" __sourcePath="{}/object/carmaRecord/referralInfo/ReferralExpirationTime" containerType="SINGLE" label="ReferralExpirationTime" name="ReferralExpirationTime" type="string"/>
-<Field __index="66" __sourcePath="{}/object/carmaRecord/referralInfo/PublishType" containerType="SINGLE" label="PublishType" name="PublishType" type="integer"/>
-<Field __index="67" __sourcePath="{}/object/carmaRecord/referralInfo/CancelReason" containerType="SINGLE" label="CancelReason" name="CancelReason" type="string"/>
-<Field __index="68" __sourcePath="{}/object/carmaRecord/referralInfo/OtherCancelrefReason" containerType="SINGLE" label="OtherCancelrefReason" name="OtherCancelrefReason" type="string"/>
-<Field __index="69" __sourcePath="{}/object/carmaRecord/referralInfo/ReferralAssessment" containerType="SINGLE" label="ReferralAssessment" name="ReferralAssessment" type="string"/>
-<Field __index="70" __sourcePath="{}/object/carmaRecord/referralInfo/ReferralReminderDate" containerType="SINGLE" label="ReferralReminderDate" name="ReferralReminderDate" type="string"/>
-<Field __index="71" __sourcePath="{}/object/carmaRecord/referralInfo/ExpectedDischargeDate" containerType="SINGLE" label="ExpectedDischargeDate" name="ExpectedDischargeDate" type="string"/>
-<Field __index="72" __sourcePath="{}/object/carmaRecord/referralInfo/ActualDischargeDate" containerType="SINGLE" label="ActualDischargeDate" name="ActualDischargeDate" type="string"/>
-<Field __index="73" __sourcePath="{}/object/carmaRecord/referralInfo/Diagnosis" containerType="SINGLE" label="Diagnosis" name="Diagnosis" type="string"/>
-<Field __index="74" __sourcePath="{}/object/carmaRecord/referralInfo/FollowUpRequired" containerType="SINGLE" label="FollowUpRequired" name="FollowUpRequired" type="boolean"/>
-<Field __index="75" __sourcePath="{}/object/carmaRecord/referralInfo/ScheduledInLogis" containerType="SINGLE" label="ScheduledInLogis" name="ScheduledInLogis" type="boolean"/>
-<Field __index="76" __sourcePath="{}/object/carmaRecord/referralInfo/ServiceProvider" containerType="SINGLE" label="ServiceProvider" name="ServiceProvider" type="string"/>
-<Field __index="77" __sourcePath="{}/object/carmaRecord/referralInfo/ReferralExtrasId" containerType="SINGLE" label="ReferralExtrasId" name="ReferralExtrasId" type="integer"/>
-<Field __index="78" __sourcePath="{}/object/carmaRecord/referralInfo/VisitedPatientatHospital" containerType="SINGLE" label="VisitedPatientatHospital" name="VisitedPatientatHospital" type="boolean"/>
-<Field __index="79" __sourcePath="{}/object/carmaRecord/referralInfo/SpecialInstructions" containerType="SINGLE" label="SpecialInstructions" name="SpecialInstructions" type="string"/>
-<Field __index="80" __sourcePath="{}/object/carmaRecord/referralInfo/ChartBuiltInCERNER" containerType="SINGLE" label="ChartBuiltInCERNER" name="ChartBuiltInCERNER" type="boolean"/>
-<Field __index="81" __sourcePath="{}/object/carmaRecord/referralInfo/MeetsCriteria" containerType="SINGLE" label="MeetsCriteria" name="MeetsCriteria" type="boolean"/>
-<Field __index="82" __sourcePath="{}/object/carmaRecord/referralInfo/SignedConsentForm" containerType="SINGLE" label="SignedConsentForm" name="SignedConsentForm" type="boolean"/>
-<Field __index="83" __sourcePath="{}/object/carmaRecord/referralInfo/ReferralTypeName" containerType="SINGLE" label="ReferralTypeName" name="ReferralTypeName" type="string"/>
-<Field __index="84" __sourcePath="{}/object/carmaRecord/referralInfo/ProviderAssigned" containerType="SINGLE" label="ProviderAssigned" name="ProviderAssigned" type="boolean"/>
-<Field __index="85" __sourcePath="{}/object/carmaRecord/referralInfo/WelcomeCall" containerType="SINGLE" label="WelcomeCall" name="WelcomeCall" type="boolean"/>
-<Field __index="86" __sourcePath="{}/object/carmaRecord/referralInfo/Orders" containerType="SINGLE" label="Orders" name="Orders" type="string"/>
-<Field __index="87" __sourcePath="{}/object/carmaRecord/referralInfo/OrdersEntered" containerType="SINGLE" label="OrdersEntered" name="OrdersEntered" type="boolean"/>
-<Field __index="88" __sourcePath="{}/object/carmaRecord/referralInfo/FollowUpCall" containerType="SINGLE" label="FollowUpCall" name="FollowUpCall" type="boolean"/>
-<Field __index="89" __sourcePath="{}/object/carmaRecord/referralInfo/DischargeFormServiceCall" containerType="SINGLE" label="DischargeFormServiceCall" name="DischargeFormServiceCall" type="string"/>
-<Field __index="90" __sourcePath="{}/object/carmaRecord/referralInfo/UnplannedVisitName" containerType="SINGLE" label="UnplannedVisitName" name="UnplannedVisitName" type="string"/>
-<Field __index="91" __sourcePath="{}/object/carmaRecord/referralInfo/ReferralSourceType" containerType="SINGLE" label="ReferralSourceType" name="ReferralSourceType" type="string"/>
-<Field __index="92" __sourcePath="{}/object/carmaRecord/referralInfo/ReferralSourcePts" containerType="SINGLE" label="ReferralSourcePts" name="ReferralSourcePts" type="string"/>
-<Field __index="93" __sourcePath="{}/object/carmaRecord/referralInfo/CancelReferralReason" containerType="SINGLE" label="CancelReferralReason" name="CancelReferralReason" type="string"/>
-<Field __index="94" __sourcePath="{}/object/carmaRecord/referralInfo/RehabFacilityName" containerType="SINGLE" label="RehabFacilityName" name="RehabFacilityName" type="string"/>
-<Field __index="95" __sourcePath="{}/object/carmaRecord/referralInfo/Paramedic" containerType="SINGLE" label="Paramedic" name="Paramedic" type="string"/>
-<Field __index="96" __sourcePath="{}/object/carmaRecord/referralInfo/ReAdmitToHospital" containerType="SINGLE" label="ReAdmitToHospital" name="ReAdmitToHospital" type="string"/>
-<Field __index="97" __sourcePath="{}/object/carmaRecord/referralInfo/ChronicCareManager" containerType="SINGLE" label="ChronicCareManager" name="ChronicCareManager" type="string"/>
-<Field __index="98" __sourcePath="{}/object/carmaRecord/referralInfo/IsPatientatHospital" containerType="SINGLE" label="IsPatientatHospital" name="IsPatientatHospital" type="boolean"/>
-<Field __index="99" __sourcePath="{}/object/carmaRecord/referralInfo/PatientLocation" containerType="SINGLE" label="PatientLocation" name="PatientLocation" type="string"/>
-<Field __index="100" __sourcePath="{}/object/carmaRecord/referralInfo/SuspectedDrg" containerType="SINGLE" label="SuspectedDrg" name="SuspectedDrg" type="string"/>
-<Field __index="101" __sourcePath="{}/object/carmaRecord/referralInfo/ReferralContract" containerType="SINGLE" label="ReferralContract" name="ReferralContract" type="string"/>
-<Field __index="102" __sourcePath="{}/object/carmaRecord/referralInfo/ServiceContractPeriod" containerType="SINGLE" label="ServiceContractPeriod" name="ServiceContractPeriod" type="string"/>
-<Field __index="103" __sourcePath="{}/object/carmaRecord/referralInfo/DeveroMRN" containerType="SINGLE" label="DeveroMRN" name="DeveroMRN" type="string"/>
-<Field __index="106" __sourcePath="{}/object/carmaRecord/referralInfo/diagnosisInfo/OtherDiagnostics" containerType="SINGLE" label="OtherDiagnostics" name="OtherDiagnostics" type="string"/>
-<Field __index="107" __sourcePath="{}/object/carmaRecord/referralInfo/hospitalInfo/RoomNo" containerType="SINGLE" label="RoomNo" name="RoomNo" type="string"/>
-<Field __index="108" __sourcePath="{}/object/carmaRecord/referralInfo/hospitalInfo/RoomLocation" containerType="SINGLE" label="RoomLocation" name="RoomLocation" type="string"/>
-<Field __index="109" __sourcePath="{}/object/carmaRecord/referralInfo/hospitalInfo/MedicalRecordNumber" containerType="SINGLE" label="MedicalRecordNumber" name="MedicalRecordNumber" type="string"/>
-<Field __index="131" __sourcePath="{}/object/carmaRecord/referralInfo/insuranceInfo/PrimaryInsuranceTypeId" containerType="SINGLE" label="PrimaryInsuranceTypeId" name="PrimaryInsuranceTypeId" type="string"/>
-<Field __index="132" __sourcePath="{}/object/carmaRecord/referralInfo/insuranceInfo/PrimaryCompanyName" containerType="SINGLE" label="PrimaryCompanyName" name="PrimaryCompanyName" type="string"/>
-<Field __index="133" __sourcePath="{}/object/carmaRecord/referralInfo/insuranceInfo/OtherPrimaryInsurance" containerType="SINGLE" label="OtherPrimaryInsurance" name="OtherPrimaryInsurance" type="string"/>
-<Field __index="134" __sourcePath="{}/object/carmaRecord/referralInfo/insuranceInfo/PrimaryCardHolderName" containerType="SINGLE" label="PrimaryCardHolderName" name="PrimaryCardHolderName" type="string"/>
-<Field __index="135" __sourcePath="{}/object/carmaRecord/referralInfo/insuranceInfo/PrimaryCardHolderSSN" containerType="SINGLE" label="PrimaryCardHolderSSN" name="PrimaryCardHolderSSN" type="string"/>
-<Field __index="136" __sourcePath="{}/object/carmaRecord/referralInfo/insuranceInfo/PrimaryPatientGroupId" containerType="SINGLE" label="PrimaryPatientGroupId" name="PrimaryPatientGroupId" type="string"/>
-<Field __index="137" __sourcePath="{}/object/carmaRecord/referralInfo/insuranceInfo/PrimaryPatientMemberId" containerType="SINGLE" label="PrimaryPatientMemberId" name="PrimaryPatientMemberId" type="string"/>
-<Field __index="138" __sourcePath="{}/object/carmaRecord/referralInfo/insuranceInfo/SecondaryInsuranceTypeId" containerType="SINGLE" label="SecondaryInsuranceTypeId" name="SecondaryInsuranceTypeId" type="string"/>
-<Field __index="139" __sourcePath="{}/object/carmaRecord/referralInfo/insuranceInfo/SecondaryCompanyName" containerType="SINGLE" label="SecondaryCompanyName" name="SecondaryCompanyName" type="string"/>
-<Field __index="140" __sourcePath="{}/object/carmaRecord/referralInfo/insuranceInfo/OtherSecondaryInsurance" containerType="SINGLE" label="OtherSecondaryInsurance" name="OtherSecondaryInsurance" type="string"/>
-<Field __index="141" __sourcePath="{}/object/carmaRecord/referralInfo/insuranceInfo/SecondaryCardHolderName" containerType="SINGLE" label="SecondaryCardHolderName" name="SecondaryCardHolderName" type="string"/>
-<Field __index="142" __sourcePath="{}/object/carmaRecord/referralInfo/insuranceInfo/SecondaryCardHolderSSN" containerType="SINGLE" label="SecondaryCardHolderSSN" name="SecondaryCardHolderSSN" type="string"/>
-<Field __index="143" __sourcePath="{}/object/carmaRecord/referralInfo/insuranceInfo/SecondaryPatientGroupId" containerType="SINGLE" label="SecondaryPatientGroupId" name="SecondaryPatientGroupId" type="string"/>
-<Field __index="144" __sourcePath="{}/object/carmaRecord/referralInfo/insuranceInfo/SecondaryPatientMemberId" containerType="SINGLE" label="SecondaryPatientMemberId" name="SecondaryPatientMemberId" type="string"/>
-<Field __index="145" __sourcePath="{}/object/carmaRecord/referralInfo/insuranceInfo/AdditionalInsuranceInfo" containerType="SINGLE" label="AdditionalInsuranceInfo" name="AdditionalInsuranceInfo" type="string"/>
+<Field __index="41" __sourcePath="{}/object/carmaRecord/patientInfo/InPatientCareType" containerType="SINGLE" label="InPatientCareType" name="InPatientCareType" type="string"/>
+<Field __index="42" __sourcePath="{}/object/carmaRecord/patientInfo/InPatientAdmitDiagnosis" containerType="SINGLE" label="InPatientAdmitDiagnosis" name="InPatientAdmitDiagnosis" type="string"/>
+<Field __index="43" __sourcePath="{}/object/carmaRecord/patientInfo/HospitalAssignedDRG" containerType="SINGLE" label="HospitalAssignedDRG" name="HospitalAssignedDRG" type="string"/>
+<Field __index="44" __sourcePath="{}/object/carmaRecord/patientInfo/Column1" containerType="SINGLE" label="Column1" name="Column1" type="string"/>
+<Field __index="45" __sourcePath="{}/object/carmaRecord/patientInfo/AMRRecordNo" containerType="SINGLE" label="AMRRecordNo" name="AMRRecordNo" type="string"/>
+<Field __index="46" __sourcePath="{}/object/carmaRecord/patientInfo/AmrFacilityName" containerType="SINGLE" label="AmrFacilityName" name="AmrFacilityName" type="string"/>
+<Field __index="47" __sourcePath="{}/object/carmaRecord/patientInfo/HospiceRecordNo" containerType="SINGLE" label="HospiceRecordNo" name="HospiceRecordNo" type="string"/>
+<Field __index="48" __sourcePath="{}/object/carmaRecord/patientInfo/Column2" containerType="SINGLE" label="Column2" name="Column2" type="string"/>
+<Field __index="49" __sourcePath="{}/object/carmaRecord/patientInfo/HospiceFacilityName" containerType="SINGLE" label="HospiceFacilityName" name="HospiceFacilityName" type="string"/>
+<Field __index="50" __sourcePath="{}/object/carmaRecord/patientInfo/InPatientDischargeDate" containerType="SINGLE" label="InPatientDischargeDate" name="InPatientDischargeDate" type="string"/>
+<Field __index="51" __sourcePath="{}/object/carmaRecord/patientInfo/AMRFacilityId" containerType="SINGLE" label="AMRFacilityId" name="AMRFacilityId" type="string"/>
+<Field __index="52" __sourcePath="{}/object/carmaRecord/patientInfo/HospiceFacilityId" containerType="SINGLE" label="HospiceFacilityId" name="HospiceFacilityId" type="string"/>
+<Field __index="53" __sourcePath="{}/object/carmaRecord/referralInfo/ReferralId" containerType="SINGLE" label="ReferralId" name="ReferralId" type="integer"/>
+<Field __index="54" __sourcePath="{}/object/carmaRecord/referralInfo/ReferralNumber" containerType="SINGLE" label="ReferralNumber" name="ReferralNumber" type="string"/>
+<Field __index="55" __sourcePath="{}/object/carmaRecord/referralInfo/TrackingNumber" containerType="SINGLE" label="TrackingNumber" name="TrackingNumber" type="string"/>
+<Field __index="56" __sourcePath="{}/object/carmaRecord/referralInfo/ReferralType" containerType="SINGLE" label="ReferralType" name="ReferralType" type="string"/>
+<Field __index="57" __sourcePath="{}/object/carmaRecord/referralInfo/CurrentStatus" containerType="SINGLE" label="CurrentStatus" name="CurrentStatus" type="string"/>
+<Field __index="58" __sourcePath="{}/object/carmaRecord/referralInfo/SenderFacilityId" containerType="SINGLE" label="SenderFacilityId" name="SenderFacilityId_1" type="integer"/>
+<Field __index="59" __sourcePath="{}/object/carmaRecord/referralInfo/SenderFacilityName" containerType="SINGLE" label="SenderFacilityName" name="SenderFacilityName" type="string"/>
+<Field __index="60" __sourcePath="{}/object/carmaRecord/referralInfo/SenderUserId" containerType="SINGLE" label="SenderUserId" name="SenderUserId" type="integer"/>
+<Field __index="61" __sourcePath="{}/object/carmaRecord/referralInfo/SenderName" containerType="SINGLE" label="SenderName" name="SenderName" type="string"/>
+<Field __index="62" __sourcePath="{}/object/carmaRecord/referralInfo/ReceiverFacilityId" containerType="SINGLE" label="ReceiverFacilityId" name="ReceiverFacilityId" type="integer"/>
+<Field __index="63" __sourcePath="{}/object/carmaRecord/referralInfo/RecieverFacilityName" containerType="SINGLE" label="RecieverFacilityName" name="RecieverFacilityName" type="string"/>
+<Field __index="64" __sourcePath="{}/object/carmaRecord/referralInfo/ReceiverUserId" containerType="SINGLE" label="ReceiverUserId" name="ReceiverUserId" type="string"/>
+<Field __index="65" __sourcePath="{}/object/carmaRecord/referralInfo/Column1" containerType="SINGLE" label="Column1" name="Column1_1" type="string"/>
+<Field __index="66" __sourcePath="{}/object/carmaRecord/referralInfo/RecieverName" containerType="SINGLE" label="RecieverName" name="RecieverName" type="string"/>
+<Field __index="67" __sourcePath="{}/object/carmaRecord/referralInfo/ReferralExpirationId" containerType="SINGLE" label="ReferralExpirationId" name="ReferralExpirationId" type="string"/>
+<Field __index="68" __sourcePath="{}/object/carmaRecord/referralInfo/ExpirationOption" containerType="SINGLE" label="ExpirationOption" name="ExpirationOption" type="string"/>
+<Field __index="69" __sourcePath="{}/object/carmaRecord/referralInfo/ReferralExpirationTime" containerType="SINGLE" label="ReferralExpirationTime" name="ReferralExpirationTime" type="string"/>
+<Field __index="70" __sourcePath="{}/object/carmaRecord/referralInfo/PublishType" containerType="SINGLE" label="PublishType" name="PublishType" type="integer"/>
+<Field __index="71" __sourcePath="{}/object/carmaRecord/referralInfo/CancelReasonId" containerType="SINGLE" label="CancelReasonId" name="CancelReasonId" type="string"/>
+<Field __index="72" __sourcePath="{}/object/carmaRecord/referralInfo/CancelReason" containerType="SINGLE" label="CancelReason" name="CancelReason" type="string"/>
+<Field __index="73" __sourcePath="{}/object/carmaRecord/referralInfo/OtherCancelrefReason" containerType="SINGLE" label="OtherCancelrefReason" name="OtherCancelrefReason" type="string"/>
+<Field __index="74" __sourcePath="{}/object/carmaRecord/referralInfo/RoomNo" containerType="SINGLE" label="RoomNo" name="RoomNo" type="string"/>
+<Field __index="75" __sourcePath="{}/object/carmaRecord/referralInfo/RoomLocation" containerType="SINGLE" label="RoomLocation" name="RoomLocation" type="string"/>
+<Field __index="76" __sourcePath="{}/object/carmaRecord/referralInfo/ReferralAssessment" containerType="SINGLE" label="ReferralAssessment" name="ReferralAssessment" type="string"/>
+<Field __index="77" __sourcePath="{}/object/carmaRecord/referralInfo/ReferralReminderDate" containerType="SINGLE" label="ReferralReminderDate" name="ReferralReminderDate" type="string"/>
+<Field __index="78" __sourcePath="{}/object/carmaRecord/referralInfo/ExpectedDischargeDate" containerType="SINGLE" label="ExpectedDischargeDate" name="ExpectedDischargeDate" type="string"/>
+<Field __index="79" __sourcePath="{}/object/carmaRecord/referralInfo/ActualDischargeDate" containerType="SINGLE" label="ActualDischargeDate" name="ActualDischargeDate" type="string"/>
+<Field __index="80" __sourcePath="{}/object/carmaRecord/referralInfo/Diagnosis" containerType="SINGLE" label="Diagnosis" name="Diagnosis" type="string"/>
+<Field __index="81" __sourcePath="{}/object/carmaRecord/referralInfo/MedicalRecordNumber" containerType="SINGLE" label="MedicalRecordNumber" name="MedicalRecordNumber" type="string"/>
+<Field __index="82" __sourcePath="{}/object/carmaRecord/referralInfo/FollowUpRequired" containerType="SINGLE" label="FollowUpRequired" name="FollowUpRequired" type="boolean"/>
+<Field __index="83" __sourcePath="{}/object/carmaRecord/referralInfo/ScheduledInLogis" containerType="SINGLE" label="ScheduledInLogis" name="ScheduledInLogis" type="boolean"/>
+<Field __index="84" __sourcePath="{}/object/carmaRecord/referralInfo/ServiceProvider" containerType="SINGLE" label="ServiceProvider" name="ServiceProvider" type="string"/>
+<Field __index="85" __sourcePath="{}/object/carmaRecord/referralInfo/ServiceContractPeriod" containerType="SINGLE" label="ServiceContractPeriod" name="ServiceContractPeriod" type="string"/>
+<Field __index="86" __sourcePath="{}/object/carmaRecord/referralInfo/ReferralExtrasId" containerType="SINGLE" label="ReferralExtrasId" name="ReferralExtrasId" type="integer"/>
+<Field __index="87" __sourcePath="{}/object/carmaRecord/referralInfo/VisitedPatientatHospital" containerType="SINGLE" label="VisitedPatientatHospital" name="VisitedPatientatHospital" type="boolean"/>
+<Field __index="88" __sourcePath="{}/object/carmaRecord/referralInfo/SpecialInstructions" containerType="SINGLE" label="SpecialInstructions" name="SpecialInstructions" type="string"/>
+<Field __index="89" __sourcePath="{}/object/carmaRecord/referralInfo/ChartBuiltInCERNER" containerType="SINGLE" label="ChartBuiltInCERNER" name="ChartBuiltInCERNER" type="boolean"/>
+<Field __index="90" __sourcePath="{}/object/carmaRecord/referralInfo/MeetsCriteria" containerType="SINGLE" label="MeetsCriteria" name="MeetsCriteria" type="boolean"/>
+<Field __index="91" __sourcePath="{}/object/carmaRecord/referralInfo/SignedConsentForm" containerType="SINGLE" label="SignedConsentForm" name="SignedConsentForm" type="boolean"/>
+<Field __index="92" __sourcePath="{}/object/carmaRecord/referralInfo/RiskTypeId" containerType="SINGLE" label="RiskTypeId" name="RiskTypeId" type="string"/>
+<Field __index="93" __sourcePath="{}/object/carmaRecord/referralInfo/ReferralTypeName" containerType="SINGLE" label="ReferralTypeName" name="ReferralTypeName" type="string"/>
+<Field __index="94" __sourcePath="{}/object/carmaRecord/referralInfo/DischargeInfo" containerType="SINGLE" label="DischargeInfo" name="DischargeInfo" type="string"/>
+<Field __index="95" __sourcePath="{}/object/carmaRecord/referralInfo/ProviderAssigned" containerType="SINGLE" label="ProviderAssigned" name="ProviderAssigned" type="boolean"/>
+<Field __index="96" __sourcePath="{}/object/carmaRecord/referralInfo/WelcomeCall" containerType="SINGLE" label="WelcomeCall" name="WelcomeCall" type="boolean"/>
+<Field __index="97" __sourcePath="{}/object/carmaRecord/referralInfo/Orders" containerType="SINGLE" label="Orders" name="Orders" type="string"/>
+<Field __index="98" __sourcePath="{}/object/carmaRecord/referralInfo/OrdersEntered" containerType="SINGLE" label="OrdersEntered" name="OrdersEntered" type="boolean"/>
+<Field __index="99" __sourcePath="{}/object/carmaRecord/referralInfo/FollowUpCall" containerType="SINGLE" label="FollowUpCall" name="FollowUpCall" type="boolean"/>
+<Field __index="100" __sourcePath="{}/object/carmaRecord/referralInfo/DischargeFormServiceCall" containerType="SINGLE" label="DischargeFormServiceCall" name="DischargeFormServiceCall" type="string"/>
+<Field __index="101" __sourcePath="{}/object/carmaRecord/referralInfo/UnplanedFollowUpVisitId" containerType="SINGLE" label="UnplanedFollowUpVisitId" name="UnplanedFollowUpVisitId" type="string"/>
+<Field __index="102" __sourcePath="{}/object/carmaRecord/referralInfo/UnplannedVisitName" containerType="SINGLE" label="UnplannedVisitName" name="UnplannedVisitName" type="string"/>
+<Field __index="103" __sourcePath="{}/object/carmaRecord/referralInfo/ReferralSourceId" containerType="SINGLE" label="ReferralSourceId" name="ReferralSourceId" type="string"/>
+<Field __index="104" __sourcePath="{}/object/carmaRecord/referralInfo/ReferralSourceType" containerType="SINGLE" label="ReferralSourceType" name="ReferralSourceType" type="string"/>
+<Field __index="105" __sourcePath="{}/object/carmaRecord/referralInfo/ReferralSourcePts" containerType="SINGLE" label="ReferralSourcePts" name="ReferralSourcePts" type="string"/>
+<Field __index="106" __sourcePath="{}/object/carmaRecord/referralInfo/CancelReferralId" containerType="SINGLE" label="CancelReferralId" name="CancelReferralId" type="string"/>
+<Field __index="107" __sourcePath="{}/object/carmaRecord/referralInfo/CancelReferralReason" containerType="SINGLE" label="CancelReferralReason" name="CancelReferralReason" type="string"/>
+<Field __index="108" __sourcePath="{}/object/carmaRecord/referralInfo/RehabFacilityName" containerType="SINGLE" label="RehabFacilityName" name="RehabFacilityName" type="string"/>
+<Field __index="109" __sourcePath="{}/object/carmaRecord/referralInfo/Paramedic" containerType="SINGLE" label="Paramedic" name="Paramedic" type="string"/>
+<Field __index="110" __sourcePath="{}/object/carmaRecord/referralInfo/ReAdmitToHospital" containerType="SINGLE" label="ReAdmitToHospital" name="ReAdmitToHospital" type="string"/>
+<Field __index="111" __sourcePath="{}/object/carmaRecord/referralInfo/ChronicCareManager" containerType="SINGLE" label="ChronicCareManager" name="ChronicCareManager" type="string"/>
+<Field __index="112" __sourcePath="{}/object/carmaRecord/referralInfo/IsPatientatHospital" containerType="SINGLE" label="IsPatientatHospital" name="IsPatientatHospital" type="boolean"/>
+<Field __index="113" __sourcePath="{}/object/carmaRecord/referralInfo/PatientLocationId" containerType="SINGLE" label="PatientLocationId" name="PatientLocationId" type="string"/>
+<Field __index="114" __sourcePath="{}/object/carmaRecord/referralInfo/PatientLocation" containerType="SINGLE" label="PatientLocation" name="PatientLocation" type="string"/>
+<Field __index="115" __sourcePath="{}/object/carmaRecord/referralInfo/SuspectedDRGId" containerType="SINGLE" label="SuspectedDRGId" name="SuspectedDRGId" type="string"/>
+<Field __index="116" __sourcePath="{}/object/carmaRecord/referralInfo/SuspectedDrg" containerType="SINGLE" label="SuspectedDrg" name="SuspectedDrg" type="string"/>
+<Field __index="117" __sourcePath="{}/object/carmaRecord/referralInfo/ReferralContractId" containerType="SINGLE" label="ReferralContractId" name="ReferralContractId" type="string"/>
+<Field __index="118" __sourcePath="{}/object/carmaRecord/referralInfo/ReferralContract" containerType="SINGLE" label="ReferralContract" name="ReferralContract" type="string"/>
+<Field __index="119" __sourcePath="{}/object/carmaRecord/referralInfo/Column2" containerType="SINGLE" label="Column2" name="Column2_1" type="string"/>
+<Field __index="120" __sourcePath="{}/object/carmaRecord/referralInfo/Column3" containerType="SINGLE" label="Column3" name="Column3" type="string"/>
+<Field __index="121" __sourcePath="{}/object/carmaRecord/referralInfo/DeveroMRN" containerType="SINGLE" label="DeveroMRN" name="DeveroMRN" type="string"/>
+<Field __index="124" __sourcePath="{}/object/carmaRecord/referralInfo/diagnosisInfo/OtherDiagnostics" containerType="SINGLE" label="OtherDiagnostics" name="OtherDiagnostics" type="string"/>
+<Field __index="125" __sourcePath="{}/object/carmaRecord/referralInfo/hospitalInfo/RoomNo" containerType="SINGLE" label="RoomNo" name="RoomNo_1" type="string"/>
+<Field __index="126" __sourcePath="{}/object/carmaRecord/referralInfo/hospitalInfo/RoomLocation" containerType="SINGLE" label="RoomLocation" name="RoomLocation_1" type="string"/>
+<Field __index="127" __sourcePath="{}/object/carmaRecord/referralInfo/hospitalInfo/MedicalRecordNumber" containerType="SINGLE" label="MedicalRecordNumber" name="MedicalRecordNumber_1" type="string"/>
+<Field __index="128" __sourcePath="{}/object/carmaRecord/referralInfo/insuranceInfo/PrimaryInsuranceTypeId" containerType="SINGLE" label="PrimaryInsuranceTypeId" name="PrimaryInsuranceTypeId" type="string"/>
+<Field __index="129" __sourcePath="{}/object/carmaRecord/referralInfo/insuranceInfo/PrimaryCompanyName" containerType="SINGLE" label="PrimaryCompanyName" name="PrimaryCompanyName" type="string"/>
+<Field __index="130" __sourcePath="{}/object/carmaRecord/referralInfo/insuranceInfo/OtherPrimaryInsurance" containerType="SINGLE" label="OtherPrimaryInsurance" name="OtherPrimaryInsurance" type="string"/>
+<Field __index="131" __sourcePath="{}/object/carmaRecord/referralInfo/insuranceInfo/PrimaryCardHolderName" containerType="SINGLE" label="PrimaryCardHolderName" name="PrimaryCardHolderName" type="string"/>
+<Field __index="132" __sourcePath="{}/object/carmaRecord/referralInfo/insuranceInfo/PrimaryCardHolderSSN" containerType="SINGLE" label="PrimaryCardHolderSSN" name="PrimaryCardHolderSSN" type="string"/>
+<Field __index="133" __sourcePath="{}/object/carmaRecord/referralInfo/insuranceInfo/PrimaryPatientGroupId" containerType="SINGLE" label="PrimaryPatientGroupId" name="PrimaryPatientGroupId" type="string"/>
+<Field __index="134" __sourcePath="{}/object/carmaRecord/referralInfo/insuranceInfo/PrimaryPatientMemberId" containerType="SINGLE" label="PrimaryPatientMemberId" name="PrimaryPatientMemberId" type="string"/>
+<Field __index="135" __sourcePath="{}/object/carmaRecord/referralInfo/insuranceInfo/SecondaryInsuranceTypeId" containerType="SINGLE" label="SecondaryInsuranceTypeId" name="SecondaryInsuranceTypeId" type="string"/>
+<Field __index="136" __sourcePath="{}/object/carmaRecord/referralInfo/insuranceInfo/SecondaryCompanyName" containerType="SINGLE" label="SecondaryCompanyName" name="SecondaryCompanyName" type="string"/>
+<Field __index="137" __sourcePath="{}/object/carmaRecord/referralInfo/insuranceInfo/OtherSecondaryInsurance" containerType="SINGLE" label="OtherSecondaryInsurance" name="OtherSecondaryInsurance" type="string"/>
+<Field __index="138" __sourcePath="{}/object/carmaRecord/referralInfo/insuranceInfo/SecondaryCardHolderName" containerType="SINGLE" label="SecondaryCardHolderName" name="SecondaryCardHolderName" type="string"/>
+<Field __index="139" __sourcePath="{}/object/carmaRecord/referralInfo/insuranceInfo/SecondaryCardHolderSSN" containerType="SINGLE" label="SecondaryCardHolderSSN" name="SecondaryCardHolderSSN" type="string"/>
+<Field __index="140" __sourcePath="{}/object/carmaRecord/referralInfo/insuranceInfo/SecondaryPatientGroupId" containerType="SINGLE" label="SecondaryPatientGroupId" name="SecondaryPatientGroupId" type="string"/>
+<Field __index="141" __sourcePath="{}/object/carmaRecord/referralInfo/insuranceInfo/SecondaryPatientMemberId" containerType="SINGLE" label="SecondaryPatientMemberId" name="SecondaryPatientMemberId" type="string"/>
+<Field __index="142" __sourcePath="{}/object/carmaRecord/referralInfo/insuranceInfo/AdditionalInsuranceInfo" containerType="SINGLE" label="AdditionalInsuranceInfo" name="AdditionalInsuranceInfo" type="string"/>
 </Record>
 </Metadata>
 <Dictionary>
@@ -544,13 +565,14 @@
 output.__id = input.__id;
 output.__parent_id = input.__parent_id;
 //END -> DO NOT REMOVE
-output.ns0_AppointmentId = str2integer(input.AppointmentId);
+output.ns0_AppointmentId = input.AppointmentId;
 output.ns0_ScheduledTime = input.ScheduledTime;
 output.ns0_ScheduleType = input.ScheduleType;
 output.ns0_AppointmentNote = input.AppointmentNote;
 output.ns0_Status = input.Status;
 output.ns0_OtherAppointmentPreference = input.OtherAppointmentPreference;
-output.ns0_OtherPatientToBeSeenWithIn = input.OtherPatientToBeSeenWithIn;]]></attr>
+output.ns0_OtherPatientToBeSeenWithIn = input.OtherPatientToBeSeenWithIn;
+output.ns0_CreatedAt = input.CreatedAt;]]></attr>
 </Node>
 <Node enabled="enabled" guiName="Foreach 'dischargeInfo' -&gt; 'ns1:dischargeInfo'" guiX="460" guiY="320" id="FOREACH_DISCHARGE_INFO_NS1_DISCHARGE_INFO" transformClass="com.mulesoft.datamapper.transform.MelRecordTransform" type="REFORMAT">
 <attr name="melScript"><![CDATA[//MEL
@@ -639,11 +661,9 @@ output.ns0_InPatientDischargeDate = input.InPatientDischargeDate;
 output.ns0_InPatientCareType = input.InPatientCareType;
 output.ns0_InPatientAdmitDiagnosis = input.InPatientAdmitDiagnosis;
 output.ns0_HospitalAssignedDRG = input.HospitalAssignedDRG;
-output.ns0_AMRFacilityId = str2integer(input.AMRFacilityId);
 output.ns0_AMRRecordNo = input.AMRRecordNo;
 output.ns0_AmrFacilityName = input.AmrFacilityName;
 output.ns0_HospiceRecordNo = input.HospiceRecordNo;
-output.ns0_HospiceFacilityId = str2integer(input.HospiceFacilityId);
 output.ns0_HospiceFacilityName = input.HospiceFacilityName;
 output.ns0_ReferralId = input.ReferralId;
 output.ns0_ReferralNumber = input.ReferralNumber;
@@ -680,9 +700,6 @@ output.ns0_SignedConsentForm = input.SignedConsentForm;
 output.ns0_ReferralTypeName = input.ReferralTypeName;
 output.ns0_ProviderAssigned = input.ProviderAssigned+"";
 output.ns0_WelcomeCall = input.WelcomeCall+"";
-output.ns0_Orders = input.Orders;
-output.ns0_OrdersEntered = input.OrdersEntered+"";
-output.ns0_FollowUpCall = input.FollowUpCall+"";
 output.ns0_DischargeFormServiceCall = input.DischargeFormServiceCall;
 output.ns0_UnplannedVisitName = input.UnplannedVisitName;
 output.ns0_ReferralSourceType = input.ReferralSourceType;
@@ -716,7 +733,12 @@ output.ns0_SecondaryCardHolderName = input.SecondaryCardHolderName;
 output.ns0_SecondaryCardHolderSSN = input.SecondaryCardHolderSSN;
 output.ns0_SecondaryPatientGroupId = input.SecondaryPatientGroupId;
 output.ns0_SecondaryPatientMemberId = input.SecondaryPatientMemberId;
-output.ns0_AdditionalInsuranceInfo = input.AdditionalInsuranceInfo;]]></attr>
+output.ns0_AdditionalInsuranceInfo = input.AdditionalInsuranceInfo;
+output.ns0_AMRFacilityId = str2integer(input.AMRFacilityId);
+output.ns0_HospiceFacilityId = str2integer(input.HospiceFacilityId);
+output.ns0_FollowUpCall = input.FollowUpCall+"";
+output.ns0_OrdersEntered = input.OrdersEntered+"";
+output.ns0_Orders = input.Orders;]]></attr>
 </Node>
 <Node charset="UTF-8" enabled="enabled" fileURL="dict:inputPayload" guiName="JSON READER" guiX="20" guiY="20" id="JSON_READER0" type="JSON_READER">
 <attr name="__isJsonSchema"><![CDATA[false]]></attr>
@@ -728,9 +750,9 @@ output.ns0_AdditionalInsuranceInfo = input.AdditionalInsuranceInfo;]]></attr>
     <Mapping cloverField="environment" trim="true" xpath="carmaRecord/header/environment"/>
     <Mapping cloverField="messageType" trim="true" xpath="carmaRecord/header/messageType"/>
     <Mapping cloverField="timeZone" trim="true" xpath="carmaRecord/header/timeZone"/>
-    <Mapping cloverField="patientStatus" trim="true" xpath="carmaRecord/header/patientStatus"/>
     <Mapping cloverField="sourceSystemRecordId" trim="true" xpath="carmaRecord/header/sourceSystemRecordId"/>
     <Mapping cloverField="createdAt" trim="true" xpath="carmaRecord/header/createdAt"/>
+    <Mapping cloverField="patientStatus" trim="true" xpath="carmaRecord/header/patientStatus"/>
     <Mapping cloverField="machine" trim="true" xpath="carmaRecord/header/machine"/>
     <Mapping cloverField="PatientRecordId" trim="true" xpath="carmaRecord/patientInfo/PatientRecordId"/>
     <Mapping cloverField="PatientFirstName" trim="true" xpath="carmaRecord/patientInfo/PatientFirstName"/>
@@ -764,16 +786,18 @@ output.ns0_AdditionalInsuranceInfo = input.AdditionalInsuranceInfo;]]></attr>
     <Mapping cloverField="PCPPhone" trim="true" xpath="carmaRecord/patientInfo/PCPPhone"/>
     <Mapping cloverField="PCPEmail" trim="true" xpath="carmaRecord/patientInfo/PCPEmail"/>
     <Mapping cloverField="InPatientAdmitDate" trim="true" xpath="carmaRecord/patientInfo/InPatientAdmitDate"/>
-    <Mapping cloverField="InPatientDischargeDate" trim="true" xpath="carmaRecord/patientInfo/InPatientDischargeDate"/>
     <Mapping cloverField="InPatientCareType" trim="true" xpath="carmaRecord/patientInfo/InPatientCareType"/>
     <Mapping cloverField="InPatientAdmitDiagnosis" trim="true" xpath="carmaRecord/patientInfo/InPatientAdmitDiagnosis"/>
     <Mapping cloverField="HospitalAssignedDRG" trim="true" xpath="carmaRecord/patientInfo/HospitalAssignedDRG"/>
-    <Mapping cloverField="AMRFacilityId" trim="true" xpath="carmaRecord/patientInfo/AMRFacilityId"/>
+    <Mapping cloverField="Column1" trim="true" xpath="carmaRecord/patientInfo/Column1"/>
     <Mapping cloverField="AMRRecordNo" trim="true" xpath="carmaRecord/patientInfo/AMRRecordNo"/>
     <Mapping cloverField="AmrFacilityName" trim="true" xpath="carmaRecord/patientInfo/AmrFacilityName"/>
     <Mapping cloverField="HospiceRecordNo" trim="true" xpath="carmaRecord/patientInfo/HospiceRecordNo"/>
-    <Mapping cloverField="HospiceFacilityId" trim="true" xpath="carmaRecord/patientInfo/HospiceFacilityId"/>
+    <Mapping cloverField="Column2" trim="true" xpath="carmaRecord/patientInfo/Column2"/>
     <Mapping cloverField="HospiceFacilityName" trim="true" xpath="carmaRecord/patientInfo/HospiceFacilityName"/>
+    <Mapping cloverField="InPatientDischargeDate" trim="true" xpath="carmaRecord/patientInfo/InPatientDischargeDate"/>
+    <Mapping cloverField="AMRFacilityId" trim="true" xpath="carmaRecord/patientInfo/AMRFacilityId"/>
+    <Mapping cloverField="HospiceFacilityId" trim="true" xpath="carmaRecord/patientInfo/HospiceFacilityId"/>
     <Mapping cloverField="ReferralId" trim="true" xpath="carmaRecord/referralInfo/ReferralId"/>
     <Mapping cloverField="ReferralNumber" trim="true" xpath="carmaRecord/referralInfo/ReferralNumber"/>
     <Mapping cloverField="TrackingNumber" trim="true" xpath="carmaRecord/referralInfo/TrackingNumber"/>
@@ -786,51 +810,67 @@ output.ns0_AdditionalInsuranceInfo = input.AdditionalInsuranceInfo;]]></attr>
     <Mapping cloverField="ReceiverFacilityId" trim="true" xpath="carmaRecord/referralInfo/ReceiverFacilityId"/>
     <Mapping cloverField="RecieverFacilityName" trim="true" xpath="carmaRecord/referralInfo/RecieverFacilityName"/>
     <Mapping cloverField="ReceiverUserId" trim="true" xpath="carmaRecord/referralInfo/ReceiverUserId"/>
+    <Mapping cloverField="Column1_1" trim="true" xpath="carmaRecord/referralInfo/Column1"/>
     <Mapping cloverField="RecieverName" trim="true" xpath="carmaRecord/referralInfo/RecieverName"/>
+    <Mapping cloverField="ReferralExpirationId" trim="true" xpath="carmaRecord/referralInfo/ReferralExpirationId"/>
     <Mapping cloverField="ExpirationOption" trim="true" xpath="carmaRecord/referralInfo/ExpirationOption"/>
     <Mapping cloverField="ReferralExpirationTime" trim="true" xpath="carmaRecord/referralInfo/ReferralExpirationTime"/>
     <Mapping cloverField="PublishType" trim="true" xpath="carmaRecord/referralInfo/PublishType"/>
+    <Mapping cloverField="CancelReasonId" trim="true" xpath="carmaRecord/referralInfo/CancelReasonId"/>
     <Mapping cloverField="CancelReason" trim="true" xpath="carmaRecord/referralInfo/CancelReason"/>
     <Mapping cloverField="OtherCancelrefReason" trim="true" xpath="carmaRecord/referralInfo/OtherCancelrefReason"/>
+    <Mapping cloverField="RoomNo" trim="true" xpath="carmaRecord/referralInfo/RoomNo"/>
+    <Mapping cloverField="RoomLocation" trim="true" xpath="carmaRecord/referralInfo/RoomLocation"/>
     <Mapping cloverField="ReferralAssessment" trim="true" xpath="carmaRecord/referralInfo/ReferralAssessment"/>
     <Mapping cloverField="ReferralReminderDate" trim="true" xpath="carmaRecord/referralInfo/ReferralReminderDate"/>
     <Mapping cloverField="ExpectedDischargeDate" trim="true" xpath="carmaRecord/referralInfo/ExpectedDischargeDate"/>
     <Mapping cloverField="ActualDischargeDate" trim="true" xpath="carmaRecord/referralInfo/ActualDischargeDate"/>
     <Mapping cloverField="Diagnosis" trim="true" xpath="carmaRecord/referralInfo/Diagnosis"/>
+    <Mapping cloverField="MedicalRecordNumber" trim="true" xpath="carmaRecord/referralInfo/MedicalRecordNumber"/>
     <Mapping cloverField="FollowUpRequired" trim="true" xpath="carmaRecord/referralInfo/FollowUpRequired"/>
     <Mapping cloverField="ScheduledInLogis" trim="true" xpath="carmaRecord/referralInfo/ScheduledInLogis"/>
     <Mapping cloverField="ServiceProvider" trim="true" xpath="carmaRecord/referralInfo/ServiceProvider"/>
+    <Mapping cloverField="ServiceContractPeriod" trim="true" xpath="carmaRecord/referralInfo/ServiceContractPeriod"/>
     <Mapping cloverField="ReferralExtrasId" trim="true" xpath="carmaRecord/referralInfo/ReferralExtrasId"/>
     <Mapping cloverField="VisitedPatientatHospital" trim="true" xpath="carmaRecord/referralInfo/VisitedPatientatHospital"/>
     <Mapping cloverField="SpecialInstructions" trim="true" xpath="carmaRecord/referralInfo/SpecialInstructions"/>
     <Mapping cloverField="ChartBuiltInCERNER" trim="true" xpath="carmaRecord/referralInfo/ChartBuiltInCERNER"/>
     <Mapping cloverField="MeetsCriteria" trim="true" xpath="carmaRecord/referralInfo/MeetsCriteria"/>
     <Mapping cloverField="SignedConsentForm" trim="true" xpath="carmaRecord/referralInfo/SignedConsentForm"/>
+    <Mapping cloverField="RiskTypeId" trim="true" xpath="carmaRecord/referralInfo/RiskTypeId"/>
     <Mapping cloverField="ReferralTypeName" trim="true" xpath="carmaRecord/referralInfo/ReferralTypeName"/>
+    <Mapping cloverField="DischargeInfo" trim="true" xpath="carmaRecord/referralInfo/DischargeInfo"/>
     <Mapping cloverField="ProviderAssigned" trim="true" xpath="carmaRecord/referralInfo/ProviderAssigned"/>
     <Mapping cloverField="WelcomeCall" trim="true" xpath="carmaRecord/referralInfo/WelcomeCall"/>
     <Mapping cloverField="Orders" trim="true" xpath="carmaRecord/referralInfo/Orders"/>
     <Mapping cloverField="OrdersEntered" trim="true" xpath="carmaRecord/referralInfo/OrdersEntered"/>
     <Mapping cloverField="FollowUpCall" trim="true" xpath="carmaRecord/referralInfo/FollowUpCall"/>
     <Mapping cloverField="DischargeFormServiceCall" trim="true" xpath="carmaRecord/referralInfo/DischargeFormServiceCall"/>
+    <Mapping cloverField="UnplanedFollowUpVisitId" trim="true" xpath="carmaRecord/referralInfo/UnplanedFollowUpVisitId"/>
     <Mapping cloverField="UnplannedVisitName" trim="true" xpath="carmaRecord/referralInfo/UnplannedVisitName"/>
+    <Mapping cloverField="ReferralSourceId" trim="true" xpath="carmaRecord/referralInfo/ReferralSourceId"/>
     <Mapping cloverField="ReferralSourceType" trim="true" xpath="carmaRecord/referralInfo/ReferralSourceType"/>
     <Mapping cloverField="ReferralSourcePts" trim="true" xpath="carmaRecord/referralInfo/ReferralSourcePts"/>
+    <Mapping cloverField="CancelReferralId" trim="true" xpath="carmaRecord/referralInfo/CancelReferralId"/>
     <Mapping cloverField="CancelReferralReason" trim="true" xpath="carmaRecord/referralInfo/CancelReferralReason"/>
     <Mapping cloverField="RehabFacilityName" trim="true" xpath="carmaRecord/referralInfo/RehabFacilityName"/>
     <Mapping cloverField="Paramedic" trim="true" xpath="carmaRecord/referralInfo/Paramedic"/>
     <Mapping cloverField="ReAdmitToHospital" trim="true" xpath="carmaRecord/referralInfo/ReAdmitToHospital"/>
     <Mapping cloverField="ChronicCareManager" trim="true" xpath="carmaRecord/referralInfo/ChronicCareManager"/>
     <Mapping cloverField="IsPatientatHospital" trim="true" xpath="carmaRecord/referralInfo/IsPatientatHospital"/>
+    <Mapping cloverField="PatientLocationId" trim="true" xpath="carmaRecord/referralInfo/PatientLocationId"/>
     <Mapping cloverField="PatientLocation" trim="true" xpath="carmaRecord/referralInfo/PatientLocation"/>
+    <Mapping cloverField="SuspectedDRGId" trim="true" xpath="carmaRecord/referralInfo/SuspectedDRGId"/>
     <Mapping cloverField="SuspectedDrg" trim="true" xpath="carmaRecord/referralInfo/SuspectedDrg"/>
+    <Mapping cloverField="ReferralContractId" trim="true" xpath="carmaRecord/referralInfo/ReferralContractId"/>
     <Mapping cloverField="ReferralContract" trim="true" xpath="carmaRecord/referralInfo/ReferralContract"/>
-    <Mapping cloverField="ServiceContractPeriod" trim="true" xpath="carmaRecord/referralInfo/ServiceContractPeriod"/>
+    <Mapping cloverField="Column2_1" trim="true" xpath="carmaRecord/referralInfo/Column2"/>
+    <Mapping cloverField="Column3" trim="true" xpath="carmaRecord/referralInfo/Column3"/>
     <Mapping cloverField="DeveroMRN" trim="true" xpath="carmaRecord/referralInfo/DeveroMRN"/>
     <Mapping cloverField="OtherDiagnostics" trim="true" xpath="carmaRecord/referralInfo/diagnosisInfo/OtherDiagnostics"/>
-    <Mapping cloverField="RoomNo" trim="true" xpath="carmaRecord/referralInfo/hospitalInfo/RoomNo"/>
-    <Mapping cloverField="RoomLocation" trim="true" xpath="carmaRecord/referralInfo/hospitalInfo/RoomLocation"/>
-    <Mapping cloverField="MedicalRecordNumber" trim="true" xpath="carmaRecord/referralInfo/hospitalInfo/MedicalRecordNumber"/>
+    <Mapping cloverField="RoomNo_1" trim="true" xpath="carmaRecord/referralInfo/hospitalInfo/RoomNo"/>
+    <Mapping cloverField="RoomLocation_1" trim="true" xpath="carmaRecord/referralInfo/hospitalInfo/RoomLocation"/>
+    <Mapping cloverField="MedicalRecordNumber_1" trim="true" xpath="carmaRecord/referralInfo/hospitalInfo/MedicalRecordNumber"/>
     <Mapping cloverField="PrimaryInsuranceTypeId" trim="true" xpath="carmaRecord/referralInfo/insuranceInfo/PrimaryInsuranceTypeId"/>
     <Mapping cloverField="PrimaryCompanyName" trim="true" xpath="carmaRecord/referralInfo/insuranceInfo/PrimaryCompanyName"/>
     <Mapping cloverField="OtherPrimaryInsurance" trim="true" xpath="carmaRecord/referralInfo/insuranceInfo/OtherPrimaryInsurance"/>
@@ -846,23 +886,22 @@ output.ns0_AdditionalInsuranceInfo = input.AdditionalInsuranceInfo;]]></attr>
     <Mapping cloverField="SecondaryPatientGroupId" trim="true" xpath="carmaRecord/referralInfo/insuranceInfo/SecondaryPatientGroupId"/>
     <Mapping cloverField="SecondaryPatientMemberId" trim="true" xpath="carmaRecord/referralInfo/insuranceInfo/SecondaryPatientMemberId"/>
     <Mapping cloverField="AdditionalInsuranceInfo" trim="true" xpath="carmaRecord/referralInfo/insuranceInfo/AdditionalInsuranceInfo"/>
-    <Context generatedKey="__parent_id" outPort="1" parentKey="__id" sequenceField="__id" xpath="carmaRecord/referralInfo/diagnosisInfo/ICDs">
-      <Mapping cloverField="DiagnosisID" trim="true" xpath="DiagnosisID"/>
-      <Mapping cloverField="DiagnosisType" trim="true" xpath="DiagnosisType"/>
-    </Context>
     <Context generatedKey="__parent_id" outPort="2" parentKey="__id" sequenceField="__id" xpath="carmaRecord/referralInfo/appointmentInfo">
       <Mapping cloverField="AppointmentId" trim="true" xpath="AppointmentId"/>
       <Mapping cloverField="ScheduledTime" trim="true" xpath="ScheduledTime"/>
       <Mapping cloverField="ScheduleType" trim="true" xpath="ScheduleType"/>
       <Mapping cloverField="AppointmentNote" trim="true" xpath="AppointmentNote"/>
       <Mapping cloverField="Status" trim="true" xpath="Status"/>
-      <Mapping cloverField="OtherAppointmentPreference" trim="true" xpath="OtherAppointmentPreference"/>
       <Mapping cloverField="OtherPatientToBeSeenWithIn" trim="true" xpath="OtherPatientToBeSeenWithIn"/>
+      <Mapping cloverField="OtherAppointmentPreference" trim="true" xpath="OtherAppointmentPreference"/>
+      <Mapping cloverField="CreatedAt" trim="true" xpath="CreatedAt"/>
     </Context>
     <Context generatedKey="__parent_id" outPort="3" parentKey="__id" sequenceField="__id" xpath="carmaRecord/referralInfo/dischargeInfo">
       <Mapping cloverField="DischargeInfoId" trim="true" xpath="DischargeInfoId"/>
       <Mapping cloverField="ReferralTrackerId" trim="true" xpath="ReferralTrackerId"/>
+      <Mapping cloverField="DischargedToTypeId" trim="true" xpath="DischargedToTypeId"/>
       <Mapping cloverField="DischartgeToType" trim="true" xpath="DischartgeToType"/>
+      <Mapping cloverField="DischargeWithTypeId" trim="true" xpath="DischargeWithTypeId"/>
       <Mapping cloverField="DischargeWithType" trim="true" xpath="DischargeWithType"/>
       <Mapping cloverField="AgencyName" trim="true" xpath="AgencyName"/>
       <Mapping cloverField="AgencyAddress" trim="true" xpath="AgencyAddress"/>
@@ -882,20 +921,23 @@ output.ns0_AdditionalInsuranceInfo = input.AdditionalInsuranceInfo;]]></attr>
       <Mapping cloverField="DischargeDate" trim="true" xpath="DischargeDate"/>
       <Mapping cloverField="TransferDate" trim="true" xpath="TransferDate"/>
     </Context>
+    <Context generatedKey="__parent_id" outPort="1" parentKey="__id" sequenceField="__id" xpath="carmaRecord/referralInfo/diagnosisInfo/ICDs">
+      <Mapping cloverField="DiagnosisID" trim="true" xpath="DiagnosisID"/>
+      <Mapping cloverField="DiagnosisType" trim="true" xpath="DiagnosisType"/>
+    </Context>
   </Context>
 </Context>
 ]]></attr>
 <attr name="_data_format"><![CDATA[JSON]]></attr>
-<attr name="__metadata"><![CDATA[true]]></attr>
-<attr name="jsonSchemaURL"><![CDATA[./src/main/api/examples/sample-dispatch.json]]></attr>
+<attr name="jsonSchemaURL"><![CDATA[./src/main/api/examples/sample-dispatch-0912.json]]></attr>
 </Node>
-<Edge debugMode="true" fromNode="FOREACH_APPOINTMENT_INFO_NS1_APPOINTMENT_INFO:0" guiBendpoints="" id="Edge5" inPort="Port 2 (in)" metadata="c6334661-afcb-4887-b762-82b5b4fcb86c" outPort="Port 0 (out)" toNode="EXT_XML_WRITER0:2"/>
-<Edge debugMode="true" fromNode="FOREACH_DISCHARGE_INFO_NS1_DISCHARGE_INFO:0" guiBendpoints="" id="Edge7" inPort="Port 3 (in)" metadata="722717ab-5c62-44e8-bf09-562164c8fc28" outPort="Port 0 (out)" toNode="EXT_XML_WRITER0:3"/>
-<Edge debugMode="true" fromNode="FOREACH_ICDS_NS1_ICDS:0" guiBendpoints="" id="Edge3" inPort="Port 1 (in)" metadata="e6efc2da-9bac-41d6-adcc-fa70331a373a" outPort="Port 0 (out)" toNode="EXT_XML_WRITER0:1"/>
-<Edge debugMode="true" fromNode="FOREACH_OBJECT_NS0_CARMA_RECORD:0" guiBendpoints="" id="Edge1" inPort="Port 0 (in)" metadata="deb9dc86-7496-462b-b6af-9f2dc55ef379" outPort="Port 0 (out)" toNode="EXT_XML_WRITER0:0"/>
-<Edge debugMode="true" fromNode="JSON_READER0:0" guiBendpoints="" id="Edge0" inPort="Port 0 (in)" metadata="0b95c370-9848-40d4-8a2d-7064851f87af" outPort="Port 0 (out)" toNode="FOREACH_OBJECT_NS0_CARMA_RECORD:0"/>
-<Edge debugMode="true" fromNode="JSON_READER0:1" guiBendpoints="" id="Edge2" inPort="Port 0 (in)" metadata="bd96b420-99c7-4c49-b08a-1b7609229f45" outPort="Port 1 (out)" toNode="FOREACH_ICDS_NS1_ICDS:0"/>
-<Edge debugMode="true" fromNode="JSON_READER0:2" guiBendpoints="" id="Edge4" inPort="Port 0 (in)" metadata="8d0f90b9-eb13-4b04-bcfb-68e2253d3bd1" outPort="Port 2 (out)" toNode="FOREACH_APPOINTMENT_INFO_NS1_APPOINTMENT_INFO:0"/>
-<Edge debugMode="true" fromNode="JSON_READER0:3" guiBendpoints="" id="Edge6" inPort="Port 0 (in)" metadata="438a4d19-b5c7-4b0a-bcf4-7a66071fe730" outPort="Port 3 (out)" toNode="FOREACH_DISCHARGE_INFO_NS1_DISCHARGE_INFO:0"/>
+<Edge debugMode="true" fromNode="FOREACH_APPOINTMENT_INFO_NS1_APPOINTMENT_INFO:0" guiBendpoints="" id="Edge5" inPort="Port 2 (in)" metadata="d1679064-fdee-4713-a4ae-0d483d1ae922" outPort="Port 0 (out)" toNode="EXT_XML_WRITER0:2"/>
+<Edge debugMode="true" fromNode="FOREACH_DISCHARGE_INFO_NS1_DISCHARGE_INFO:0" guiBendpoints="" id="Edge7" inPort="Port 3 (in)" metadata="ae8a5098-2922-46af-b3ae-206357a7a43c" outPort="Port 0 (out)" toNode="EXT_XML_WRITER0:3"/>
+<Edge debugMode="true" fromNode="FOREACH_ICDS_NS1_ICDS:0" guiBendpoints="" id="Edge3" inPort="Port 1 (in)" metadata="5a3b6d7e-a290-45ad-9228-995678ac4379" outPort="Port 0 (out)" toNode="EXT_XML_WRITER0:1"/>
+<Edge debugMode="true" fromNode="FOREACH_OBJECT_NS0_CARMA_RECORD:0" guiBendpoints="" id="Edge1" inPort="Port 0 (in)" metadata="b4143c08-e40f-4a74-be7f-700b9cb26e42" outPort="Port 0 (out)" toNode="EXT_XML_WRITER0:0"/>
+<Edge debugMode="true" fromNode="JSON_READER0:0" guiBendpoints="" id="Edge0" inPort="Port 0 (in)" metadata="5c9d17b5-00d0-4530-9451-d0da70f5fe46" outPort="Port 0 (out)" toNode="FOREACH_OBJECT_NS0_CARMA_RECORD:0"/>
+<Edge debugMode="true" fromNode="JSON_READER0:1" guiBendpoints="" id="Edge2" inPort="Port 0 (in)" metadata="98a002d4-a9ca-46af-98bd-9afb077f879b" outPort="Port 1 (out)" toNode="FOREACH_ICDS_NS1_ICDS:0"/>
+<Edge debugMode="true" fromNode="JSON_READER0:2" guiBendpoints="" id="Edge4" inPort="Port 0 (in)" metadata="b147aa0b-f023-4791-a2b9-a2b2eed00eaf" outPort="Port 2 (out)" toNode="FOREACH_APPOINTMENT_INFO_NS1_APPOINTMENT_INFO:0"/>
+<Edge debugMode="true" fromNode="JSON_READER0:3" guiBendpoints="" id="Edge6" inPort="Port 0 (in)" metadata="c71b4bb4-913a-430e-90b4-9693d760fe11" outPort="Port 3 (out)" toNode="FOREACH_DISCHARGE_INFO_NS1_DISCHARGE_INFO:0"/>
 </Phase>
 </Graph>
