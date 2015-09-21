@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mule xmlns:data-mapper="http://www.mulesoft.org/schema/mule/ee/data-mapper"
-	xmlns:ws="http://www.mulesoft.org/schema/mule/ws" xmlns:tls="http://www.mulesoft.org/schema/mule/tls"
+<mule xmlns:mulexml="http://www.mulesoft.org/schema/mule/xml" xmlns:data-mapper="http://www.mulesoft.org/schema/mule/ee/data-mapper"
+	xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf" xmlns:tls="http://www.mulesoft.org/schema/mule/tls"
 	xmlns:encryption="http://www.mulesoft.org/schema/mule/encryption"
 	xmlns:splunklogger="http://www.mulesoft.org/schema/mule/splunklogger"
 	xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns:json="http://www.mulesoft.org/schema/mule/json"
@@ -9,7 +9,7 @@
 	xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
 	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:spring="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="EE-3.6.2"
-	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/tls http://www.mulesoft.org/schema/mule/tls/current/mule-tls.xsd
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd http://www.mulesoft.org/schema/mule/tls http://www.mulesoft.org/schema/mule/tls/current/mule-tls.xsd
 http://www.mulesoft.org/schema/mule/splunklogger http://www.mulesoft.org/schema/mule/splunklogger/current/mule-splunklogger.xsd
 http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
 http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
@@ -19,7 +19,7 @@ http://www.mulesoft.org/schema/mule/apikit http://www.mulesoft.org/schema/mule/a
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/encryption http://www.mulesoft.org/schema/mule/encryption/current/mule-encryption.xsd
-http://www.mulesoft.org/schema/mule/ws http://www.mulesoft.org/schema/mule/ws/current/mule-ws.xsd
+http://www.mulesoft.org/schema/mule/cxf http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd
 http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schema/mule/ee/data-mapper/current/mule-data-mapper.xsd">
 
 	<context:property-placeholder location="api.${env}.properties" />
@@ -44,6 +44,8 @@ http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schem
 		</tls:context>
 	</http:listener-config>
 
+	<http:request-config name="CorepointSOAP" basePath="/" />
+	
 	<!-- Enabling SSL: https://msdn.microsoft.com/en-us/library/bb879949(v=sql.110).aspx -->
 	<db:generic-config name="MSSQL"
 		url="jdbc:sqlserver://${carma.mssql.host}:${carma.mssql.port};databaseName=${carma.mssql.db};user=${carma.mssql.user};password=${carma.mssql.password}"
@@ -63,14 +65,15 @@ http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schem
 	<encryption:config name="Encryption" doc:name="Encryption">
 		<encryption:jce-encrypter-config key="${patient.encryption.key}" />
 	</encryption:config>
-	<ws:consumer-config name="Web_Service_Consumer1"
-		wsdlLocation="wsdl/corepoint-revised-i.wsdl" service="InboundCarmaXML"
-		port="Carma" serviceAddress="http://${carma.corepoint.server}:${carma.corepoint.port}" doc:name="Web Service Consumer" />
-    <data-mapper:config name="Xml_SendPatientXMLDataResponse__To_Map" transformationGraphPath="xml_sendpatientxmldataresponse__to_map_1.grf" doc:name="Xml_SendPatientXMLDataResponse__To_Map"/>
-
-    <data-mapper:config name="JSON_To_Xml_carmaRecord__1JSON_To_Xml_carmaRecord__2" transformationGraphPath="json_to_xml_carmarecord__3.grf" doc:name="JSON_To_Xml_carmaRecord__1JSON_To_Xml_carmaRecord__2"/>
 	
-	<flow name="main">
+<!-- 	<ws:consumer-config name="Web_Service_Consumer1" -->
+<!-- 		wsdlLocation="wsdl/corepoint-revised-i.wsdl" service="InboundCarmaXML" -->
+<!-- 		port="Carma" serviceAddress="http://${carma.corepoint.server}:${carma.corepoint.port}" doc:name="Web Service Consumer" /> -->
+<!--     <data-mapper:config name="Xml_SendPatientXMLDataResponse__To_Map" transformationGraphPath="xml_sendpatientxmldataresponse__to_map_1.grf" doc:name="Xml_SendPatientXMLDataResponse__To_Map"/> -->
+
+<!--     <data-mapper:config name="JSON_To_Xml_carmaRecord__1JSON_To_Xml_carmaRecord__2" transformationGraphPath="json_to_xml_carmarecord__3.grf" doc:name="JSON_To_Xml_carmaRecord__1JSON_To_Xml_carmaRecord__2"/> -->
+	 
+	 <flow name="main">
 		<http:listener config-ref="HTTP_Listener_Configuration"
 			doc:name="HTTP" path="/api/*" />
 		<apikit:router config-ref="apiConfig" doc:name="APIkit Router" />
@@ -78,35 +81,60 @@ http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schem
 			doc:name="Reference Exception Strategy" />
 	</flow>
 
-	<flow name="post:/patients/{id}/dispatch:apiConfig">
-	
-		
-	 
-	
+	<flow name="post:/patients/{id}/dispatch:apiConfig"> 
+
  		<flow-ref name="_logAndEncrypt" doc:name="_logAndEncrypt" /> 
- 
+
 		<until-successful maxRetries="${carma.corepoint.retry.count}"
-			secondsBetweenRetries="${carma.corepoint.retry.interval}"
-			objectStore-ref="cpObjectStore" deadLetterQueue-ref="DLQHandler"
-			doc:name="Until Successful" >
-			<processor-chain doc:name="Processor Chain">
-  
-				<encryption:decrypt config-ref="Encryption"
-					doc:name="Encryption" />
-	
+						  secondsBetweenRetries="${carma.corepoint.retry.interval}"
+			              objectStore-ref="cpObjectStore" deadLetterQueue-ref="DLQHandler"
+			              doc:name="Until Successful" >
+
+			<processor-chain doc:name="Processor Chain"> 
+				<encryption:decrypt config-ref="Encryption" />
+
+<!-- 				<json:json-to-object-transformer returnClass="java.util.Map"/> -->
+<!-- 				<set-payload value="#[message.payload['carmaRecord']]"/> -->
+<!-- 				<json:object-to-json-transformer mimeType="application/json"/> -->
+
+				<json:json-to-object-transformer returnClass="org.tempuri.SendPatientXMLData">
+					<json:deserialization-mixin mixinClass="com.envision.mule.corepoint.mixin.PatientInfoTypeMixin"
+                							  targetClass="com.corepoint.edims.carma.PatientInfoType"/>
+					<json:deserialization-mixin mixinClass="com.envision.mule.corepoint.mixin.RerralInfoTypeMixin"
+                							  targetClass="com.corepoint.edims.carma.RerralInfoType"/>
+					<json:deserialization-mixin mixinClass="com.envision.mule.corepoint.mixin.DiagnosisTypeMixin"
+                							  targetClass="com.corepoint.edims.carma.DiagnosisType"/>
+					<json:deserialization-mixin mixinClass="com.envision.mule.corepoint.mixin.DiagnosisTypeMixin.ICDs"
+                							  targetClass="com.corepoint.edims.carma.DiagnosisType.ICDs"/>
+					<json:deserialization-mixin mixinClass="com.envision.mule.corepoint.mixin.HospitalTypeMixin"
+                							  targetClass="com.corepoint.edims.carma.HospitalType"/>
+					<json:deserialization-mixin mixinClass="com.envision.mule.corepoint.mixin.InsuranceTypeMixin"
+                							  targetClass="com.corepoint.edims.carma.InsuranceType"/>
+					<json:deserialization-mixin mixinClass="com.envision.mule.corepoint.mixin.AppointmentTypeMixin"
+                							  targetClass="com.corepoint.edims.carma.AppointmentType"/>
+					<json:deserialization-mixin mixinClass="com.envision.mule.corepoint.mixin.DischargeTypeMixin"
+                							  targetClass="com.corepoint.edims.carma.DischargeType"/>
+				</json:json-to-object-transformer>
+
+				<logger level="INFO" message="Dispatching record to Corepoint..."/>
+				<cxf:jaxws-client serviceClass="org.tempuri.Carma"/>
+				<http:request host="${carma.corepoint.server}" port="${carma.corepoint.port}" method="POST" path="/" config-ref="CorepointSOAP"/>
+				<logger level="INFO" message="Dispatching record to Corepoint - Success!"/>
+				
+<!-- 	
 				<data-mapper:transform config-ref="JSON_To_Xml_carmaRecord__1JSON_To_Xml_carmaRecord__2" doc:name="JSON To Xml&lt;carmaRecord&gt;"/>	
                 
 				<ws:consumer config-ref="Web_Service_Consumer1"
 					operation="SendPatientXMLData" doc:name="Web Service Consumer" />
                 <data-mapper:transform config-ref="Xml_SendPatientXMLDataResponse__To_Map" doc:name="Xml&lt;SendPatientXMLDataResponse&gt; To Map"/>
-				<splunklogger:logger config-ref="SplunkLogger"
-					doc:name="Logger">
-					<splunklogger:fields>
-						<splunklogger:field key="sendPatientXMLDataResult"
-							value-ref="#[payload.SendPatientXMLDataResult]" />
-					</splunklogger:fields>
+-->                
 
+				<splunklogger:logger config-ref="SplunkLogger" doc:name="Logger">
+					<splunklogger:fields>
+						<splunklogger:field key="sendPatientXMLDataResult" value-ref="#[payload.SendPatientXMLDataResult]" />
+					</splunklogger:fields>
 				</splunklogger:logger>
+
 			</processor-chain>
 		</until-successful>
 
@@ -115,15 +143,13 @@ http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schem
 	</flow>
 
 	<flow name="put:/patients/{id}:apiConfig">
-		<set-payload value="#[NullPayload.getInstance()]"
-			doc:name="Set Payload" />
+		<set-property value="501" propertyName="http.status" doc:name="Property"/>
+		<set-payload value="{'message':'Not implemented'}" doc:name="Set Payload"/>
 	</flow>
 
 	<flow name="get:/patients/{id}:apiConfig">
-		<set-property value="501" propertyName="http.status"
-			doc:name="Property" />
-		<set-payload value="{'message':'Not implemented'}"
-			doc:name="Set Payload" />
+		<set-property value="501" propertyName="http.status" doc:name="Property"/>
+		<set-payload value="{'message':'Not implemented'}" doc:name="Set Payload"/>
 	</flow>
 
 	<flow name="post:/patients:apiConfig">
@@ -166,16 +192,12 @@ http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schem
 
 	<flow name="CarmaRecord">
 		<choice doc:name="Choice">
-			<when
-				expression="#[message.payload['carmaRecord']['patientInfo']['PatientRecordId'] == 0]"> <!-- Record Does Not Exist -->
-				<logger level="INFO" message="Carma : Inserting New Patient"
-					doc:name="Logger" />
+			<when expression="#[message.payload['carmaRecord']['patientInfo']['PatientRecordId'] == 0]"> <!-- Record Does Not Exist -->
+				<logger level="INFO" message="Carma : Inserting New Patient" doc:name="Logger"/>
 				<flow-ref name="_insertNewPatient" doc:name="_insertNewPatient" />
 			</when>
 			<otherwise>
-				<logger level="INFO"
-					message="#['Patient: ' + message.payload['carmaRecord']['patientInfo']['PatientRecordId'] + ' exists, inserting new encounter only...']"
-					doc:name="Logger" />
+				<logger level="INFO" message="#['Patient: ' + message.payload['carmaRecord']['patientInfo']['PatientRecordId'] + ' exists, inserting new encounter only...']" doc:name="Logger"/>
 			</otherwise>
 		</choice>
 
@@ -184,8 +206,7 @@ http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schem
 
 	<flow name="NonCarmaRecord">
 		<choice doc:name="Choice">
-			<when
-				expression="#[message.payload['carmaRecord']['patientInfo']['SocialSecurityNumber'] != empty]">
+			<when expression="#[message.payload['carmaRecord']['patientInfo']['SocialSecurityNumber'] != empty]">
 				<flow-ref name="_checkIfExistsBySSN" doc:name="_checkIfExistsBySSN" />
 			</when>
 			<otherwise>
@@ -205,21 +226,17 @@ http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schem
 	</flow>
 
 	<sub-flow name="_logAndEncrypt">
-		<json:json-to-object-transformer
-			returnClass="java.util.Map" doc:name="JSON to Object" />
+		<json:json-to-object-transformer returnClass="java.util.Map" doc:name="JSON to Object" />
 
-		<splunklogger:logger config-ref="SplunkLogger"
-			doc:name="Logger">
+		<splunklogger:logger config-ref="SplunkLogger" doc:name="Logger">
 			<splunklogger:fields>
-				<splunklogger:field key="transactionStatus"
-					value-ref="#['Received']" />
+				<splunklogger:field key="transactionStatus" value-ref="#['Received']" />
 			</splunklogger:fields>
 		</splunklogger:logger>
 
-		<json:object-to-json-transformer
-			doc:name="Object to JSON" />
-		<encryption:encrypt config-ref="Encryption"
-			doc:name="Encryption" />
+		<json:object-to-json-transformer doc:name="Object to JSON"/> 
+		
+		<encryption:encrypt config-ref="Encryption" doc:name="Encryption"/>
 	</sub-flow>
 
 	<sub-flow name="_insertEncounter">
@@ -295,9 +312,7 @@ http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schem
     		</db:parameterized-query>
 		</db:insert>
 
-		<logger level="INFO"
-			message="ID is #[flowVars['recordId'][0]['GENERATED_KEYS']]"
-			doc:name="Logger" />
+		<logger level="INFO" message="ID is #[flowVars['recordId'][0]['GENERATED_KEYS']]" doc:name="Logger"/>
 
 		<db:insert config-ref="MSSQL" doc:name="Database"
 			transactionalAction="ALWAYS_JOIN" target="#[flowVars['otherInfoRecordId']]">
@@ -318,14 +333,12 @@ http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schem
 		</db:insert>
 
 		<expression-component doc:name="Expression">
-			message.payload['carmaRecord']['patientInfo']['PatientRecordId'] =
-			flowVars['recordId'][0]['GENERATED_KEYS'];
+			message.payload['carmaRecord']['patientInfo']['PatientRecordId'] = flowVars['recordId'][0]['GENERATED_KEYS'];
 		</expression-component>
 	</sub-flow>
 
 	<sub-flow name="_checkIfExistsBySSN">
-		<db:select config-ref="MSSQL" doc:name="Database"
-			target="#[flowVars['ExistingPatientInfo']]">
+		<db:select config-ref="MSSQL" doc:name="Database" target="#[flowVars['ExistingPatientInfo']]">
 			<db:parameterized-query>    		
 				<![CDATA[
 				SELECT * FROM [dbo].[PatientRecords] 
@@ -337,11 +350,11 @@ http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schem
 					]]>						    	 
     		</db:parameterized-query>
 		</db:select>
-		<logger level="INFO" message="#[flowVars['ExistingPatientInfo']]"
-			doc:name="Logger" />
+		
+		<logger level="INFO" message="#[flowVars['ExistingPatientInfo']]" doc:name="Logger"/>
+		
 		<choice doc:name="Choice">
-			<when
-				expression="#[flowVars['ExistingPatientInfo'] != empty &amp;&amp; flowVars['ExistingPatientInfo'].size() &gt; 0]"><!-- Record exists -->
+			<when expression="#[flowVars['ExistingPatientInfo'] != empty &amp;&amp; flowVars['ExistingPatientInfo'].size() &gt; 0]"><!-- Record exists -->
 				<logger level="INFO"
 					message="Patient record lookup by SSN successful, inserting encounter only"
 					doc:name="Logger" />
@@ -363,8 +376,7 @@ http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schem
 	</sub-flow>
 
 	<sub-flow name="_checkIfExistsByNameDOB">
-		<db:select config-ref="MSSQL" doc:name="Database"
-			target="#[flowVars['ExistingPatientInfo']]">
+		<db:select config-ref="MSSQL" doc:name="Database" target="#[flowVars['ExistingPatientInfo']]">
 			<db:parameterized-query>    		
 				<![CDATA[
 				SELECT * FROM [dbo].[PatientRecords] 
