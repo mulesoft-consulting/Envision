@@ -93,10 +93,6 @@ http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schem
 			<processor-chain doc:name="Processor Chain"> 
 				<encryption:decrypt config-ref="Encryption" />
 
-<!-- 				<json:json-to-object-transformer returnClass="java.util.Map"/> -->
-<!-- 				<set-payload value="#[message.payload['carmaRecord']]"/> -->
-<!-- 				<json:object-to-json-transformer mimeType="application/json"/> -->
-
 				<json:json-to-object-transformer returnClass="org.tempuri.SendPatientXMLData">
 					<json:deserialization-mixin mixinClass="com.envision.mule.corepoint.mixin.PatientInfoTypeMixin"
                 							  targetClass="com.corepoint.edims.carma.PatientInfoType"/>
@@ -117,18 +113,10 @@ http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schem
 				</json:json-to-object-transformer>
 
 				<logger level="INFO" message="Dispatching record to Corepoint..."/>
-				<cxf:jaxws-client serviceClass="org.tempuri.Carma"/>
+				<cxf:jaxws-client serviceClass="org.tempuri.Carma" port="Carma" operation="SendPatientXMLData"/>
 				<http:request host="${carma.corepoint.server}" port="${carma.corepoint.port}" method="POST" path="/" config-ref="CorepointSOAP"/>
 				<logger level="INFO" message="Dispatching record to Corepoint - Success!"/>
 				
-<!-- 	
-				<data-mapper:transform config-ref="JSON_To_Xml_carmaRecord__1JSON_To_Xml_carmaRecord__2" doc:name="JSON To Xml&lt;carmaRecord&gt;"/>	
-                
-				<ws:consumer config-ref="Web_Service_Consumer1"
-					operation="SendPatientXMLData" doc:name="Web Service Consumer" />
-                <data-mapper:transform config-ref="Xml_SendPatientXMLDataResponse__To_Map" doc:name="Xml&lt;SendPatientXMLDataResponse&gt; To Map"/>
--->                
-
 				<splunklogger:logger config-ref="SplunkLogger" doc:name="Logger">
 					<splunklogger:fields>
 						<splunklogger:field key="sendPatientXMLDataResult" value-ref="#[payload.SendPatientXMLDataResult]" />
