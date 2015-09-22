@@ -82,17 +82,21 @@ http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schem
 	</flow>
 
 	<flow name="post:/patients/{id}/dispatch:apiConfig"> 
-
+		<object-to-string-transformer />
+		<logger level="INFO" message="Dispatch message received: #[message.payload]"/>
+		
  		<flow-ref name="_logAndEncrypt" doc:name="_logAndEncrypt" /> 
 
 		<until-successful maxRetries="${carma.corepoint.retry.count}"
 						  secondsBetweenRetries="${carma.corepoint.retry.interval}"
 			              objectStore-ref="cpObjectStore" deadLetterQueue-ref="DLQHandler"
-			              doc:name="Until Successful" >
+			              doc:name="Until Successful">
 
 			<processor-chain doc:name="Processor Chain"> 
 				<encryption:decrypt config-ref="Encryption" />
 
+				<logger level="INFO" message="JSON Patiend data received"/>
+				
 				<json:json-to-object-transformer returnClass="org.tempuri.SendPatientXMLData">
 					<json:deserialization-mixin mixinClass="com.envision.mule.corepoint.mixin.PatientInfoTypeMixin"
                 							  targetClass="com.corepoint.edims.carma.PatientInfoType"/>
@@ -113,6 +117,7 @@ http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schem
 				</json:json-to-object-transformer>
 
 				<logger level="INFO" message="Dispatching record to Corepoint..."/>
+
 				<cxf:jaxws-client serviceClass="org.tempuri.Carma" port="Carma" operation="SendPatientXMLData"/>
 				<http:request host="${carma.corepoint.server}" port="${carma.corepoint.port}" method="POST" path="/" config-ref="CorepointSOAP"/>
 				<logger level="INFO" message="Dispatching record to Corepoint - Success!"/>

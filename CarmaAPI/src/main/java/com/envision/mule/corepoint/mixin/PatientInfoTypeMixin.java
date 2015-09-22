@@ -4,93 +4,96 @@ import java.math.BigDecimal;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
 
 import com.corepoint.edims.carma.GenderType;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class PatientInfoTypeMixin {
     @JsonProperty("PatientRecordId")
-    protected long patientRecordId;
+    public long patientRecordId;
     @JsonProperty("PatientFirstName")
-    protected String patientFirstName;
+    public String patientFirstName;
     @JsonProperty("PatientLastName")
-    protected String patientLastName;
+    public String patientLastName;
     @JsonProperty("SocialSecurityNumber")
-    protected String socialSecurityNumber;
+    public String socialSecurityNumber;
     @JsonProperty("DateOfBirth")
-    protected String dateOfBirth;
+    public String dateOfBirth;
     @JsonProperty("PatientGender")
-    protected GenderType patientGender;
+    @JsonDeserialize(using = PatientGenderDeserializer.class)
+    public GenderType patientGender;
     @JsonProperty("PatientCell")
-    protected String patientCell;
+    public String patientCell;
     @JsonProperty("PatientSecondaryPhone")
-    protected String patientSecondaryPhone;
+    public String patientSecondaryPhone;
     @JsonProperty("PatientEmail")
-    protected String patientEmail;
+    public String patientEmail;
     @JsonProperty("PatientAddress1")
-    protected String patientAddress1;
+    public String patientAddress1;
     @JsonProperty("PatientAddress2")
-    protected String patientAddress2;
+    public String patientAddress2;
     @JsonProperty("City")
-    protected String city;
+    public String city;
     @JsonProperty("State")
-    protected String state;
+    public String state;
     @JsonProperty("Zip")
-    protected String zip;
+    public String zip;
     @JsonProperty("PatientHeightFeet")
-    protected BigDecimal patientHeightFeet;
+    public BigDecimal patientHeightFeet;
     @JsonProperty("PatientHeightInches")
-    protected BigDecimal patientHeightInches;
+    public BigDecimal patientHeightInches;
     @JsonProperty("PatientWeight")
-    protected BigDecimal patientWeight;
+    public BigDecimal patientWeight;
     @JsonProperty("PatientTrackingId")
-    protected String patientTrackingId;
+    public String patientTrackingId;
     @JsonProperty("SenderFacilityId")
-    protected short senderFacilityId;
+    public short senderFacilityId;
     @JsonProperty("HosptialName")
-    protected String hosptialName;
+    public String hosptialName;
     @JsonProperty("HospitalEMR")
-    protected String hospitalEMR;
+    public String hospitalEMR;
     @JsonProperty("HospitalFIN")
-    protected String hospitalFIN;
+    public String hospitalFIN;
     @JsonProperty("HomePhone")
-    protected String homePhone;
+    public String homePhone;
     @JsonProperty("PrimaryCare")
-    protected String primaryCare;
+    public String primaryCare;
     @JsonProperty("PrimaryCareRelationship")
-    protected String primaryCareRelationship;
+    public String primaryCareRelationship;
     @JsonProperty("PrimaryCarePhone")
-    protected String primaryCarePhone;
+    public String primaryCarePhone;
     @JsonProperty("PrimaryCareEmail")
-    protected String primaryCareEmail;
+    public String primaryCareEmail;
     @JsonProperty("PCPName")
-    protected String pcpName;
+    public String pcpName;
     @JsonProperty("PCPAddress")
-    protected String pcpAddress;
+    public String pcpAddress;
     @JsonProperty("PCPPhone")
-    protected String pcpPhone;
+    public String pcpPhone;
     @JsonProperty("PCPEmail")
-    protected String pcpEmail;
+    public String pcpEmail;
     @JsonProperty("InPatientAdmitDate")
-    protected String inPatientAdmitDate;
+    public String inPatientAdmitDate;
     @JsonProperty("InPatientDischargeDate")
-    protected String inPatientDischargeDate;
+    public String inPatientDischargeDate;
     @JsonProperty("InPatientCareType")
-    protected String inPatientCareType;
+    public String inPatientCareType;
     @JsonProperty("InPatientAdmitDiagnosis")
-    protected String inPatientAdmitDiagnosis;
+    public String inPatientAdmitDiagnosis;
     @JsonProperty("HospitalAssignedDRG")
-    protected String hospitalAssignedDRG;
+    public String hospitalAssignedDRG;
     @JsonProperty("AMRFacilityId")
-    protected int amrFacilityId;
+    public int amrFacilityId;
     @JsonProperty("AMRRecordNo")
-    protected String amrRecordNo;
+    public String amrRecordNo;
     @JsonProperty("AmrFacilityName")
-    protected String amrFacilityName;
+    public String amrFacilityName;
     @JsonProperty("HospiceRecordNo")
-    protected String hospiceRecordNo;
+    public String hospiceRecordNo;
     @JsonProperty("HospiceFacilityId")
-    protected int hospiceFacilityId;
+    public int hospiceFacilityId;
     @JsonProperty("HospiceFacilityName")
-    protected String hospiceFacilityName;
+    public String hospiceFacilityName;
+
 }

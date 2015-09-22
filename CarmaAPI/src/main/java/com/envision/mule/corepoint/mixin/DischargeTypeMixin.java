@@ -2,6 +2,7 @@ package com.envision.mule.corepoint.mixin;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
 
 import com.corepoint.edims.carma.DischargeToType;
 
@@ -12,6 +13,7 @@ public abstract class DischargeTypeMixin {
     @JsonProperty("ReferralTrackerId")
     protected long referralTrackerId;
     @JsonProperty("DischartgeToType")
+    @JsonDeserialize(using = DischargeToTypeDeserializer.class)
     protected DischargeToType dischartgeToType;
     @JsonProperty("DischargeWithType")
     protected String dischargeWithType;
