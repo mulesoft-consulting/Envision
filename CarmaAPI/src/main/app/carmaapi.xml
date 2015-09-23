@@ -56,8 +56,8 @@ http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schem
 	</db:generic-config>
 
 	<spring:beans>
-		<spring:bean id="objectStore"
-			class="org.mule.util.store.PartitionedPersistentObjectStore" />
+<!-- 		<spring:bean id="objectStore" -->
+<!-- 			class="org.mule.util.store.PartitionedPersistentObjectStore" /> -->
 		<spring:bean id="cpObjectStore"
 			class="org.mule.util.store.PartitionedPersistentObjectStore" />
 	</spring:beans>
@@ -87,10 +87,10 @@ http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schem
 		
  		<flow-ref name="_logAndEncrypt" doc:name="_logAndEncrypt" /> 
 
-		<until-successful maxRetries="${carma.corepoint.retry.count}"
-						  secondsBetweenRetries="${carma.corepoint.retry.interval}"
-			              objectStore-ref="cpObjectStore" deadLetterQueue-ref="DLQHandler"
-			              doc:name="Until Successful">
+<!-- 		<until-successful maxRetries="${carma.corepoint.retry.count}" -->
+<!-- 						  secondsBetweenRetries="${carma.corepoint.retry.interval}" -->
+<!-- 			              objectStore-ref="cpObjectStore" deadLetterQueue-ref="DLQHandler" -->
+<!-- 			              doc:name="Until Successful"> -->
 
 			<processor-chain doc:name="Processor Chain"> 
 				<encryption:decrypt config-ref="Encryption" />
@@ -129,7 +129,7 @@ http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schem
 				</splunklogger:logger>
 
 			</processor-chain>
-		</until-successful>
+<!-- 		</until-successful> -->
 
 		<set-payload value="{'message':'Success'}" doc:name="Set Payload" />
  
@@ -146,20 +146,24 @@ http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schem
 	</flow>
 
 	<flow name="post:/patients:apiConfig">
+		<json:json-to-object-transformer returnClass="java.util.Map" doc:name="JSON to Object" />
 
-		<flow-ref name="_logAndEncrypt" doc:name="_logAndEncrypt" />
+		<splunklogger:logger config-ref="SplunkLogger" doc:name="Logger">
+			<splunklogger:fields>
+				<splunklogger:field key="transactionStatus" value-ref="#['Received']" />
+			</splunklogger:fields>
+		</splunklogger:logger>
+<!-- 		<flow-ref name="_logAndEncrypt" doc:name="_logAndEncrypt" /> -->
 
 		<until-successful maxRetries="${carma.mssql.retry.count}"
 			secondsBetweenRetries="${carma.mssql.retry.interval}"
-			objectStore-ref="objectStore" deadLetterQueue-ref="DLQHandler"
+			synchronous="true" 
 			doc:name="Until Successful">
 
 			<transactional action="BEGIN_OR_JOIN" doc:name="Transactional">
 				<processor-chain doc:name="Processor Chain">
-					<encryption:decrypt config-ref="Encryption"
-						doc:name="Encryption" />
-					<json:json-to-object-transformer
-						returnClass="java.util.Map" doc:name="JSON to Object" />
+<!-- 					<encryption:decrypt config-ref="Encryption" -->
+<!-- 						doc:name="Encryption" /> -->
 
 					<choice doc:name="Choice">
 						<when
@@ -179,8 +183,25 @@ http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schem
 			</transactional>
 		</until-successful>
 
-		<set-payload value="OK" doc:name="Set Payload" />
-
+		<expression-component>
+			Map response = new HashMap();
+			response.put('CarmaRecordId', message.payload['carmaRecord']['patientInfo']['PatientRecordId']);
+			payload = response;
+		</expression-component>
+		
+		<json:object-to-json-transformer/>
+		<logger level="INFO" message="RESPONSE IS #[message.payload]"/>
+		
+		<rollback-exception-strategy>
+			<logger level="INFO" message="Exception occured, rolling back... #[exception]"/>
+			<expression-component>
+				Map response = new HashMap();
+				response.put('Error', exception.getMessage());
+				payload = response;
+			</expression-component>
+			<json:object-to-json-transformer/>
+			<set-property propertyName="http.status" value="500" doc:name="Property" />
+		</rollback-exception-strategy>
 	</flow>
 
 	<flow name="CarmaRecord">

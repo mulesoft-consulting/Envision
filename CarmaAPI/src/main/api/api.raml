@@ -11,6 +11,13 @@ mediaType: application/json
       application/json:
         example: !include examples/sample-dispatch-0912.json   
         schema: !include schema/CarmaRecord_json_V0.2-0912.jsonschema
+    responses:
+      200:
+        body:
+          application/json:
+      500:
+        body:
+          application/json:        
   /{id}:
     get:
       responses:
