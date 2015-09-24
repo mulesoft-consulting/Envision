@@ -94,10 +94,16 @@ http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schem
 
 			<processor-chain doc:name="Processor Chain"> 
 				<encryption:decrypt config-ref="Encryption" />
-
+				
+				<json:json-to-object-transformer returnClass="java.util.Map"/>
+				<set-payload value="#[message.payload['carmaRecord']]" />
+				<json:object-to-json-transformer/>
+				
 				<logger level="INFO" message="JSON Patiend data received"/>
 				
-				<json:json-to-object-transformer returnClass="org.tempuri.SendPatientXMLData">
+				<json:json-to-object-transformer returnClass="com.corepoint.edims.carma.CarmaRecordType">
+					<json:deserialization-mixin mixinClass="com.envision.mule.corepoint.mixin.HeaderTypeMixin"
+                							  targetClass="com.corepoint.edims.carma.HeaderType"/>
 					<json:deserialization-mixin mixinClass="com.envision.mule.corepoint.mixin.PatientInfoTypeMixin"
                 							  targetClass="com.corepoint.edims.carma.PatientInfoType"/>
 					<json:deserialization-mixin mixinClass="com.envision.mule.corepoint.mixin.RerralInfoTypeMixin"

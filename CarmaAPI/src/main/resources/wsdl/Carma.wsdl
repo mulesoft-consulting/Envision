@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s1="http://carma.edims.corepoint.com" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:import namespace="http://carma.edims.corepoint.com" />
+      <s:element name="carmaRecord" type="s1:carmaRecordType" />
+      <s:element name="SendPatientXMLDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendPatientXMLDataResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://carma.edims.corepoint.com">
+      <s:element name="carmaRecord" type="s1:carmaRecordType" />
+      <s:complexType name="carmaRecordType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="header" type="s1:headerType" />
+          <s:element minOccurs="0" maxOccurs="1" name="patientInfo" type="s1:patientInfoType" />
+          <s:element minOccurs="0" maxOccurs="1" name="referralInfo" type="s1:rerralInfoType" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="headerType">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="version" type="s:float" />
+          <s:element minOccurs="0" maxOccurs="1" name="sourceSystem" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="environment" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="messageType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="timeZone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="patientStatus" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="sourceSystemRecordId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="createdAt" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="machine" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ZSegment" type="s1:zsegType" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="zsegType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="value" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="patientInfoType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="PatientRecordId" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="PatientFirstName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PatientLastName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SocialSecurityNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DateOfBirth" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PatientGender" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PatientCell" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PatientSecondaryPhone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PatientEmail" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PatientAddress1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PatientAddress2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="State" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Zip" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PatientHeightFeet" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PatientHeightInches" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PatientWeight" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PatientTrackingId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SenderFacilityId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HosptialName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HospitalEMR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HospitalFIN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HomePhone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PrimaryCare" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PrimaryCareRelationship" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PrimaryCarePhone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PrimaryCareEmail" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PCPName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PCPAddress" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PCPPhone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PCPEmail" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="InPatientAdmitDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="InPatientDischargeDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="InPatientCareType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="InPatientAdmitDiagnosis" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HospitalAssignedDRG" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AMRFacilityId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="AMRRecordNo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AmrFacilityName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HospiceRecordNo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HospiceFacilityId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="HospiceFacilityName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ZSegment" type="s1:zsegType" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="rerralInfoType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ReferralId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReferralNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TrackingNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReferralType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CurrentStatus" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SenderFacilityId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="SenderFacilityName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SenderUserId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="SenderName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReceiverFacilityId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="RecieverFacilityName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReceiverUserId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RecieverName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ExpirationOption" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReferralExpirationTime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PublishType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CancelReason" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OtherCancelrefReason" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReferralAssessment" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReferralReminderDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ExpectedDischargeDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ActualDischargeDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Diagnosis" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FollowUpRequired" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ScheduledInLogis" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ServiceProvider" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReferralExtrasId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="VisitedPatientatHospital" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="SpecialInstructions" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ChartBuiltInCERNER" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="MeetsCriteria" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="SignedConsentForm" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReferralTypeName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProviderAssigned" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WelcomeCall" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Orders" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OrdersEntered" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FollowUpCall" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DischargeFormServiceCall" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UnplannedVisitName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReferralSourceType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReferralSourcePts" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CancelReferralReason" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RehabFacilityName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Paramedic" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReAdmitToHospital" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ChronicCareManager" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IsPatientatHospital" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PatientLocation" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SuspectedDrg" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReferralContractId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReferralContract" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ServiceContractPeriodId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ServiceContractPeriod" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DeveroMRN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="diagnosisInfo" type="s1:diagnosisType" />
+          <s:element minOccurs="0" maxOccurs="1" name="hospitalInfo" type="s1:hospitalType" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="dischargeInfo" type="s1:dischargeType" />
+          <s:element minOccurs="0" maxOccurs="1" name="insuranceInfo" type="s1:insuranceType" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="appointmentInfo" type="s1:appointmentType" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ZSegment" type="s1:zsegType" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="diagnosisType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ICDs">
+            <s:complexType>
+              <s:sequence>
+                <s:element minOccurs="0" maxOccurs="1" name="DiagnosisID" type="s:string" />
+                <s:element minOccurs="0" maxOccurs="1" name="DiagnosisType" type="s:string" />
+                <s:element minOccurs="0" maxOccurs="unbounded" name="ZSegment" type="s1:zsegType" />
+              </s:sequence>
+            </s:complexType>
+          </s:element>
+          <s:element minOccurs="0" maxOccurs="1" name="OtherDiagnostics" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ZSegment" type="s1:zsegType" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="hospitalType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="RoomNo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RoomLocation" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MedicalRecordNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ZSegment" type="s1:zsegType" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="dischargeType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="DischargeInfoId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReferralTrackerId" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="DischartgeToType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DischargeWithType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AgencyName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AgencyAddress" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AgencyPhone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AgencyFAX" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FacilityTypeId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FacilityType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FacilityName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FacilityAddress" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FacilityCity" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FacilityZip" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FacilityPhone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FacilityFax" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FacilityState" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PostAcuteProvider" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RemindDays" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DischargeDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TransferDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ZSegment" type="s1:zsegType" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="insuranceType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="PrimaryInsuranceTypeId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PrimaryCompanyName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OtherPrimaryInsurance" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PrimaryCardHolderName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PrimaryCardHolderSSN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PrimaryPatientGroupId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PrimaryPatientMemberId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SecondaryInsuranceTypeId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SecondaryCompanyName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OtherSecondaryInsurance" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SecondaryCardHolderName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SecondaryCardHolderSSN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SecondaryPatientGroupId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SecondaryPatientMemberId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AdditionalInsuranceInfo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ZSegment" type="s1:zsegType" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="appointmentType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="AppointmentId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ScheduledTime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ScheduleType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AppointmentNote" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OtherAppointmentPreference" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OtherPatientToBeSeenWithIn" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CreatedAt" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ZSegment" type="s1:zsegType" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SendPatientXMLDataSoapIn">
+    <wsdl:part name="parameters" element="tns:carmaRecord" />
+  </wsdl:message>
+  <wsdl:message name="SendPatientXMLDataSoapOut">
+    <wsdl:part name="parameters" element="tns:SendPatientXMLDataResponse" />
+  </wsdl:message>
+  <wsdl:portType name="Carma">
+    <wsdl:operation name="SendPatientXMLData">
+      <wsdl:input message="tns:SendPatientXMLDataSoapIn" />
+      <wsdl:output message="tns:SendPatientXMLDataSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Carma" type="tns:Carma">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SendPatientXMLData">
+      <soap:operation soapAction="http://tempuri.org/SendPatientXMLData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="Carma12" type="tns:Carma">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SendPatientXMLData">
+      <soap12:operation soapAction="http://tempuri.org/SendPatientXMLData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Test_InboundCarmaXML">
+    <wsdl:port name="Carma" binding="tns:Carma">
+      <soap:address location="http://10.5.4.150:8085" />
+    </wsdl:port>
+    <wsdl:port name="Carma12" binding="tns:Carma12">
+      <soap12:address location="http://10.5.4.150:8085" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

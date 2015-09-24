@@ -6,8 +6,6 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 
-import com.corepoint.edims.carma.GenderType;
-
 @JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class PatientInfoTypeMixin {
     @JsonProperty("PatientRecordId")
@@ -21,8 +19,7 @@ public abstract class PatientInfoTypeMixin {
     @JsonProperty("DateOfBirth")
     public String dateOfBirth;
     @JsonProperty("PatientGender")
-    @JsonDeserialize(using = PatientGenderDeserializer.class)
-    public GenderType patientGender;
+    public String patientGender;
     @JsonProperty("PatientCell")
     public String patientCell;
     @JsonProperty("PatientSecondaryPhone")

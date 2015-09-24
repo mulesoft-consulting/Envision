@@ -2,10 +2,6 @@ package com.envision.mule.corepoint.mixin;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
-
-import com.corepoint.edims.carma.ReferralType;
-import com.corepoint.edims.carma.StatusType;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class RerralInfoTypeMixin {
@@ -16,11 +12,9 @@ public abstract class RerralInfoTypeMixin {
     @JsonProperty("TrackingNumber")
     protected String trackingNumber;
     @JsonProperty("ReferralType")
-    @JsonDeserialize(using = ReferralTypeDeserializer.class)
-    protected ReferralType referralType;
+    protected String referralType;
     @JsonProperty("CurrentStatus")
-    @JsonDeserialize(using = StatusTypeDeserializer.class)
-    protected StatusType currentStatus;
+    protected String currentStatus;
     @JsonProperty("SenderFacilityId")
     protected int senderFacilityId;
     @JsonProperty("SenderFacilityName")

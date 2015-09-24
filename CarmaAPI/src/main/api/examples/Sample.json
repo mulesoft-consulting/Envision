@@ -1,0 +1,537 @@
+﻿{
+  "carmaRecord": {
+    "header": {
+      "version": 0.2,
+      "sourceSystem": "RCC",
+      "environment": "DEV",
+      "messageType": "Carma-Record",
+      "timeZone": "utc",
+      "patientStatus": "New",
+      "sourceSystemRecordId": "1022",
+      "createdAt": "9/24/2015 4:17:49 AM",
+      "machine": "SMS-LAP-0004",
+      "ZSegment": [
+        {
+          "key": "key1",
+          "value": "val1"
+        },
+        {
+          "key": "key1",
+          "value": "val1"
+        },
+        {
+          "key": "key1",
+          "value": "val1"
+        },
+        {
+          "key": "key1",
+          "value": "val1"
+        }
+      ]
+    },
+    "patientInfo": {
+      "PatientRecordId": 123,
+      "PatientFirstName": "FristName44",
+      "PatientLastName": "LastName44",
+      "SocialSecurityNumber": "123",
+      "DateOfBirth": "9/24/2015",
+      "PatientGender": "Male",
+      "PatientCell": "123",
+      "PatientSecondaryPhone": "123444",
+      "PatientEmail": "123@fff.com",
+      "PatientAddress1": "123",
+      "PatientAddress2": "123",
+      "City": "123",
+      "State": "123",
+      "Zip": "12345",
+      "PatientHeightFeet": "123",
+      "PatientHeightInches": "123",
+      "PatientWeight": "123",
+      "PatientTrackingId": "123",
+      "SenderFacilityId": 4,
+      "HosptialName": "123",
+      "HospitalEMR": "123",
+      "HospitalFIN": "123",
+      "HomePhone": "123",
+      "PrimaryCare": "123",
+      "PrimaryCareRelationship": "123",
+      "PrimaryCarePhone": "123",
+      "PrimaryCareEmail": "123@fff.com",
+      "PCPName": "123",
+      "PCPAddress": "123",
+      "PCPPhone": "123",
+      "PCPEmail": "123@fff.com",
+      "InPatientAdmitDate": "123",
+      "InPatientDischargeDate": "123",
+      "InPatientCareType": "123",
+      "InPatientAdmitDiagnosis": "123",
+      "HospitalAssignedDRG": "123",
+      "AMRFacilityId": "123",
+      "AMRRecordNo": "123",
+      "AmrFacilityName": "123",
+      "HospiceRecordNo": "123",
+      "HospiceFacilityId": "123",
+      "HospiceFacilityName": "123",
+      "ZSegment": [
+        {
+          "key": "key1",
+          "value": "val1"
+        },
+        {
+          "key": "key1",
+          "value": "val1"
+        },
+        {
+          "key": "key1",
+          "value": "val1"
+        },
+        {
+          "key": "key1",
+          "value": "val1"
+        }
+      ]
+    },
+    "referralInfo": {
+      "ReferralId": 1,
+      "ReferralNumber": "123",
+      "TrackingNumber": "123",
+      "ReferralType": "OutPatient",
+      "CurrentStatus": "Referral",
+      "SenderFacilityId": 1,
+      "SenderFacilityName": "123",
+      "SenderUserId": 1,
+      "SenderName": "123",
+      "ReceiverFacilityId": 1,
+      "RecieverFacilityName": "123",
+      "ReceiverUserId": "123",
+      "RecieverName": "123",
+      "ExpirationOption": "123",
+      "ReferralExpirationTime": "12-12-15",
+      "PublishType": 1,
+      "CancelReason": "123",
+      "OtherCancelrefReason": "123",
+      "ReferralAssessment": "123",
+      "ReferralReminderDate": "12-12-16",
+      "ExpectedDischargeDate": "12-12-15",
+      "ActualDischargeDate": "12-12-15",
+      "Diagnosis": "123",
+      "FollowUpRequired": true,
+      "ScheduledInLogis": true,
+      "ServiceProvider": "123",
+      "ReferralExtrasId": 1,
+      "VisitedPatientatHospital": true,
+      "SpecialInstructions": "123",
+      "ChartBuiltInCERNER": true,
+      "MeetsCriteria": true,
+      "SignedConsentForm": true,
+      "ReferralTypeName": "123",
+      "ProviderAssigned": true,
+      "WelcomeCall": true,
+      "Orders": "123",
+      "OrdersEntered": true,
+      "FollowUpCall": true,
+      "DischargeFormServiceCall": "123",
+      "UnplannedVisitName": "123",
+      "ReferralSourceType": "123",
+      "ReferralSourcePts": "123",
+      "CancelReferralReason": "123",
+      "RehabFacilityName": "123",
+      "Paramedic": "123",
+      "ReAdmitToHospital": "123",
+      "ChronicCareManager": "123",
+      "IsPatientatHospital": true,
+      "PatientLocation": "123",
+      "SuspectedDrg": "123",
+      "ReferralContract": "123",
+      "ServiceContractPeriod": "123",
+      "DeveroMRN": "123",
+      "diagnosisInfo": {
+        "ICDs": [
+          {
+            "DiagnosisID": "123",
+            "DiagnosisType": "icd-9",
+            "ZSegment": [
+              {
+                "key": "key1",
+                "value": "val1"
+              },
+              {
+                "key": "key1",
+                "value": "val1"
+              },
+              {
+                "key": "key1",
+                "value": "val1"
+              },
+              {
+                "key": "key1",
+                "value": "val1"
+              }
+            ]
+          },
+          {
+            "DiagnosisID": "123",
+            "DiagnosisType": "icd-9"
+          },
+          {
+            "DiagnosisID": "123",
+            "DiagnosisType": "icd-10"
+          },
+          {
+            "DiagnosisID": "123",
+            "DiagnosisType": "icd-10"
+          }
+        ],
+        "OtherDiagnostics": "123",
+        "ZSegment": [
+          {
+            "key": "key1",
+            "value": "val1"
+          },
+          {
+            "key": "key1",
+            "value": "val1"
+          },
+          {
+            "key": "key1",
+            "value": "val1"
+          },
+          {
+            "key": "key1",
+            "value": "val1"
+          }
+        ]
+      },
+      "hospitalInfo": {
+        "RoomNo": "123",
+        "RoomLocation": "123",
+        "MedicalRecordNumber": "123",
+        "ZSegment": [
+          {
+            "key": "key1",
+            "value": "val1"
+          },
+          {
+            "key": "key1",
+            "value": "val1"
+          },
+          {
+            "key": "key1",
+            "value": "val1"
+          },
+          {
+            "key": "key1",
+            "value": "val1"
+          }
+        ]
+      },
+      "dischargeInfo": [
+        {
+          "DischargeInfoId": 123,
+          "ReferralTrackerId": 123,
+          "DischartgeToType": "Home",
+          "DischargeWithType": "123",
+          "AgencyName": "123",
+          "AgencyAddress": "123",
+          "AgencyPhone": "123",
+          "AgencyFAX": "123",
+          "FacilityTypeId": "123",
+          "FacilityType": "123",
+          "FacilityName": "123",
+          "FacilityAddress": "123",
+          "FacilityCity": "123",
+          "FacilityZip": "12345",
+          "FacilityPhone": "123",
+          "FacilityFax": "123",
+          "FacilityState": "123",
+          "PostAcuteProvider": "123",
+          "RemindDays": "123",
+          "DischargeDate": "12-12-16",
+          "TransferDate": "12-12-15"
+        },
+        {
+          "DischargeInfoId": 123,
+          "ReferralTrackerId": 123,
+          "DischartgeToType": "Home",
+          "DischargeWithType": "123",
+          "AgencyName": "123",
+          "AgencyAddress": "123",
+          "AgencyPhone": "123",
+          "AgencyFAX": "123",
+          "FacilityTypeId": "123",
+          "FacilityType": "123",
+          "FacilityName": "123",
+          "FacilityAddress": "123",
+          "FacilityCity": "123",
+          "FacilityZip": "12345",
+          "FacilityPhone": "123",
+          "FacilityFax": "123",
+          "FacilityState": "123",
+          "PostAcuteProvider": "123",
+          "RemindDays": "123",
+          "DischargeDate": "12-12-16",
+          "TransferDate": "12-12-15",
+          "ZSegment": [
+            {
+              "key": "key1",
+              "value": "val1"
+            },
+            {
+              "key": "key1",
+              "value": "val1"
+            },
+            {
+              "key": "key1",
+              "value": "val1"
+            },
+            {
+              "key": "key1",
+              "value": "val1"
+            }
+          ]
+        },
+        {
+          "DischargeInfoId": 123,
+          "ReferralTrackerId": 123,
+          "DischartgeToType": "Home",
+          "DischargeWithType": "123",
+          "AgencyName": "123",
+          "AgencyAddress": "123",
+          "AgencyPhone": "123",
+          "AgencyFAX": "123",
+          "FacilityTypeId": "123",
+          "FacilityType": "123",
+          "FacilityName": "123",
+          "FacilityAddress": "123",
+          "FacilityCity": "123",
+          "FacilityZip": "12345",
+          "FacilityPhone": "123",
+          "FacilityFax": "123",
+          "FacilityState": "123",
+          "PostAcuteProvider": "123",
+          "RemindDays": "123",
+          "DischargeDate": "12-12-16",
+          "TransferDate": "12-12-15"
+        },
+        {
+          "DischargeInfoId": 123,
+          "ReferralTrackerId": 123,
+          "DischartgeToType": "Home",
+          "DischargeWithType": "123",
+          "AgencyName": "123",
+          "AgencyAddress": "123",
+          "AgencyPhone": "123",
+          "AgencyFAX": "123",
+          "FacilityTypeId": "123",
+          "FacilityType": "123",
+          "FacilityName": "123",
+          "FacilityAddress": "123",
+          "FacilityCity": "123",
+          "FacilityZip": "12345",
+          "FacilityPhone": "123",
+          "FacilityFax": "123",
+          "FacilityState": "123",
+          "PostAcuteProvider": "123",
+          "RemindDays": "123",
+          "DischargeDate": "12-12-16",
+          "TransferDate": "12-12-15"
+        },
+        {
+          "DischargeInfoId": 123,
+          "ReferralTrackerId": 123,
+          "DischartgeToType": "Home",
+          "DischargeWithType": "123",
+          "AgencyName": "123",
+          "AgencyAddress": "123",
+          "AgencyPhone": "123",
+          "AgencyFAX": "123",
+          "FacilityTypeId": "123",
+          "FacilityType": "123",
+          "FacilityName": "123",
+          "FacilityAddress": "123",
+          "FacilityCity": "123",
+          "FacilityZip": "12345",
+          "FacilityPhone": "123",
+          "FacilityFax": "123",
+          "FacilityState": "123",
+          "PostAcuteProvider": "123",
+          "RemindDays": "123",
+          "DischargeDate": "12-12-16",
+          "TransferDate": "12-12-15"
+        }
+      ],
+      "insuranceInfo": {
+        "PrimaryInsuranceTypeId": "123",
+        "PrimaryCompanyName": "123",
+        "OtherPrimaryInsurance": "123",
+        "PrimaryCardHolderName": "123",
+        "PrimaryCardHolderSSN": "123",
+        "PrimaryPatientGroupId": "123",
+        "PrimaryPatientMemberId": "123",
+        "SecondaryInsuranceTypeId": "123",
+        "SecondaryCompanyName": "123",
+        "OtherSecondaryInsurance": "123",
+        "SecondaryCardHolderName": "123",
+        "SecondaryCardHolderSSN": "123",
+        "SecondaryPatientGroupId": "123",
+        "SecondaryPatientMemberId": "123",
+        "AdditionalInsuranceInfo": "123",
+        "ZSegment": [
+          {
+            "key": "key1",
+            "value": "val1"
+          },
+          {
+            "key": "key1",
+            "value": "val1"
+          },
+          {
+            "key": "key1",
+            "value": "val1"
+          },
+          {
+            "key": "key1",
+            "value": "val1"
+          }
+        ]
+      },
+      "appointmentInfo": [
+        {
+          "AppointmentId": "123",
+          "ScheduledTime": "12-12-15",
+          "ScheduleType": "123",
+          "AppointmentNote": "123",
+          "Status": "123",
+          "OtherAppointmentPreference": "123",
+          "OtherPatientToBeSeenWithIn": "123",
+          "ZSegment": [
+            {
+              "key": "key1",
+              "value": "val1"
+            },
+            {
+              "key": "key1",
+              "value": "val1"
+            },
+            {
+              "key": "key1",
+              "value": "val1"
+            },
+            {
+              "key": "key1",
+              "value": "val1"
+            }
+          ]
+        },
+        {
+          "AppointmentId": "123",
+          "ScheduledTime": "12-12-15",
+          "ScheduleType": "123",
+          "AppointmentNote": "123",
+          "Status": "123",
+          "OtherAppointmentPreference": "123",
+          "OtherPatientToBeSeenWithIn": "123",
+          "ZSegment": [
+            {
+              "key": "key1",
+              "value": "val1"
+            },
+            {
+              "key": "key1",
+              "value": "val1"
+            },
+            {
+              "key": "key1",
+              "value": "val1"
+            },
+            {
+              "key": "key1",
+              "value": "val1"
+            }
+          ]
+        },
+        {
+          "AppointmentId": "123",
+          "ScheduledTime": "12-12-15",
+          "ScheduleType": "123",
+          "AppointmentNote": "123",
+          "Status": "123",
+          "OtherAppointmentPreference": "123",
+          "OtherPatientToBeSeenWithIn": "123",
+          "ZSegment": [
+            {
+              "key": "key1",
+              "value": "val1"
+            },
+            {
+              "key": "key1",
+              "value": "val1"
+            },
+            {
+              "key": "key1",
+              "value": "val1"
+            },
+            {
+              "key": "key1",
+              "value": "val1"
+            }
+          ]
+        },
+        {
+          "AppointmentId": "123",
+          "ScheduledTime": "12-12-15",
+          "ScheduleType": "123",
+          "AppointmentNote": "123",
+          "Status": "123",
+          "OtherAppointmentPreference": "123",
+          "OtherPatientToBeSeenWithIn": "123"
+        },
+        {
+          "AppointmentId": "123",
+          "ScheduledTime": "12-12-15",
+          "ScheduleType": "123",
+          "AppointmentNote": "123",
+          "Status": "123",
+          "OtherAppointmentPreference": "123",
+          "OtherPatientToBeSeenWithIn": "123",
+          "ZSegment": [
+            {
+              "key": "key1",
+              "value": "val1"
+            },
+            {
+              "key": "key1",
+              "value": "val1"
+            },
+            {
+              "key": "key1",
+              "value": "val1"
+            },
+            {
+              "key": "key1",
+              "value": "val1"
+            }
+          ]
+        }
+      ],
+      "ZSegment": [
+        {
+          "key": "key1",
+          "value": "val1"
+        },
+        {
+          "key": "key1",
+          "value": "val1"
+        },
+        {
+          "key": "key1",
+          "value": "val1"
+        },
+        {
+          "key": "key1",
+          "value": "val1"
+        }
+      ]
+    }
+  }
+}
