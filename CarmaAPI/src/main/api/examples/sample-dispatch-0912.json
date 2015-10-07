@@ -17,7 +17,7 @@
             "PatientLastName": "ROCK",
             "SocialSecurityNumber": "abc",
             "DateOfBirth": "2005-01-13T00:00:00",
-            "PatientGender": "MALE",
+            "PatientGender": "M",
             "PatientCell": "abc",
             "PatientSecondaryPhone": "abc",
             "PatientEmail": "abc",

@@ -1,82 +1,82 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.envision.mule</groupId>
-	<artifactId>carmaapi</artifactId>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.envision.mule</groupId>
+    <artifactId>carmaapi</artifactId>
     <version>1.1.4-SNAPSHOT</version>
     <packaging>mule</packaging>
-	<name>Mule CARMA API Application</name>
-	
+    <name>Mule CARMA API Application</name>
+    
 
     <properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<mule.version>3.6.1</mule.version>
-    	<mule.tools.version>1.0</mule.tools.version>
-    	
-	<munit.version>3.7.0-RC2</munit.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <mule.version>3.6.1</mule.version>
+        <mule.tools.version>1.0</mule.tools.version>
+        
+    <munit.version>3.7.0-RC2</munit.version>
     </properties>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.mule.tools.maven</groupId>
-				<artifactId>mule-app-maven-plugin</artifactId>
-				<version>${mule.tools.version}</version>
-				<extensions>true</extensions>
-				<configuration>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.mule.tools.maven</groupId>
+                <artifactId>mule-app-maven-plugin</artifactId>
+                <version>${mule.tools.version}</version>
+                <extensions>true</extensions>
+                <configuration>
                     <copyToAppsDirectory>true</copyToAppsDirectory>
-				<inclusions>
+                <inclusions>
                         <inclusion>
                             <groupId>org.mule.modules</groupId>
                             <artifactId>mule-module-apikit</artifactId>
                         </inclusion>
                         <inclusion>
-							<groupId>com.microsoft.sqlserver</groupId>
-							<artifactId>sqljdbc4</artifactId>
-						</inclusion>
+                            <groupId>com.microsoft.sqlserver</groupId>
+                            <artifactId>sqljdbc4</artifactId>
+                        </inclusion>
                     <inclusion>
                             <groupId>com.mulesoft.security</groupId>
                             <artifactId>mule-module-security-encryption</artifactId>
                         </inclusion>
                     </inclusions>
                 </configuration>
-			</plugin>
-			<plugin>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<version>2.2.1</version>
-				<configuration>
-					<descriptorRefs>
-						<descriptorRef>project</descriptorRef>
-					</descriptorRefs>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>build-helper-maven-plugin</artifactId>
-				<version>1.7</version>
-				<executions>
-					<execution>
-						<id>add-resource</id>
-						<phase>generate-resources</phase>
-						<goals>
-							<goal>add-resource</goal>
-						</goals>
-						<configuration>
-							<resources>
-								<resource>
-									<directory>src/main/app/</directory>
-								</resource>
-								<resource>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.2.1</version>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>project</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>1.7</version>
+                <executions>
+                    <execution>
+                        <id>add-resource</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>add-resource</goal>
+                        </goals>
+                        <configuration>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/app/</directory>
+                                </resource>
+                                <resource>
                                     <directory>src/main/api/</directory>
                                 </resource>
                             </resources>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-		<plugin>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        <plugin>
                 <groupId>org.mule.munit.tools</groupId>
                 <artifactId>munit-maven-plugin</artifactId>
                 <version>${munit.version}</version>
@@ -91,7 +91,7 @@
                 </executions>
             </plugin>
         </plugins>
-	<testResources>
+    <testResources>
             <testResource>
                 <directory>src/test/munit</directory>
             </testResource>
@@ -101,63 +101,63 @@
         </testResources>
     </build>
 
-	<!-- Mule Dependencies -->
-	<dependencies>
-		<!-- Xml configuration -->
-		<dependency>
-        	<groupId>com.mulesoft.muleesb</groupId>
-			<artifactId>mule-core-ee</artifactId>
-			<version>${mule.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<!-- Xml configuration -->
-		<dependency>
-			<groupId>com.mulesoft.muleesb.modules</groupId>
-			<artifactId>mule-module-spring-config-ee</artifactId>
-			<version>${mule.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.mule.transports</groupId>
-			<artifactId>mule-transport-http</artifactId>
-			<version>${mule.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<!-- for testing -->
-		<dependency>
-			<groupId>org.mule.tests</groupId>
-			<artifactId>mule-tests-functional</artifactId>
-			<version>${mule.version}</version>
-			<scope>test</scope>
-		</dependency>
-	<dependency>
+    <!-- Mule Dependencies -->
+    <dependencies>
+        <!-- Xml configuration -->
+        <dependency>
+            <groupId>com.mulesoft.muleesb</groupId>
+            <artifactId>mule-core-ee</artifactId>
+            <version>${mule.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- Xml configuration -->
+        <dependency>
+            <groupId>com.mulesoft.muleesb.modules</groupId>
+            <artifactId>mule-module-spring-config-ee</artifactId>
+            <version>${mule.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mule.transports</groupId>
+            <artifactId>mule-transport-http</artifactId>
+            <version>${mule.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- for testing -->
+        <dependency>
+            <groupId>org.mule.tests</groupId>
+            <artifactId>mule-tests-functional</artifactId>
+            <version>${mule.version}</version>
+            <scope>test</scope>
+        </dependency>
+    <dependency>
             <groupId>org.mule.modules</groupId>
             <artifactId>mule-module-apikit</artifactId>
             <version>1.6.2</version>
         </dependency>
         <dependency>
-			<groupId>com.microsoft.sqlserver</groupId>
-			<artifactId>sqljdbc4</artifactId>
-			<version>4.0</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.mule.modules</groupId>
-			<artifactId>mule-module-db</artifactId>
-			<version>${mule.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.splunk.it</groupId>
-			<artifactId>splunklogger-module</artifactId>
-			<version>1.2.0</version>
-		</dependency>
-    	<dependency>
+            <groupId>com.microsoft.sqlserver</groupId>
+            <artifactId>sqljdbc4</artifactId>
+            <version>4.0</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.mule.modules</groupId>
+            <artifactId>mule-module-db</artifactId>
+            <version>${mule.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.splunk.it</groupId>
+            <artifactId>splunklogger-module</artifactId>
+            <version>1.2.0</version>
+        </dependency>
+        <dependency>
             <groupId>com.mulesoft.security</groupId>
             <artifactId>mule-module-security-encryption</artifactId>
             <version>1.4.0</version>
         </dependency>
-    	<dependency>
+        <dependency>
             <groupId>com.mulesoft.security</groupId>
             <artifactId>security-api</artifactId>
             <version>1.4.0</version>
@@ -214,7 +214,7 @@
     </dependencies>
 
 
-	<repositories>
+    <repositories>
           <repository>
             <id>Central</id>
             <name>Central</name>

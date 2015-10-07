@@ -8,8 +8,9 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
 	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:spring="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="EE-3.6.2"
-	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd http://www.mulesoft.org/schema/mule/tls http://www.mulesoft.org/schema/mule/tls/current/mule-tls.xsd
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd
+http://www.mulesoft.org/schema/mule/tls http://www.mulesoft.org/schema/mule/tls/current/mule-tls.xsd
 http://www.mulesoft.org/schema/mule/splunklogger http://www.mulesoft.org/schema/mule/splunklogger/current/mule-splunklogger.xsd
 http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
 http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
@@ -44,7 +45,7 @@ http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schem
 		</tls:context>
 	</http:listener-config>
 
-	<http:request-config name="CorepointSOAP" basePath="/" />
+	<http:request-config name="CorepointSOAP" basePath="/" doc:name="HTTP Request Configuration"/>
 	
 	<!-- Enabling SSL: https://msdn.microsoft.com/en-us/library/bb879949(v=sql.110).aspx -->
 	<db:generic-config name="MSSQL"
@@ -82,8 +83,8 @@ http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schem
 	</flow>
 
 	<flow name="post:/patients/{id}/dispatch:apiConfig"> 
-		<object-to-string-transformer />
-		<logger level="INFO" message="Dispatch message received: #[message.payload]"/>
+		<object-to-string-transformer doc:name="Object to String"/>
+		<logger level="INFO" message="Dispatch message received: #[message.payload]" doc:name="Logger"/>
 		
  		<flow-ref name="_logAndEncrypt" doc:name="_logAndEncrypt" /> 
 
@@ -93,15 +94,15 @@ http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schem
 <!-- 			              doc:name="Until Successful"> -->
 
 			<processor-chain doc:name="Processor Chain"> 
-				<encryption:decrypt config-ref="Encryption" />
+				<encryption:decrypt config-ref="Encryption" doc:name="Encryption"/>
 				
-				<json:json-to-object-transformer returnClass="java.util.Map"/>
-				<set-payload value="#[message.payload['carmaRecord']]" />
-				<json:object-to-json-transformer/>
+				<json:json-to-object-transformer returnClass="java.util.Map" doc:name="JSON to Object"/>
+				<set-payload value="#[message.payload['carmaRecord']]" doc:name="Set Payload"/>
+				<json:object-to-json-transformer doc:name="Object to JSON"/>
 				
-				<logger level="INFO" message="JSON Patiend data received"/>
+				<logger level="INFO" message="JSON Patiend data received" doc:name="Logger"/>
 				
-				<json:json-to-object-transformer returnClass="com.corepoint.edims.carma.CarmaRecordType">
+				<json:json-to-object-transformer returnClass="com.corepoint.edims.carma.CarmaRecordType" doc:name="JSON to Object">
 					<json:deserialization-mixin mixinClass="com.envision.mule.corepoint.mixin.HeaderTypeMixin"
                 							  targetClass="com.corepoint.edims.carma.HeaderType"/>
 					<json:deserialization-mixin mixinClass="com.envision.mule.corepoint.mixin.PatientInfoTypeMixin"
@@ -122,11 +123,11 @@ http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schem
                 							  targetClass="com.corepoint.edims.carma.DischargeType"/>
 				</json:json-to-object-transformer>
 
-				<logger level="INFO" message="Dispatching record to Corepoint..."/>
+				<logger level="INFO" message="Dispatching record to Corepoint..." doc:name="Logger"/>
 
-				<cxf:jaxws-client serviceClass="org.tempuri.Carma" port="Carma" operation="SendPatientXMLData"/>
-				<http:request host="${carma.corepoint.server}" port="${carma.corepoint.port}" method="POST" path="/" config-ref="CorepointSOAP"/>
-				<logger level="INFO" message="Dispatching record to Corepoint - Success!"/>
+				<cxf:jaxws-client serviceClass="org.tempuri.Carma" port="Carma" operation="SendPatientXMLData" doc:name="CXF"/>
+				<http:request host="${carma.corepoint.server}" port="${carma.corepoint.port}" method="POST" path="/" config-ref="CorepointSOAP" doc:name="HTTP"/>
+				<logger level="INFO" message="Dispatching record to Corepoint - Success!" doc:name="Logger"/>
 				
 				<splunklogger:logger config-ref="SplunkLogger" doc:name="Logger">
 					<splunklogger:fields>
@@ -189,23 +190,24 @@ http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schem
 			</transactional>
 		</until-successful>
 
-		<expression-component>
+		<expression-component doc:name="Expression">
 			Map response = new HashMap();
 			response.put('CarmaRecordId', message.payload['carmaRecord']['patientInfo']['PatientRecordId']);
+			response.put('PatientTrackingId', message.payload['carmaRecord']['patientInfo']['PatientTrackingId']);
 			payload = response;
 		</expression-component>
 		
-		<json:object-to-json-transformer/>
-		<logger level="INFO" message="RESPONSE IS #[message.payload]"/>
+		<json:object-to-json-transformer doc:name="Object to JSON"/>
+		<logger level="INFO" message="RESPONSE IS #[message.payload]" doc:name="Logger"/>
 		
-		<rollback-exception-strategy>
-			<logger level="INFO" message="Exception occured, rolling back... #[exception]"/>
-			<expression-component>
+		<rollback-exception-strategy doc:name="Rollback Exception Strategy">
+			<logger level="INFO" message="Exception occured, rolling back... #[exception]" doc:name="Logger"/>
+			<expression-component doc:name="Expression">
 				Map response = new HashMap();
 				response.put('Error', exception.getMessage());
 				payload = response;
 			</expression-component>
-			<json:object-to-json-transformer/>
+			<json:object-to-json-transformer doc:name="Object to JSON"/>
 			<set-property propertyName="http.status" value="500" doc:name="Property" />
 		</rollback-exception-strategy>
 	</flow>
@@ -265,9 +267,7 @@ http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schem
 
 		<db:insert config-ref="MSSQL" doc:name="Database"
 			target="#[flowVars['encounterRecordId']]">
-			<db:parameterized-query>    		
-				<![CDATA[
-				INSERT INTO [dbo].[PatientEncounters]
+            <db:parameterized-query><![CDATA[INSERT INTO [dbo].[PatientEncounters]
 		           ([PatientRecordId]
 		           ,[DiagnosisInfo]
 		           ,[FacilityName]
@@ -278,9 +278,7 @@ http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schem
 					,#[message.payload['carmaRecord']['patientInfo']['InPatientAdmitDiagnosis'] != empty ? message.payload['carmaRecord']['patientInfo']['InPatientAdmitDiagnosis'] : ''] 
 					,#[message.payload['carmaRecord']['referralInfo']['SenderFacilityName']]
 					,#[message.payload['carmaRecord']['referralInfo']['SenderFacilityId']]
-					,#[message.payload['carmaRecord']['patientInfo']['InPatientDischargeDate']]) 
-					]]>						    	 
-    		</db:parameterized-query>
+					,#[message.payload['carmaRecord']['patientInfo']['InPatientDischargeDate']])]]></db:parameterized-query>
 		</db:insert>
 
 		<splunklogger:logger config-ref="SplunkLogger"
@@ -304,9 +302,7 @@ http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schem
 		<db:insert config-ref="MSSQL" autoGeneratedKeys="true"
 			target="#[flowVars['recordId']]" transactionalAction="ALWAYS_JOIN"
 			doc:name="Database">
-			<db:parameterized-query>    		
-				<![CDATA[
-					INSERT INTO [dbo].[PatientRecords]
+            <db:parameterized-query><![CDATA[INSERT INTO [dbo].[PatientRecords]
 				           ([PatientFirstName]
 				           ,[PatientLastName]
 				           ,[SocialSecurityNumber]
@@ -327,18 +323,15 @@ http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schem
 							,0
 							,#[message.payload['carmaRecord']['patientInfo']['SenderFacilityId']]
 							,'Update-Later'
-							,'Update-Later')						
-				]]>						    	
-    		</db:parameterized-query>
+							,'Update-Later')]]></db:parameterized-query>
 		</db:insert>
+        <logger message="IDs are #[flowVars['recordId'] ]" level="INFO" doc:name="Logger"/>
 
 		<logger level="INFO" message="ID is #[flowVars['recordId'][0]['GENERATED_KEYS']]" doc:name="Logger"/>
 
 		<db:insert config-ref="MSSQL" doc:name="Database"
 			transactionalAction="ALWAYS_JOIN" target="#[flowVars['otherInfoRecordId']]">
-			<db:parameterized-query>    		
-				<![CDATA[
-				INSERT INTO [dbo].[PatientOtherInfo] 
+            <db:parameterized-query><![CDATA[INSERT INTO [dbo].[PatientOtherInfo] 
 				           ([PatientRecordId] 
 				           ,[InPatientAdmitDiagnosis]
 						   ,[FacilityName]
@@ -347,28 +340,31 @@ http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schem
 				           ( #[flowVars['recordId'][0]['GENERATED_KEYS']]
 							,#[message.payload['carmaRecord']['patientInfo']['InPatientAdmitDiagnosis'] != empty ? message.payload['carmaRecord']['patientInfo']['InPatientAdmitDiagnosis'] : ''] 
 							,#[message.payload['carmaRecord']['referralInfo']['SenderFacilityName']] 
-							,#[message.payload['carmaRecord']['patientInfo']['InPatientDischargeDate']]) 
-					]]>						    	 
-    		</db:parameterized-query>
+							,#[message.payload['carmaRecord']['patientInfo']['InPatientDischargeDate']])]]></db:parameterized-query>
 		</db:insert>
+        <enricher source="#[payload[0].PatientTrackingId]" target="#[flowVars['PatientTrackingId']]" doc:name="Message Enricher">
+            <processor-chain >
+            	<db:select config-ref="MSSQL" doc:name="Database">
+                	<db:parameterized-query><![CDATA[select PatientTrackingId from [dbo].[PatientRecords] where PatientRecordId=#[flowVars['recordId'][0]['GENERATED_KEYS']];]]></db:parameterized-query>
+            </db:select>
+            <logger level="INFO" message="DB result = #[payload]" doc:name="Logger"/>
+            </processor-chain>
+        </enricher>
 
 		<expression-component doc:name="Expression">
 			message.payload['carmaRecord']['patientInfo']['PatientRecordId'] = flowVars['recordId'][0]['GENERATED_KEYS'];
+			message.payload['carmaRecord']['patientInfo']['PatientTrackingId'] = flowVars['PatientTrackingId'];
 		</expression-component>
 	</sub-flow>
 
 	<sub-flow name="_checkIfExistsBySSN">
 		<db:select config-ref="MSSQL" doc:name="Database" target="#[flowVars['ExistingPatientInfo']]">
-			<db:parameterized-query>    		
-				<![CDATA[
-				SELECT * FROM [dbo].[PatientRecords] 
+            <db:parameterized-query><![CDATA[SELECT * FROM [dbo].[PatientRecords] 
 				WHERE
 					 PatientFirstName = #[message.payload['carmaRecord']['patientInfo']['PatientFirstName']] AND
 					 PatientLastName = #[message.payload['carmaRecord']['patientInfo']['PatientLastName']] AND
 					 SocialSecurityNumber = #[message.payload['carmaRecord']['patientInfo']['SocialSecurityNumber']] AND
-					 DateOfBirth = #[message.payload['carmaRecord']['patientInfo']['DateOfBirth']]
-					]]>						    	 
-    		</db:parameterized-query>
+					 DateOfBirth = #[message.payload['carmaRecord']['patientInfo']['DateOfBirth']]]]></db:parameterized-query>
 		</db:select>
 		
 		<logger level="INFO" message="#[flowVars['ExistingPatientInfo']]" doc:name="Logger"/>
